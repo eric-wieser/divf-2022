@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="reveal.js/dist/reset.css" />
+  <link rel="stylesheet" href="reveal.js/dist/reveal.css" />
+  <link rel="stylesheet" href="reveal.js/dist/theme/white.css" />
+  <link rel="stylesheet" href="css/hljs.css" />
+  <link rel="stylesheet" href="css/common.css" />
+  <link rel="shortcut icon" type="image/png" href="https://ericwieser.me/images/favicon.png"/>
+  <meta name="author" content="Eric Wieser" />
+  <meta name="description" content="" />
+  <meta name="keywords" content="TODO" />
+  <title>Something about formalization</title>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section>
+        <h1>Something about formalization</h1>
+
+        <p>Eric Wieser<br/> Cambridge University Engineering Department</p>
+        <small>slides: <a href="https://eric-wieser.github.io/divf-2022">
+        eric-wieser.github.io/divf-2022</a></small>
+        <small style="display: block; text-align: center; opacity: 0.5">2021-09-10</small>
+        <aside class="notes">
+          <p>Hi, I'm Eric Wieser, a PhD student at Cambridge University</p>
+        </aside>
+      </section>
+      <section>
+        <pre>
+          <code class="lean has-highlights" data-fragment-index="0" data-trim data-line-numbers="|1-2|4-5|7|8|10|11">
+          -- name : type := value (or "term")
+          def two : ℕ := 2
+
+          def double : ℕ → ℕ :=
+            λ a, two * a
+
+          def unlikely : Prop := ∃ (x : ℕ), x*x = 2
+          lemma unlikely_proof : unlikely := sorry
+
+          lemma double_is_add_self : ∀ a, double a = a + a :=
+            by {intro a, apply two_mul}
+          </code></pre>
+        </section>
+      </div>
+    </div>
+  </div>
+  <script src="reveal.js/dist/reveal.js"></script>
+  <script src="reveal.js/plugin/highlight/highlight.js"></script>
+  <script src="reveal.js/plugin/math/math.js"></script>
+  <script src="reveal.js/plugin/notes/notes.js"></script>
+  <script src="js/lean.min.js"></script>
+  <script>
+    Reveal.initialize({
+      math: {
+        mathjax: 'https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js',
+        config: 'TeX-AMS_HTML-full',
+        TeX: {
+          extensions: ["AMScd.js"]
+        }
+      },
+      plugins: [
+        RevealHighlight,
+        RevealMath,
+        RevealNotes,
+      ],
+      history: true,
+      center: true,
+      // defaultTiming: 40,
+      slideNumber: 'c/t',
+      width: 1856,
+      height: 1016,
+      // showNotes: 'separate-page'
+    });
+  </script>
+  <script src="js/inline_svg.js"></script>
+</body>
+
+</html>
