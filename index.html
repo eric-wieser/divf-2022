@@ -10,16 +10,23 @@
   <link rel="stylesheet" href="css/common.css" />
   <link rel="shortcut icon" type="image/png" href="https://ericwieser.me/images/favicon.png"/>
   <meta name="author" content="Eric Wieser" />
-  <meta name="description" content="" />
-  <meta name="keywords" content="TODO" />
-  <title>Something about formalization</title>
+  <meta name="description" content="
+    Working with noncommutative algebras in computer algebra systems (CAS) can be challenging.
+    Taking a popular CAS as an example; Python's sympy can run into various difficulties when working with the matrix and quaternion algebras, and building more unusual algebras only makes matters worse.
+    While on the surface solving a similar class of problems to CAS, theorem provers offer a very strong correctness guarantee.
+    As it turns out, the design decisions that ensure this guarantee are the same as those which provide the extensionality needed for adding new algebraic constructions.
+    With this background, this talk acts as an introduction to the Lean theorem prover by example, and demonstrates some of the trade-offs to be made by choosing to use a theorem prover over a CAS.
+    With the help of Lean's comprehensive library of formalized mathematics, Mathlib, I'll show how to manipulate and simplify some matrix expressions.
+    Lean and Mathlib are a collaborative effort; this talk concludes with a summary of the more interesting parts I myself have contributed." />
+  <meta name="keywords" content="sympy, lean, non-commutative algebra, mathlib" />
+  <title>Non-commutative algebras, computer algebra systems, and theorem provers</title>
 </head>
 
 <body>
   <div class="reveal">
     <div class="slides">
       <section>
-        <h1>Something about formalization</h1>
+        <h1>Non-commutative algebras, computer algebra systems, and theorem provers</h1>
 
         <p>Eric Wieser<br/> Cambridge University Engineering Department</p>
         <small>slides: <a href="https://eric-wieser.github.io/divf-2022">
@@ -44,6 +51,28 @@
           lemma double_is_add_self : ∀ a, double a = a + a :=
             by {intro a, apply two_mul}
           </code></pre>
+        </section>
+        <section id="mathlib-graph" data-background-iframe="https://eric-wieser.github.io/mathlib-import-graph?highlight=mathlib:linear_algebra.clifford_algebra.basic" data-background-interactive>
+        </section>
+        <section id="mathlib-contributions">
+          <h2>Contributions to mathlib</h2>
+          <ul>
+            <li>Exterior algebra: $\bigwedge(V)$.
+              <a href="https://leanprover-community.github.io/mathlib_docs/find/exterior_algebra"><code>
+                exterior_algebra R V</code></a></li>
+            <li>Alternating maps: $F : V^n \to W$ where $v_i = v_j \implies F(\ldots, v_i, \ldots, v_j, \ldots) = 0$.
+              <a href="https://leanprover-community.github.io/mathlib_docs/find/alternating_map"><code>
+                alternating_map R V</code></a></li>
+            <li>Clifford algebra: $\mathcal{C}\ell(Q)$
+              <a href="https://leanprover-community.github.io/mathlib_docs/find/clifford_algebra"><code>
+                clifford_algebra Q</code></a></li>
+            <li>Dual numbers: $R[\varepsilon]$ or $x + \varepsilon y$, where $\varepsilon^2 = 0$
+              <a href="https://leanprover-community.github.io/mathlib_docs/find/clifford_algebra"><code>
+                dual_number R</code></a></li>
+            <li>Graded algebras: $A = \bigoplus_i A_i$ where $A_iA_j \subseteq A_{i+j}$
+              <a href="https://leanprover-community.github.io/mathlib_docs/find/graded_algebra"><code>
+                graded_algebra A</code></a></li>
+          </ul>
         </section>
       </div>
     </div>
