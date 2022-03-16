@@ -37,6 +37,141 @@
         </aside>
       </section>
       <section>
+        <section>
+          <h2>Sympy</h2>
+        </section>
+        <section>
+          <h3>Expression trees</h3>
+          <pre><code class="pycon" data-trim>
+          >>> from sympy import *; from this_presentation import show_repr
+          </code></pre>
+          <div style="display: grid; grid-template: auto / auto auto auto; column-gap: var(--r-block-margin)">
+            <div>
+              <p>Real numbers</p>
+              <pre><code class="pycon" data-trim>
+              >>> x, y = symbols('x y', real=True)
+              >>> expr = (x + y)*(x - y); expr
+              $(x - y)(x + y)$
+              >>> show_repr(expr)
+              Mul(Add($x$, Mul(Integer(-1), $y$)),
+                  Add($x$, $y$))
+              </code></pre>
+            </div>
+            <div>
+              <p>Complex numbers</p>
+              <pre><code class="pycon" data-trim>
+              >>> x, y = symbols('x y', complex=True)
+              >>> expr = (x + y)*(x - y); expr
+              $(x - y)(x + y)$
+              >>> show_repr(expr)
+              Mul(Add($x$, Mul(Integer(-1), $y$)),
+                  Add($x$, $y$))
+              </code></pre>
+            </div>
+            <div>
+              <p>Matrices</p>
+              <pre><code class="pycon" data-trim>
+              >>> m, n = symbols('m n')
+              >>> X = MatrixSymbol('X', m, n)
+              >>> Y = MatrixSymbol('Y', m, n)
+              >>> expr = (X + Y)*(X - Y).T; expr
+              $(X + Y)(X^T - Y^T)$
+              >>> show_repr(expr)
+              MatMul(MatAdd($X$, $Y$),
+                     MatAdd(Transpose($X$),
+                            MatMul(Integer(-1), Transpose($Y$))))
+              </code></pre>
+            </div>
+          </div>
+          <p>Quaternions</p>
+          <pre><code class="pycon" data-trim>
+          >>> (x, xi, xj, xk), (y, yi, yj, yk) = symbols('x x_i x_j x_k'), symbols('y y_i y_j y_k')
+          >>> xq, yq = Quaternion(x, xi, xj, xk), Quaternion(y, yi, yj, yk)
+          >>> expr = xq * yq; expr
+          $\left(x y - x_{i} y_{i} - x_{j} y_{j} - x_{k} y_{k}\right) + \left(x y_{i} + x_{i} y + x_{j} y_{k} - x_{k} y_{j}\right) i + \left(x y_{j} - x_{i} y_{k} + x_{j} y + x_{k} y_{i}\right) j + \left(x y_{k} + x_{i} y_{j} - x_{j} y_{i} + x_{k} y\right)$
+          >>> show_repr(expr)
+          Quaternion(Add(Mul($x$, $y$), Mul(Integer(-1), $x_i$, $y_i$), Mul(Integer(-1), $x_j$, $y_j$), Mul(Integer(-1), $x_k$, $y_k$)),
+                     Add(Mul($x$, $y_i$), Mul($x_i$, $y$), Mul($x_j$, $y_k$), Mul(Integer(-1), $x_k$, $y_j$)),
+                     Add(Mul($x$, $y_j$), Mul(Integer(-1), $x_i$, $y_k$), Mul($x_j$, $y$), Mul($x_k$, $y_i$)),
+                     Add(Mul($x$, $y_k$), Mul($x_i$, $y_j$), Mul(Integer(-1), $x_j$, $y_i$), Mul($x_k$, $y$)))
+          </code></pre>
+        </section>
+        <section>
+          <h3>Expression trees</h3>
+          <ul>
+            <li>Real: <code>Add</code>, <code>Mul</code>, ...</li>
+            <li>Complex: <code>Add</code>, <code>Mul</code>, ...</li>
+            <li>Matrix: <code>MatrixAdd</code>, <code>MatrixMul</code>, ...</li>
+            <li>Quaternion: ???</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Example: Checking matrix determinants</h3>
+          <div style="display: grid; grid-template: auto / auto auto auto; column-gap: var(--r-block-margin)">
+            <div>
+              <pre><code class="pycon" data-trim>
+              >>> n = symbols('n')
+              </code></pre>
+            </div>
+            <div>
+              <pre><code class="pycon" data-trim>
+              >>> A = MatrixSymbol('A', n, n)
+              >>> B = MatrixSymbol('B', n, n)
+              </code></pre>
+            </div>
+            <div>
+              <pre><code class="pycon" data-trim>
+              >>> u = MatrixSymbol('u', n, 1)
+              >>> v = MatrixSymbol('v', n, 1)
+              </code></pre>
+            </div>
+          </div>
+          <div style="display: grid; grid: auto auto auto / 1fr 2fr; align-items: end; column-gap: var(--r-block-margin)">
+            <div data-fragment-index="0" class="fragment fade-in-then-semi-out">
+              $$\operatorname{det} AB = \operatorname{det} A \operatorname{det} B$$
+              <pre><code class="pycon" data-trim>
+              >>> Eq(det(A*B), det(A)*det(B))
+              $\text{True}$
+              </code></pre>
+            </div>
+            <div data-fragment-index="0"  class="fragment fade-in-then-semi-out" style="text-align: left">
+              <p><code class="python">Eq</code> can be used to write down a symbolic equality.</p>
+              <p><code>sympy</code> is automatically performing this simplification for us, via <code class="python">MatMul._eval_determinant</code>.</p>
+            </div>
+            <div data-fragment-index="1"  class="fragment fade-in-then-semi-out">
+              $$\operatorname{det} ABA^{-1} = \operatorname{det} B$$
+              <pre><code class="pycon" data-trim>
+              >>> Eq(det(A*B*A.inv()), det(B))
+              $\left|{A^{-1}}\right| \left|{A}\right| \left|{B}\right| = \left|{B}\right|$
+              >>> Eq(det(A*B*A.inv()), det(B)).simplify()
+              $\text{True}$
+              </code></pre>
+            </div>
+            <div data-fragment-index="1" class="fragment fade-in-then-semi-out" style="text-align: left">
+              <p><code class="python">MatMul._eval_determinant</code> gets us partway there, but doesn't finish the job.</p>
+              <p><code class="python">simplify()</code> can clean up.</p>
+            </div>
+            <div data-fragment-index="2" class="fragment fade-in-then-semi-out">
+              $$\operatorname{det} (I_n + uv^T) = \operatorname{det} (I_1 + v^Tu)$$
+              <pre><code class="pycon" data-trim>
+              >>> Eq(det(Identity(n) + u * v.T),
+                     det(Identity(1) + v.T * u))
+              $\left|{\mathbb{I} + u v^{T}}\right| = \left|{\mathbb{I} + v^{T} u}\right|$
+              >>> Eq(det(Identity(n) + u * v.T),
+              ...    det(Identity(1) + v.T * u)).simplify()
+              Traceback (most recent call last)
+                ...
+              AttributeError: 'Mul' object has no attribute 'shape'
+              </code></pre>
+            </div>
+            <div data-fragment-index="2" class="fragment fade-in-then-semi-out" style="text-align: left">
+              <p>There is no <code class="python">MatAdd._eval_determinant</code> to help here, it wouldn't generalize well anyway.</p>
+              <p>Simplification is ad-hoc, and sometimes crashes!</p>
+            </div>
+          </div>
+        </section>
+      </section>
+      <section>
         <pre>
           <code class="lean has-highlights" data-fragment-index="0" data-trim data-line-numbers="|1-2|4-5|7|8|10|11">
           -- name : type := value (or "term")
@@ -54,6 +189,43 @@
         </section>
         <section id="mathlib-graph" data-background-iframe="https://eric-wieser.github.io/mathlib-import-graph?highlight=mathlib:linear_algebra.clifford_algebra.basic" data-background-interactive>
         </section>
+        <section>
+          <h3>Example: Checking matrix determinants</h3>
+          <pre><code class="lean" data-trim>
+          variables {R n : Type*} [ring R] [fintype n] [decidable_eq n]
+          variables (A B : matrix n n R) (u v : matrix n unit R)
+          </code></pre>
+          <div style="display: grid; grid: auto auto auto / 1fr 2fr; align-items: end; column-gap: var(--r-block-margin)">
+            <div data-fragment-index="0" class="fragment fade-in-then-semi-out">
+              $$\operatorname{det} AB = \operatorname{det} A \operatorname{det} B$$
+              <pre><code class="lean" data-trim>
+              example : det (A⬝B) = det A * det B :=
+              by simp
+              </code></pre>
+            </div>
+            <div data-fragment-index="0"  class="fragment fade-in-then-semi-out" style="text-align: left">
+            </div>
+            <div data-fragment-index="1"  class="fragment fade-in-then-semi-out">
+              $$\operatorname{det} ABA^{-1} = \operatorname{det} B$$
+              <pre><code class="lean" data-trim>
+              example (h : is_unit A) : det (A⬝B⬝A⁻¹) = det B :=
+              sorry
+              </code></pre>
+            </div>
+            <div data-fragment-index="1" class="fragment fade-in-then-semi-out" style="text-align: left">
+            </div>
+            <div data-fragment-index="2" class="fragment fade-in-then-semi-out">
+              $$\operatorname{det} (I_n + uv^T) = \operatorname{det} (I_1 + v^Tu)$$
+              <pre><code class="lean" data-trim>
+              example : det (1 + u⬝vᵀ) = det (1 + vᵀ⬝u) :=
+              sorry
+              </code></pre>
+            </div>
+            <div data-fragment-index="2" class="fragment fade-in-then-semi-out" style="text-align: left">
+            </div>
+          </div>
+        </section>
+      </section>
         <section id="mathlib-contributions">
           <h2>Contributions to mathlib</h2>
           <ul>
@@ -84,16 +256,24 @@
   <script src="js/lean.min.js"></script>
   <script>
     Reveal.initialize({
-      math: {
-        mathjax: 'https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js',
-        config: 'TeX-AMS_HTML-full',
-        TeX: {
-          extensions: ["AMScd.js"]
-        }
+      mathjax3: {
+        mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js',
+        loader: {load: ['[tex]/mathtools']},
+        tex: {
+          packages: {'[+]': ['mathtools']},
+        },
+        chtml: {
+          // This seems to break rendering on slides that weren't onscreen at render time
+          // mtextInheritFont: true,
+          mtextFont: 'Source Sans Pro',
+        },
+        options: {
+          skipHtmlTags: {'[-]': ['code', 'pre']},
+        },
       },
       plugins: [
         RevealHighlight,
-        RevealMath,
+        RevealMath.MathJax3,
         RevealNotes,
       ],
       history: true,

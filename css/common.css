@@ -1,0 +1,13 @@
+.reveal pre {
+	width: auto;
+}
+
+p > code {
+	font-size: 80%;
+	box-shadow: 0px 5px 15px rgb(0 0 0 / 15%);
+	background: #F6F8FB;
+}
+
+mjx-container[jax="CHTML"][display="true"] {
+    margin: var(--r-block-margin) 0 !important;
+}
