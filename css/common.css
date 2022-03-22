@@ -45,6 +45,10 @@ mjx-container[jax="CHTML"][display="true"] {
     position: static;
 }
 
+.reveal .hljs .fragment.current-fragment {
+    font-weight: bold;
+}
+
 .error {
 	text-decoration: underline wavy hsl(0, 85%, 62%);
 	position: relative;
@@ -117,4 +121,74 @@ mjx-container[jax="CHTML"][display="true"] {
 .hljs-goal-sym {
   font-weight: bold;
   color: #367cb6;
+}
+
+
+
+.reveal blockquote {
+  padding: 20px;
+  position: relative;
+  margin-bottom: 70px;
+  text-align: left;
+  background: #0000000d;
+  box-shadow: none;
+  width: auto;
+}
+.reveal blockquote.long {
+  font-style: inherit;
+  width: auto;
+  margin-left: -20px;
+  margin-right: -20px;
+}
+/* black.css does something wacky here */
+.reveal blockquote p:first-child,
+.reveal blockquote p:last-child {
+  display: initial; }
+
+blockquote p.reference {
+    text-align: right;
+    position: absolute;
+    font-style: normal;
+    top: 100%;
+    right: 60px;
+    font-size: 80%;
+    margin-top: 5px;
+    min-height: 50px;
+    vertical-align: bottom;
+}
+blockquote p.reference::before {
+    position: absolute;
+    top: -5px;
+    right: -60px;
+    width: 0px;
+    height: 0px;
+    content: "";
+    border-left: 50px solid #0000000d;
+    border-bottom: 50px solid transparent;
+}
+.reveal blockquote.long p.reference {
+  font-size: 60%;
+}
+
+p.reference {
+  font-size: 50%;
+}
+p.reference > cite {
+  display: block;
+}
+p.reference > cite a {
+  color: inherit;
+}
+p.reference > span {
+  opacity: 0.6;
+  display: block;
+}
+
+.reveal .slides section .fragment.current-only.current-fragment {
+  display: block;
+  visibility: visible;
+}
+
+.reveal .slides section .fragment.current-only {
+  visibility: hidden;
 }

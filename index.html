@@ -74,10 +74,71 @@
       </section>
       <section>
         <section>
+          <h2>Computer algebra systems</h2>
+          <blockquote>
+            A computer algebra system (CAS) or symbolic algebra system (SAS) is any mathematical software with the ability to manipulate mathematical expressions in a way similar to the traditional manual computations of mathematicians and scientists.
+            <p class="reference">
+              <cite><a href="https://en.wikipedia.org/wiki/Computer_algebra_system">Computer algebra system</a></cite>
+              <span>Wikipedia</span>
+            </p>
+          </blockquote>
+          <div style="display: grid; grid-template: auto / auto auto; column-gap: var(--r-block-margin)">
+            <div>
+              <p>Useful for</p>
+              <ul>
+                <li>Roughly checking your work</li>
+                <li>Answering what-if questions experimentally</li>
+                <li>Solving large but tedious equations quickly</li>
+                <li>&hellip;</li>
+              </ul>
+            </div>
+            <div>
+              <p>Typical features</p>
+              <ul>
+                <li>Algebraic simplification</li>
+                <li>Root finding</li>
+                <li>Integration and differentiation</li>
+                <li>Arbitrary precision calculations</li>
+                <li>&hellip;</li>
+              </ul>
+            </div>
+          </div>
+            <div>
+              <p>Notable implementations</p>
+              <div style="height:50px; position:relative; width: 90%; margin: auto; margin-bottom: 20px">
+                <canvas id="cas-timeline" />
+              </div>
+              <ul style="columns: 3; list-style-type: none">
+                <li>Axiom (1965, BSD License)</li>
+                <li style="text-align: right">Maxima (1982, GPL License)</li>
+                <li>Maple (1982, Proprietary)</li>
+                <li style="text-align: right">Magma (1993, Proprietary) </li>
+                <li>Mathematica (1998, Proprietary)</li>
+                <li style="text-align: right">SageMath (2004, GPL)</li>
+              </ul>
+            </div>
+        </section>
+        <section>
           <h2>Sympy</h2>
           <blockquote>
             SymPy is a Python library for symbolic mathematics. It aims to become a full-featured computer algebra system (CAS) while keeping the code as simple as possible in order to be comprehensible and easily extensible. SymPy is written entirely in Python.
+            <p class="reference">
+              <cite><a href="https://www.sympy.org/en/index.html">SymPy's website</a></cite>
+              <!-- <span>Sympy.org</span> -->
+            </p>
           </blockquote>
+          <p class="fragment" style="text-align: center">Why wasn't this on the previous slide?</p>
+          <blockquote class="fragment">
+            Sage[Math] tries to gather together all the major open source mathematics software, and glue it together into a useful system. In fact, Sage[Math] includes SymPy as one of its systems.
+            <p class="reference">
+              <cite><a href="https://stackoverflow.com/q/17847902/102441">What is the difference between SymPy and Sage[Math]?</a></cite>
+              <span>Aaron Meurer (Lead SymPy developer)</span>
+            </p>
+          </blockquote>
+        </section>
+        <section>
+          <h2>Some sympy examples</h2>
+          TODO
         </section>
         <section>
           <h3>Expression trees</h3>
@@ -206,12 +267,47 @@
               </code></pre>
             </div>
             <div data-fragment-index="2" class="fragment fade-in-then-semi-out" style="text-align: left">
-              <p>(sometimes called the <q>Weinstein–Aronszajn</q> identity)
+              <p>(sometimes called the <q>Weinstein–Aronszajn</q> identity)</p>
               <p>There is no <code class="python">MatAdd._eval_determinant</code> to help here, it wouldn't generalize well anyway.</p>
               <p>Simplification is ad-hoc, and sometimes crashes!</p>
             </div>
           </div>
         </section>
+      </section>
+      <section>
+        <h2>Theorem proving languages - History</h2>
+        <div style="height:50px; position:relative; width: 90%; margin: auto; margin-bottom: 20px">
+          <canvas id="lean-timeline" />
+        </div>
+        <ul>
+          <li class="fragment">Relatively new (compared to other actively used tools)
+            <ul>
+              <li style="font-size: smaller">Mizar (<span style="color: #42affa">1973</span>), Isabelle (<span style="color: #42affa">1986</span>), HOL Family (<span style="color: #42affa">1988</span>)</li>
+              <li style="font-size: smaller">Coq (<span style="color: #42affa">1989</span>), Metamath (<span style="color: #42affa">1993</span>), Agda (<span style="color: #42affa">2007</span>)</li>
+              <li style="font-size: smaller">Lean 1 (<span style="color: green">2013</span>) & Lean 2 (<span style="color: green">2015</span>)</li>
+            </ul>
+            <blockquote>
+              Lean had the advantage of being born later and learning from past mistakes.
+              <p class="reference">
+                <cite>CICM 2020 slack</cite>
+                <span>Mario Carneiro, Lean Maintainer</span>
+              </p>
+            </blockquote>
+          </li>
+          <li class="fragment">Lean 3 (<span style="color: green">2016</span>)
+            <ul>
+              <li style="font-size: smaller">Actively maintained by the community (v3.24.0 to v3.35.1 in 2021)</li>
+              <li style="font-size: smaller">Can be used <a href="https://leanprover.github.io/live/latest/">in-browser</a> or in supported IDEs: <a href="https://github.com/leanprover/vscode-lean">VS Code</a> and <a href="https://github.com/leanprover/lean-mode">Emacs</a></li>
+            </ul>
+          </li>
+          <li class="fragment">Lean 4 (<span style="color: orange">202x</span>)
+            <ul>
+              <li style="font-size: smaller">Better support for domain-specific syntax and custom automation</li>
+              <li style="font-size: smaller">Native code and its formal verification in one language</li>
+              <li style="font-size: smaller">In active development at Microsoft Research</li>
+            </ul>
+          </li>
+        </ul>
       </section>
       <section>
         <pre> <code class="lean has-highlights" data-fragment-index="0" data-trim data-line-numbers="|1-2|4-5|7|8|10|11">
@@ -230,145 +326,177 @@
       </section>
       <section id="mathlib-graph" data-background-iframe="https://eric-wieser.github.io/mathlib-import-graph?highlight=mathlib:linear_algebra.clifford_algebra.basic" data-background-interactive>
       </section>
-      <section id="matrix-determinant-lean">
-        <h3>Example: Checking matrix determinants</h3>
-        <pre><code class="lean" data-trim>
-          import linear_algebra.matrix.nonsingular_inverse
-          variables {R m n : Type*} [comm_ring R] [fintype m] [fintype n] [decidable_eq m] [decidable_eq n]
-          variables (A B : matrix n n R) (P : matrix m n R) (Q : matrix n m R)
-          open matrix         -- for `det`
-          open_locale matrix  -- for `⬝`
-        </code></pre>
-        <div style="display: grid; grid: auto auto auto / 1fr 2fr; align-items: end; column-gap: var(--r-block-margin)">
-          <div data-fragment-index="0" class="fragment fade-in-then-semi-out">
-            $$\operatorname{det} AB = \operatorname{det} A \operatorname{det} B$$
-            <pre><code class="lean" data-trim>
-            example : det (A⬝B) = det A * det B :=
-            by simp
-            </code></pre>
-          </div>
-          <div data-fragment-index="0"  class="fragment fade-in-then-semi-out" style="text-align: left">
-            <p><code>⬝</code> is matrix multiply.</p>
-          </div>
-          <div data-fragment-index="6" class="fragment semi-fade-out">
-            <div class="fragment" data-fragment-index="1">
-              $$\operatorname{det} ABA^{-1} = \operatorname{det} B$$
-              <pre class="r-stack"><code class="lean fragment" data-trim data-noescape
-                  data-fragment-index="1" class="fragment">
-                example : det (A⬝B⬝A⁻¹) = det B :=
-                sorry
-              </code><code class="lean fragment" data-trim data-noescape
-                  data-fragment-index="2">
-                example (hA : is_unit A) : det (A⬝B⬝A⁻¹) = det B :=
-                sorry
-              </code><code class="lean fragment" data-trim data-noescape
-                  data-fragment-index="3">
-                example (hA : is_unit A) : det (A⬝B⬝A⁻¹) = det B :=
-                by <span class="error" title="⊢ A.det * B.det * ring.inverse A.det = B.det">simp [hA]<!--
-                --></span>
-              </code><code class="lean fragment" data-trim data-noescape
-                  data-fragment-index="4">
-                example (hA : is_unit A) : det (A⬝B⬝A⁻¹) = det B :=
-                by <span class="info" title="Try this: exact det_conj hA B">library_search<!--
-                --></span>
-              </code><code class="lean fragment" data-trim data-noescape
-                  data-fragment-index="5">
-                example (hA : is_unit A) : det (A⬝B⬝A⁻¹) = det B :=
-                by exact det_conj hA B
-              </code></pre>
-            </div>
-          </div>
-          <div data-fragment-index="6" class="fragment semi-fade-out">
-            <p data-fragment-index="1" class="fragment">
-              We need a proof that <code>A</code> is invertible, spelt <code>is_unit A</code></p>
-            <p data-fragment-index="3" class="fragment"><code>simp</code> takes us to a dead end</p>
-            <p data-fragment-index="5" class="fragment"><code>library_search</code> finds that Lean knows this result</p>
-          </div>
-          <div data-fragment-index="6" class="fragment fade-in-then-semi-out">
-            $$\operatorname{det} (I_m + PQ) = \operatorname{det} (I_n + QP)$$
-            <pre><code class="lean" data-trim data-noescape>
-            example : det (1 + P⬝Q) = det (1 + Q⬝P) :=
-            by <span class="error" title="(1 + P ⬝ Q).det = (1 + Q ⬝ P).det">simp</span>
-            </code></pre>
-          </div>
-          <div data-fragment-index="6" class="fragment fade-in-then-semi-out" style="text-align: left">
-            <p>Lean doesn't know this result yet; let's prove it!</p>
-          </div>
-        </div>
-      </section>
       <section>
-        <h3>Proving the Weinstein–Aronszajn identity in lean</h3>
-        <h4>The maths proof:</h4>
-        <p>
-          Recall the determinant of a block matrix expands with the Schur complement as:
-          \begin{align}
-          \operatorname{det}\begin{bmatrix}A & B \\ C & D\end{bmatrix}
-            &= \operatorname{det} A \cdot \operatorname{det}(D - CA^{-1}B) \\
-            &= \operatorname{det} D \cdot \operatorname{det}(A - BD^{-1}C)
-          \end{align}</p>
-        <p>Set $A = I$ and $D = I$ to get
-          $$\operatorname{det}\begin{bmatrix}I & B \\ C & I\end{bmatrix} =
-            \operatorname{det}(I - CB) =
-            \operatorname{det}(I - BC)$$</p>
-        <div class="r-stack">
-          <div class="lean-demo">
-            <pre class="r-stack"><code class="lean" data-trim data-noescape>
-              /-- The Weinstein–Aronszajn identity -/
-              lemma matrix.det_one_plus_comm : det (1 + P⬝Q) = det (1 + Q⬝P) :=
-              begin
-                calc det (1 + P⬝Q) = det (from_blocks 1 (-P) Q 1) : _
-                               ... = det (1 + Q⬝P)                : _,
-                <span class="fragment" data-fragment-index="2">{ <span class="fragment" data-fragment-index="3">rewrite det_from_blocks_one₂₂,</span>
-                  <span class="fragment" data-fragment-index="4">rewrite matrix.neg_mul,</span>
-                  <span class="fragment" data-fragment-index="5">rewrite sub_neg_eq_add,</span> },
-                <span class="fragment" data-fragment-index="7">{ rw [det_from_blocks_one₁₁, matrix.mul_neg, sub_neg_eq_add] }</span>,</span>
-              end
-            </code></pre>
-            <div class="lean-state">
-              <pre class="r-stack"><code class="lean-goal fragment" data-trim data-fragment-index="0">
-                R : Type u_1
-                m : Type u_2
-                n : Type u_3
-                P : matrix m n R
-                Q : matrix n m R
-                ⊢ (1 + P ⬝ Q).det = (from_blocks 1 (-P) Q 1).det
-                R : Type u_1
-                m : Type u_2
-                n : Type u_3
-                P : matrix m n R
-                Q : matrix n m R
-                ⊢ (from_blocks 1 (-P) Q 1).det = (1 + Q ⬝ P).det
-              </code><code class="lean-goal fragment" data-trim data-fragment-index="2">
-                R : Type u_1
-                m : Type u_2
-                n : Type u_3
-                P : matrix m n R
-                Q : matrix n m R
-                ⊢ (1 + P ⬝ Q).det = (from_blocks 1 (-P) Q 1).det
-              </code><code class="lean-goal fragment" data-trim data-fragment-index="3">
-                R : Type u_1
-                m : Type u_2
-                n : Type u_3
-                P : matrix m n R
-                Q : matrix n m R
-                ⊢ (1 + P ⬝ Q).det = (1 - -P ⬝ Q).det
-              </code><code class="lean-goal fragment" data-trim data-fragment-index="4">
-                R : Type u_1
-                m : Type u_2
-                n : Type u_3
-                P : matrix m n R
-                Q : matrix n m R
-                ⊢ (1 + P ⬝ Q).det = (1 - -(P ⬝ Q)).det
-              </code><code class="lean-goal fragment" data-trim data-fragment-index="5">
-                goals accomplished 🎉
-              </code><code class="lean-goal fragment" data-trim data-fragment-index="6">
-                ⊢ (from_blocks 1 (-P) Q 1).det = (1 + Q ⬝ P).det
-              </code><code class="lean-goal fragment" data-trim data-fragment-index="7">
-                goals accomplished 🎉
+        <section id="matrix-determinant-lean">
+          <h3>Example: Checking matrix determinants</h3>
+          <pre><code class="lean" data-trim>
+            import linear_algebra.matrix.nonsingular_inverse
+            variables {R m n : Type*} [comm_ring R] [fintype m] [fintype n] [decidable_eq m] [decidable_eq n]
+            variables (A B : matrix n n R) (P : matrix m n R) (Q : matrix n m R)
+            open matrix         -- for `det`
+            open_locale matrix  -- for `⬝`
+          </code></pre>
+          <div style="display: grid; grid: auto auto auto / 1fr 2fr; align-items: end; column-gap: var(--r-block-margin)">
+            <div data-fragment-index="0" class="fragment fade-in-then-semi-out">
+              $$\operatorname{det} AB = \operatorname{det} A \operatorname{det} B$$
+              <pre><code class="lean" data-trim>
+              example : det (A⬝B) = det A * det B :=
+              by simp
               </code></pre>
             </div>
+            <div data-fragment-index="0"  class="fragment fade-in-then-semi-out" style="text-align: left">
+              <p><code>⬝</code> is matrix multiply.</p>
+            </div>
+            <div data-fragment-index="6" class="fragment semi-fade-out">
+              <div class="fragment" data-fragment-index="1">
+                $$\operatorname{det} ABA^{-1} = \operatorname{det} B$$
+                <pre class="r-stack"><code class="lean fragment" data-trim data-noescape
+                    data-fragment-index="1" class="fragment">
+                  example : det (A⬝B⬝A⁻¹) = det B :=
+                  sorry
+                </code><code class="lean fragment" data-trim data-noescape
+                    data-fragment-index="2">
+                  example (hA : is_unit A) : det (A⬝B⬝A⁻¹) = det B :=
+                  sorry
+                </code><code class="lean fragment" data-trim data-noescape
+                    data-fragment-index="3">
+                  example (hA : is_unit A) : det (A⬝B⬝A⁻¹) = det B :=
+                  by <span class="error" title="⊢ A.det * B.det * ring.inverse A.det = B.det">simp [hA]<!--
+                  --></span>
+                </code><code class="lean fragment" data-trim data-noescape
+                    data-fragment-index="4">
+                  example (hA : is_unit A) : det (A⬝B⬝A⁻¹) = det B :=
+                  by <span class="info" title="Try this: exact det_conj hA B">library_search<!--
+                  --></span>
+                </code><code class="lean fragment" data-trim data-noescape
+                    data-fragment-index="5">
+                  example (hA : is_unit A) : det (A⬝B⬝A⁻¹) = det B :=
+                  by exact det_conj hA B
+                </code></pre>
+              </div>
+            </div>
+            <div data-fragment-index="6" class="fragment semi-fade-out">
+              <p data-fragment-index="1" class="fragment">
+                We need a proof that <code>A</code> is invertible, spelt <code>is_unit A</code></p>
+              <p data-fragment-index="3" class="fragment"><code>simp</code> takes us to a dead end</p>
+              <p data-fragment-index="5" class="fragment"><code>library_search</code> finds that Lean knows this result</p>
+            </div>
+            <div data-fragment-index="6" class="fragment fade-in-then-semi-out">
+              $$\operatorname{det} (I_m + PQ) = \operatorname{det} (I_n + QP)$$
+              <pre><code class="lean" data-trim data-noescape>
+              example : det (1 + P⬝Q) = det (1 + Q⬝P) :=
+              by <span class="error" title="(1 + P ⬝ Q).det = (1 + Q ⬝ P).det">simp</span>
+              </code></pre>
+            </div>
+            <div data-fragment-index="6" class="fragment fade-in-then-semi-out" style="text-align: left">
+              <p>Lean doesn't know this result yet; let's prove it!</p>
+            </div>
           </div>
-        </div>
+        </section>
+        <section>
+          <h3>Proving the Weinstein–Aronszajn identity in lean</h3>
+          <p>How do we prove $\operatorname{det} (1 + PQ) = \operatorname{det} (1 + QP)$ by hand?</p>
+          <div style="font-size: 90%">\begin{align}
+            \operatorname{det}\begin{bmatrix}A & B \\ C & D\end{bmatrix}
+              &= \operatorname{det} A \cdot \operatorname{det}(D - CA^{-1}B)
+              &\implies \operatorname{det}\begin{bmatrix}I & -P \\ Q & I\end{bmatrix}
+              &= \operatorname{det}(I - Q(-P)) = \operatorname{det}(I + QP)
+            \end{align}</div>
+          <div style="font-size: 90%" class="fragment" data-fragment-index="0">\begin{align}
+            \operatorname{det}\begin{bmatrix}A & B \\ C & D\end{bmatrix}
+              &= \operatorname{det} D \cdot \operatorname{det}(A - BD^{-1}C)
+              &\implies \operatorname{det}\begin{bmatrix}I & -P \\ Q & I\end{bmatrix}
+              &= \operatorname{det}(I - (-PQ)) = \operatorname{det}(I + PQ)
+            \end{align}
+          </div>
+          <div style="display: grid; grid-template: auto / 1fr 1fr; column-gap: var(--r-block-margin); text-align: center">
+            <div>(Standard result with schur complement)</div>
+            <div>(Set $A = I$, $B=-P$, $C=Q$ and $D = I$)</div>
+          </div>
+          <div class="r-stretch"></div>
+          <div class="fragment" data-fragment-index="1">
+            <div class="lean-demo" style="font-size: 120%">
+              <pre class="r-stack"><code class="lean" data-trim data-noescape>
+                /-- The Weinstein–Aronszajn identity -/
+                lemma matrix.det_one_plus_comm : det (1 + P⬝Q) = det (1 + Q⬝P) :=
+                <span class="fragment" data-fragment-index="3">begin
+                  calc det (1 + P⬝Q) = det (from_blocks 1 (-P) Q 1) : _
+                                 ... = det (1 + Q⬝P)                : _,
+                  <span class="fragment" data-fragment-index="4">{ <span class="fragment" data-fragment-index="5">rewrite det_from_blocks_one₂₂,</span>
+                    <span class="fragment" data-fragment-index="6">rewrite matrix.neg_mul,</span>
+                    <span class="fragment" data-fragment-index="7">rewrite sub_neg_eq_add,</span> },
+                  <span class="fragment" data-fragment-index="9">{ rw [det_from_blocks_one₁₁, matrix.mul_neg, sub_neg_eq_add] },</span></span>
+                end</span>
+              </code></pre>
+              <div class="lean-state">
+                <pre class="r-stack fragment" data-fragment-index="1"><code class="lean-goal fragment"
+                  data-trim data-fragment-index="1" data-noescape>
+                  <span style="opacity: 0.75">R : Type u_1
+                  m : Type u_2
+                  n : Type u_3
+                  _inst_1: comm_ring R
+                  _inst_2: fintype m
+                  _inst_3: fintype n
+                  _inst_4: decidable_eq m
+                  _inst_5: decidable_eq n</span>
+                  P : matrix m n R
+                  Q : matrix n m R
+                  ⊢ (1 + P ⬝ Q).det = (1 + Q ⬝ P).det
+                </code><code class="lean-goal fragment" data-trim data-fragment-index="2">
+                  P : matrix m n R
+                  Q : matrix n m R
+                  ⊢ (1 + P ⬝ Q).det = (1 + Q ⬝ P).det
+                </code><code class="lean-goal fragment" data-trim data-fragment-index="3">
+                  P : matrix m n R
+                  Q : matrix n m R
+                  ⊢ (1 + P ⬝ Q).det = (from_blocks 1 (-P) Q 1).det
+
+                  P : matrix m n R
+                  Q : matrix n m R
+                  ⊢ (from_blocks 1 (-P) Q 1).det = (1 + Q ⬝ P).det
+                </code><code class="lean-goal fragment" data-trim data-fragment-index="4">
+                  P : matrix m n R
+                  Q : matrix n m R
+                  ⊢ (1 + P ⬝ Q).det = (from_blocks 1 (-P) Q 1).det
+                </code><code class="lean-goal fragment" data-trim data-fragment-index="5">
+                  P : matrix m n R
+                  Q : matrix n m R
+                  ⊢ (1 + P ⬝ Q).det = (1 - -P ⬝ Q).det
+                </code><code class="lean-goal fragment" data-trim data-fragment-index="6">
+                  P : matrix m n R
+                  Q : matrix n m R
+                  ⊢ (1 + P ⬝ Q).det = (1 - -(P ⬝ Q)).det
+                </code><code class="lean-goal fragment" data-trim data-fragment-index="7">
+                  goals accomplished 🎉
+                </code><code class="lean-goal fragment" data-trim data-fragment-index="8">
+                  ⊢ (from_blocks 1 (-P) Q 1).det = (1 + Q ⬝ P).det
+                </code><code class="lean-goal fragment" data-trim data-fragment-index="9">
+                  goals accomplished 🎉
+                </code></pre>
+              </div>
+            </div>
+            <div class="r-stack">
+              <span class="fragment current-only" data-fragment-index="1">
+              State the lemma. Lean provides the goal view, reminding us what we know.</span>
+              <span class="fragment current-only" data-fragment-index="2">
+                Most of the goal view is noise, so let's cut to the signal</span>
+              <span class="fragment current-only" data-fragment-index="3">
+                Outline the proof using the <code class="hljs lean">calc</code> tactic. Each <code class="hljs lean">_</code> is a hole, leaving us with two goals.</span>
+              <span class="fragment current-only" data-fragment-index="4">
+                We can use <code class="hljs lean">{}</code> braces to focus on just the first goal.</span>
+              <span class="fragment current-only" data-fragment-index="5">
+                Let's expand <code class="hljs lean">det (from_blocks ...)</code> around the bottom right, ...</span>
+              <span class="fragment current-only" data-fragment-index="6">
+                &hellip; push the negation outside the product, &hellip;</span>
+              <span class="fragment current-only" data-fragment-index="7">
+                &hellip; and cancel the negations. We're done!</span>
+              <span class="fragment current-only" data-fragment-index="8">
+                Now we can go back to the other goal. We can solve it the same way, &hellip;</span>
+              <span class="fragment current-only" data-fragment-index="9">
+                &hellip; but let's write it more concisely.</span>
+            </div>
+          </div>
+        </section>
       </section>
       <section id="mathlib-contributions">
         <h2>Contributions to mathlib</h2>
@@ -398,7 +526,14 @@
   <script src="reveal.js/plugin/notes/notes.js"></script>
   <script src="js/lean.min.js"></script>
   <script src="js/lean-goal.js"></script>
+  <script src="js/vendor/Chart.min.js"></script>
+  <script src="js/charts/cas.js"></script>
+  <script src="js/charts/provers.js"></script>
   <script>
+    Chart.defaults.global.defaultFontColor='black';
+    Chart.defaults.global.defaultColor='black';
+    Chart.defaults.global.defaultFontSize = 16;
+
     Reveal.initialize({
       mathjax3: {
         mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js',
