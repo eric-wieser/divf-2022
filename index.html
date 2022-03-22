@@ -396,17 +396,20 @@
         <section>
           <h3>Proving the Weinstein–Aronszajn identity in lean</h3>
           <p>How do we prove $\operatorname{det} (1 + PQ) = \operatorname{det} (1 + QP)$ by hand?</p>
-          <div style="font-size: 90%">\begin{align}
-            \operatorname{det}\begin{bmatrix}A & B \\ C & D\end{bmatrix}
+          <div style="font-size: 90%">
+            \begin{align}
+              \operatorname{det}\begin{bmatrix}A & B \\ C & D\end{bmatrix}
+              &= \operatorname{det} D \cdot \operatorname{det}(A - BD^{-1}C)
+              &\implies \operatorname{det}\begin{bmatrix}I & -P \\ Q & I\end{bmatrix}
+              &= \operatorname{det}(I - (-P)Q) = \operatorname{det}(I + PQ)
+            \end{align}
+          </div>
+          <div style="font-size: 90%" class="fragment" data-fragment-index="0">
+            \begin{align}
+              \operatorname{det}\begin{bmatrix}A & B \\ C & D\end{bmatrix}
               &= \operatorname{det} A \cdot \operatorname{det}(D - CA^{-1}B)
               &\implies \operatorname{det}\begin{bmatrix}I & -P \\ Q & I\end{bmatrix}
               &= \operatorname{det}(I - Q(-P)) = \operatorname{det}(I + QP)
-            \end{align}</div>
-          <div style="font-size: 90%" class="fragment" data-fragment-index="0">\begin{align}
-            \operatorname{det}\begin{bmatrix}A & B \\ C & D\end{bmatrix}
-              &= \operatorname{det} D \cdot \operatorname{det}(A - BD^{-1}C)
-              &\implies \operatorname{det}\begin{bmatrix}I & -P \\ Q & I\end{bmatrix}
-              &= \operatorname{det}(I - (-PQ)) = \operatorname{det}(I + PQ)
             \end{align}
           </div>
           <div style="display: grid; grid-template: auto / 1fr 1fr; column-gap: var(--r-block-margin); text-align: center">
