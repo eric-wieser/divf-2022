@@ -184,11 +184,18 @@ p.reference > span {
   display: block;
 }
 
-.reveal .slides section .fragment.current-only.current-fragment {
-  display: block;
-  visibility: visible;
-}
-
 .reveal .slides section .fragment.current-only {
+  display: block;
   visibility: hidden;
+  transform: translate(0, 40px);
+  /*transition: none;*/
+}
+.reveal .slides section .fragment.current-only.visible.current-fragment {
+  transform: translate(0, 0px);
+  visibility: visible;
+  opacity: 1;
+}
+.reveal .slides section .fragment.current-only.visible {
+  transform: translate(0, -40px);
+  opacity: 0;
 }
