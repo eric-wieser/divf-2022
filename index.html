@@ -31,14 +31,53 @@
         <p>Eric Wieser<br/> Cambridge University Engineering Department</p>
         <small>slides: <a href="https://eric-wieser.github.io/divf-2022">
         eric-wieser.github.io/divf-2022</a></small>
-        <small style="display: block; text-align: center; opacity: 0.5">2021-09-10</small>
+        <small style="display: block; text-align: center; opacity: 0.5">2022-03-25</small>
         <aside class="notes">
           <p>Hi, I'm Eric Wieser, a PhD student at Cambridge University</p>
         </aside>
       </section>
       <section>
         <section>
+          <h2>Examples of non-commutative algebras</h2>
+          <p>Most algebra we manipulate has commutative <emph>multiplication</emph>, $ab = ba$</p>
+          <ul>
+            <li>the real numbers $\mathbb{R}$</li>
+            <li>the complex numbers $\mathbb{C}$ ($x + y\mathrm{i}$)</li>
+          </ul>
+          <p>Geometry is inherently non-commutative:</p>
+          <ul>
+            <li>rotations in 3D don't commute</li>
+            <li>the oriented plane spanning $u$ and $v$ faces the opposite way to the one spanning $v$ and $u$</li>
+          </ul>
+          <p>Any algebraic system representing geometry of this kind will have non-commutative multiplication!</p>
+
+          <ul>
+            <li>Matrices, $\mathbb{R}^{m \times n}$
+              <ul>
+                <li>Elements of the form
+                  $\left[\begin{smallmatrix}
+                    a_{11} & \cdots & a_{1n} \\
+                    \vdots & \ddots & \vdots \\
+                    a_{m1} & \cdots & a_{mn} \\
+                  \end{smallmatrix}\right]$</li>
+              </ul></li>
+            <li>Quaternions, $\mathbb{Q}$:
+              <ul>
+                <li>Elements of the form $r + x\mathrm{i} + y\mathrm{j} + z\mathrm{k}$</li>
+                <li>Rotation around the axis $u$ by $\theta$ is $e^{\frac{\theta}{2}{(u_x\mathrm{i} + u_y\mathrm{j} + u_z\mathrm{k})}} = \cos \frac{\theta}{2} + (u_x\mathrm{i} + u_y\mathrm{j} + u_z\mathrm{k}) \sin \frac{\theta}{2}$</li>
+              </ul></li>
+            <li>The exterior algebra, $\bigwedge(V)$
+              <ul><li>Element of the form $a + \sum_{i}a_i\mathrm{e}_i + \sum_{i,j,i&lt;j}a_{ij}(\mathrm{e}_i \wedge \mathrm{e}_j) + \sum_{i,j,k,i&lt;j&lt;k}a_{ijh}(\mathrm{e}_i \wedge \mathrm{e}_j \wedge \mathrm{e}_k) + \cdots$</li></ul>
+            <li>The geometric algebra, $\mathcal{G}(\mathbb{R}^n)$</li>
+          </ul>
+        </section>
+      </section>
+      <section>
+        <section>
           <h2>Sympy</h2>
+          <blockquote>
+            SymPy is a Python library for symbolic mathematics. It aims to become a full-featured computer algebra system (CAS) while keeping the code as simple as possible in order to be comprehensible and easily extensible. SymPy is written entirely in Python.
+          </blockquote>
         </section>
         <section>
           <h3>Expression trees</h3>
@@ -46,55 +85,57 @@
           >>> from sympy import *; from this_presentation import show_repr
           </code></pre>
           <div style="display: grid; grid-template: auto / auto auto auto; column-gap: var(--r-block-margin)">
-            <div>
+            <div class="fragment">
               <p>Real numbers</p>
-              <pre><code class="pycon" data-trim>
-              >>> x, y = symbols('x y', real=True)
-              >>> expr = (x + y)*(x - y); expr
+              <pre><code class="pycon" data-trim data-noescape>
+              &gt;&gt;&gt; x, y = symbols('x y', real=True)
+              &gt;&gt;&gt; expr = (x + y)*(x - y); expr
               $(x - y)(x + y)$
-              >>> show_repr(expr)
+              <span class="fragment">&gt;&gt;&gt; show_repr(expr)
               Mul(Add($x$, Mul(Integer(-1), $y$)),
-                  Add($x$, $y$))
+                  Add($x$, $y$))</span>
               </code></pre>
             </div>
-            <div>
+            <div class="fragment">
               <p>Complex numbers</p>
-              <pre><code class="pycon" data-trim>
-              >>> x, y = symbols('x y', complex=True)
-              >>> expr = (x + y)*(x - y); expr
+              <pre><code class="pycon" data-trim data-noescape>
+              &gt;&gt;&gt; x, y = symbols('x y', complex=True)
+              &gt;&gt;&gt; expr = (x + y)*(x - y); expr
               $(x - y)(x + y)$
-              >>> show_repr(expr)
+              <span class="fragment">&gt;&gt;&gt; show_repr(expr)
               Mul(Add($x$, Mul(Integer(-1), $y$)),
-                  Add($x$, $y$))
+                  Add($x$, $y$))</span>
               </code></pre>
             </div>
-            <div>
+            <div class="fragment">
               <p>Matrices</p>
-              <pre><code class="pycon" data-trim>
-              >>> m, n = symbols('m n')
-              >>> X = MatrixSymbol('X', m, n)
-              >>> Y = MatrixSymbol('Y', m, n)
-              >>> expr = (X + Y)*(X - Y).T; expr
+              <pre><code class="pycon" data-trim data-noescape>
+              &gt;&gt;&gt; m, n = symbols('m n')
+              &gt;&gt;&gt; X = MatrixSymbol('X', m, n)
+              &gt;&gt;&gt; Y = MatrixSymbol('Y', m, n)
+              &gt;&gt;&gt; expr = (X + Y)*(X - Y).T; expr
               $(X + Y)(X^T - Y^T)$
-              >>> show_repr(expr)
+              <span class="fragment">&gt;&gt;&gt; show_repr(expr)
               MatMul(MatAdd($X$, $Y$),
                      MatAdd(Transpose($X$),
-                            MatMul(Integer(-1), Transpose($Y$))))
+                            MatMul(Integer(-1), Transpose($Y$))))</span>
               </code></pre>
             </div>
           </div>
-          <p>Quaternions</p>
-          <pre><code class="pycon" data-trim>
-          >>> (x, xi, xj, xk), (y, yi, yj, yk) = symbols('x x_i x_j x_k'), symbols('y y_i y_j y_k')
-          >>> xq, yq = Quaternion(x, xi, xj, xk), Quaternion(y, yi, yj, yk)
-          >>> expr = xq * yq; expr
-          $\left(x y - x_{i} y_{i} - x_{j} y_{j} - x_{k} y_{k}\right) + \left(x y_{i} + x_{i} y + x_{j} y_{k} - x_{k} y_{j}\right) i + \left(x y_{j} - x_{i} y_{k} + x_{j} y + x_{k} y_{i}\right) j + \left(x y_{k} + x_{i} y_{j} - x_{j} y_{i} + x_{k} y\right)$
-          >>> show_repr(expr)
-          Quaternion(Add(Mul($x$, $y$), Mul(Integer(-1), $x_i$, $y_i$), Mul(Integer(-1), $x_j$, $y_j$), Mul(Integer(-1), $x_k$, $y_k$)),
-                     Add(Mul($x$, $y_i$), Mul($x_i$, $y$), Mul($x_j$, $y_k$), Mul(Integer(-1), $x_k$, $y_j$)),
-                     Add(Mul($x$, $y_j$), Mul(Integer(-1), $x_i$, $y_k$), Mul($x_j$, $y$), Mul($x_k$, $y_i$)),
-                     Add(Mul($x$, $y_k$), Mul($x_i$, $y_j$), Mul(Integer(-1), $x_j$, $y_i$), Mul($x_k$, $y$)))
-          </code></pre>
+          <div class="fragment">
+            <p>Quaternions</p>
+            <pre><code class="pycon" data-trim data-noescape>
+            &gt;&gt;&gt; (x, xi, xj, xk), (y, yi, yj, yk) = symbols('x x_i x_j x_k'), symbols('y y_i y_j y_k')
+            &gt;&gt;&gt; xq, yq = Quaternion(x, xi, xj, xk), Quaternion(y, yi, yj, yk)
+            &gt;&gt;&gt; expr = xq * yq; expr
+            $\left(x y - x_{i} y_{i} - x_{j} y_{j} - x_{k} y_{k}\right) + \left(x y_{i} + x_{i} y + x_{j} y_{k} - x_{k} y_{j}\right) i + \left(x y_{j} - x_{i} y_{k} + x_{j} y + x_{k} y_{i}\right) j + \left(x y_{k} + x_{i} y_{j} - x_{j} y_{i} + x_{k} y\right)$
+            <span class="fragment">&gt;&gt;&gt; show_repr(expr)
+            Quaternion(Add(Mul($x$, $y$), Mul(Integer(-1), $x_i$, $y_i$), Mul(Integer(-1), $x_j$, $y_j$), Mul(Integer(-1), $x_k$, $y_k$)),
+                       Add(Mul($x$, $y_i$), Mul($x_i$, $y$), Mul($x_j$, $y_k$), Mul(Integer(-1), $x_k$, $y_j$)),
+                       Add(Mul($x$, $y_j$), Mul(Integer(-1), $x_i$, $y_k$), Mul($x_j$, $y$), Mul($x_k$, $y_i$)),
+                       Add(Mul($x$, $y_k$), Mul($x_i$, $y_j$), Mul(Integer(-1), $x_j$, $y_i$), Mul($x_k$, $y$)))</span>
+            </code></pre>
+          </div>
         </section>
         <section>
           <h3>Expression trees</h3>
@@ -110,7 +151,7 @@
           <div style="display: grid; grid-template: auto / auto auto auto; column-gap: var(--r-block-margin)">
             <div>
               <pre><code class="pycon" data-trim>
-              >>> n = symbols('n')
+              >>> m, n = symbols('m, n')
               </code></pre>
             </div>
             <div>
@@ -121,8 +162,8 @@
             </div>
             <div>
               <pre><code class="pycon" data-trim>
-              >>> u = MatrixSymbol('u', n, 1)
-              >>> v = MatrixSymbol('v', n, 1)
+              >>> P = MatrixSymbol('P', m, n)
+              >>> Q = MatrixSymbol('Q', n, m)
               </code></pre>
             </div>
           </div>
@@ -152,19 +193,20 @@
               <p><code class="python">simplify()</code> can clean up.</p>
             </div>
             <div data-fragment-index="2" class="fragment fade-in-then-semi-out">
-              $$\operatorname{det} (I_n + uv^T) = \operatorname{det} (I_1 + v^Tu)$$
+              $$\operatorname{det} (I_m + PQ) = \operatorname{det} (I_n + QP)$$
               <pre><code class="pycon" data-trim>
-              >>> Eq(det(Identity(n) + u * v.T),
-                     det(Identity(1) + v.T * u))
-              $\left|{\mathbb{I} + u v^{T}}\right| = \left|{\mathbb{I} + v^{T} u}\right|$
-              >>> Eq(det(Identity(n) + u * v.T),
-              ...    det(Identity(1) + v.T * u)).simplify()
+              >>> Eq(det(Identity(m) + P * Q),
+                     det(Identity(n) + Q * P))
+              $\left|{\mathbb{I} + PQ}\right| = \left|{\mathbb{I} + QP}\right|$
+              >>> Eq(det(Identity(m) + P * Q),
+                     det(Identity(n) + Q * P)).simplify()
               Traceback (most recent call last)
                 ...
-              AttributeError: 'Mul' object has no attribute 'shape'
+              NonSquareMatrixError: Det of a non-square matrix
               </code></pre>
             </div>
             <div data-fragment-index="2" class="fragment fade-in-then-semi-out" style="text-align: left">
+              <p>(sometimes called the <q>Weinstein–Aronszajn</q> identity)
               <p>There is no <code class="python">MatAdd._eval_determinant</code> to help here, it wouldn't generalize well anyway.</p>
               <p>Simplification is ad-hoc, and sometimes crashes!</p>
             </div>
@@ -172,8 +214,7 @@
         </section>
       </section>
       <section>
-        <pre>
-          <code class="lean has-highlights" data-fragment-index="0" data-trim data-line-numbers="|1-2|4-5|7|8|10|11">
+        <pre> <code class="lean has-highlights" data-fragment-index="0" data-trim data-line-numbers="|1-2|4-5|7|8|10|11">
           -- name : type := value (or "term")
           def two : ℕ := 2
 
@@ -186,67 +227,169 @@
           lemma double_is_add_self : ∀ a, double a = a + a :=
             by {intro a, apply two_mul}
           </code></pre>
-        </section>
-        <section id="mathlib-graph" data-background-iframe="https://eric-wieser.github.io/mathlib-import-graph?highlight=mathlib:linear_algebra.clifford_algebra.basic" data-background-interactive>
-        </section>
-        <section>
-          <h3>Example: Checking matrix determinants</h3>
-          <pre><code class="lean" data-trim>
-          variables {R n : Type*} [ring R] [fintype n] [decidable_eq n]
-          variables (A B : matrix n n R) (u v : matrix n unit R)
-          </code></pre>
-          <div style="display: grid; grid: auto auto auto / 1fr 2fr; align-items: end; column-gap: var(--r-block-margin)">
-            <div data-fragment-index="0" class="fragment fade-in-then-semi-out">
-              $$\operatorname{det} AB = \operatorname{det} A \operatorname{det} B$$
-              <pre><code class="lean" data-trim>
-              example : det (A⬝B) = det A * det B :=
-              by simp
-              </code></pre>
-            </div>
-            <div data-fragment-index="0"  class="fragment fade-in-then-semi-out" style="text-align: left">
-            </div>
-            <div data-fragment-index="1"  class="fragment fade-in-then-semi-out">
+      </section>
+      <section id="mathlib-graph" data-background-iframe="https://eric-wieser.github.io/mathlib-import-graph?highlight=mathlib:linear_algebra.clifford_algebra.basic" data-background-interactive>
+      </section>
+      <section id="matrix-determinant-lean">
+        <h3>Example: Checking matrix determinants</h3>
+        <pre><code class="lean" data-trim>
+          import linear_algebra.matrix.nonsingular_inverse
+          variables {R m n : Type*} [comm_ring R] [fintype m] [fintype n] [decidable_eq m] [decidable_eq n]
+          variables (A B : matrix n n R) (P : matrix m n R) (Q : matrix n m R)
+          open matrix         -- for `det`
+          open_locale matrix  -- for `⬝`
+        </code></pre>
+        <div style="display: grid; grid: auto auto auto / 1fr 2fr; align-items: end; column-gap: var(--r-block-margin)">
+          <div data-fragment-index="0" class="fragment fade-in-then-semi-out">
+            $$\operatorname{det} AB = \operatorname{det} A \operatorname{det} B$$
+            <pre><code class="lean" data-trim>
+            example : det (A⬝B) = det A * det B :=
+            by simp
+            </code></pre>
+          </div>
+          <div data-fragment-index="0"  class="fragment fade-in-then-semi-out" style="text-align: left">
+            <p><code>⬝</code> is matrix multiply.</p>
+          </div>
+          <div data-fragment-index="6" class="fragment semi-fade-out">
+            <div class="fragment" data-fragment-index="1">
               $$\operatorname{det} ABA^{-1} = \operatorname{det} B$$
-              <pre><code class="lean" data-trim>
-              example (h : is_unit A) : det (A⬝B⬝A⁻¹) = det B :=
-              sorry
+              <pre class="r-stack"><code class="lean fragment" data-trim data-noescape
+                  data-fragment-index="1" class="fragment">
+                example : det (A⬝B⬝A⁻¹) = det B :=
+                sorry
+              </code><code class="lean fragment" data-trim data-noescape
+                  data-fragment-index="2">
+                example (hA : is_unit A) : det (A⬝B⬝A⁻¹) = det B :=
+                sorry
+              </code><code class="lean fragment" data-trim data-noescape
+                  data-fragment-index="3">
+                example (hA : is_unit A) : det (A⬝B⬝A⁻¹) = det B :=
+                by <span class="error" title="⊢ A.det * B.det * ring.inverse A.det = B.det">simp [hA]<!--
+                --></span>
+              </code><code class="lean fragment" data-trim data-noescape
+                  data-fragment-index="4">
+                example (hA : is_unit A) : det (A⬝B⬝A⁻¹) = det B :=
+                by <span class="info" title="Try this: exact det_conj hA B">library_search<!--
+                --></span>
+              </code><code class="lean fragment" data-trim data-noescape
+                  data-fragment-index="5">
+                example (hA : is_unit A) : det (A⬝B⬝A⁻¹) = det B :=
+                by exact det_conj hA B
               </code></pre>
-            </div>
-            <div data-fragment-index="1" class="fragment fade-in-then-semi-out" style="text-align: left">
-            </div>
-            <div data-fragment-index="2" class="fragment fade-in-then-semi-out">
-              $$\operatorname{det} (I_n + uv^T) = \operatorname{det} (I_1 + v^Tu)$$
-              <pre><code class="lean" data-trim>
-              example : det (1 + u⬝vᵀ) = det (1 + vᵀ⬝u) :=
-              sorry
-              </code></pre>
-            </div>
-            <div data-fragment-index="2" class="fragment fade-in-then-semi-out" style="text-align: left">
             </div>
           </div>
-        </section>
+          <div data-fragment-index="6" class="fragment semi-fade-out">
+            <p data-fragment-index="1" class="fragment">
+              We need a proof that <code>A</code> is invertible, spelt <code>is_unit A</code></p>
+            <p data-fragment-index="3" class="fragment"><code>simp</code> takes us to a dead end</p>
+            <p data-fragment-index="5" class="fragment"><code>library_search</code> finds that Lean knows this result</p>
+          </div>
+          <div data-fragment-index="6" class="fragment fade-in-then-semi-out">
+            $$\operatorname{det} (I_m + PQ) = \operatorname{det} (I_n + QP)$$
+            <pre><code class="lean" data-trim data-noescape>
+            example : det (1 + P⬝Q) = det (1 + Q⬝P) :=
+            by <span class="error" title="(1 + P ⬝ Q).det = (1 + Q ⬝ P).det">simp</span>
+            </code></pre>
+          </div>
+          <div data-fragment-index="6" class="fragment fade-in-then-semi-out" style="text-align: left">
+            <p>Lean doesn't know this result yet; let's prove it!</p>
+          </div>
+        </div>
       </section>
-        <section id="mathlib-contributions">
-          <h2>Contributions to mathlib</h2>
-          <ul>
-            <li>Exterior algebra: $\bigwedge(V)$.
-              <a href="https://leanprover-community.github.io/mathlib_docs/find/exterior_algebra"><code>
-                exterior_algebra R V</code></a></li>
-            <li>Alternating maps: $F : V^n \to W$ where $v_i = v_j \implies F(\ldots, v_i, \ldots, v_j, \ldots) = 0$.
-              <a href="https://leanprover-community.github.io/mathlib_docs/find/alternating_map"><code>
-                alternating_map R V</code></a></li>
-            <li>Clifford algebra: $\mathcal{C}\ell(Q)$
-              <a href="https://leanprover-community.github.io/mathlib_docs/find/clifford_algebra"><code>
-                clifford_algebra Q</code></a></li>
-            <li>Dual numbers: $R[\varepsilon]$ or $x + \varepsilon y$, where $\varepsilon^2 = 0$
-              <a href="https://leanprover-community.github.io/mathlib_docs/find/clifford_algebra"><code>
-                dual_number R</code></a></li>
-            <li>Graded algebras: $A = \bigoplus_i A_i$ where $A_iA_j \subseteq A_{i+j}$
-              <a href="https://leanprover-community.github.io/mathlib_docs/find/graded_algebra"><code>
-                graded_algebra A</code></a></li>
-          </ul>
-        </section>
-      </div>
+      <section>
+        <h3>Proving the Weinstein–Aronszajn identity in lean</h3>
+        <h4>The maths proof:</h4>
+        <p>
+          Recall the determinant of a block matrix expands with the Schur complement as:
+          \begin{align}
+          \operatorname{det}\begin{bmatrix}A & B \\ C & D\end{bmatrix}
+            &= \operatorname{det} A \cdot \operatorname{det}(D - CA^{-1}B) \\
+            &= \operatorname{det} D \cdot \operatorname{det}(A - BD^{-1}C)
+          \end{align}</p>
+        <p>Set $A = I$ and $D = I$ to get
+          $$\operatorname{det}\begin{bmatrix}I & B \\ C & I\end{bmatrix} =
+            \operatorname{det}(I - CB) =
+            \operatorname{det}(I - BC)$$</p>
+        <div class="r-stack">
+          <div class="lean-demo">
+            <pre class="r-stack"><code class="lean" data-trim data-noescape>
+              /-- The Weinstein–Aronszajn identity -/
+              lemma matrix.det_one_plus_comm : det (1 + P⬝Q) = det (1 + Q⬝P) :=
+              begin
+                calc det (1 + P⬝Q) = det (from_blocks 1 (-P) Q 1) : _
+                               ... = det (1 + Q⬝P)                : _,
+                <span class="fragment" data-fragment-index="2">{ <span class="fragment" data-fragment-index="3">rewrite det_from_blocks_one₂₂,</span>
+                  <span class="fragment" data-fragment-index="4">rewrite matrix.neg_mul,</span>
+                  <span class="fragment" data-fragment-index="5">rewrite sub_neg_eq_add,</span> },
+                <span class="fragment" data-fragment-index="7">{ rw [det_from_blocks_one₁₁, matrix.mul_neg, sub_neg_eq_add] }</span>,</span>
+              end
+            </code></pre>
+            <div class="lean-state">
+              <pre class="r-stack"><code class="lean-goal fragment" data-trim data-fragment-index="0">
+                R : Type u_1
+                m : Type u_2
+                n : Type u_3
+                P : matrix m n R
+                Q : matrix n m R
+                ⊢ (1 + P ⬝ Q).det = (from_blocks 1 (-P) Q 1).det
+                R : Type u_1
+                m : Type u_2
+                n : Type u_3
+                P : matrix m n R
+                Q : matrix n m R
+                ⊢ (from_blocks 1 (-P) Q 1).det = (1 + Q ⬝ P).det
+              </code><code class="lean-goal fragment" data-trim data-fragment-index="2">
+                R : Type u_1
+                m : Type u_2
+                n : Type u_3
+                P : matrix m n R
+                Q : matrix n m R
+                ⊢ (1 + P ⬝ Q).det = (from_blocks 1 (-P) Q 1).det
+              </code><code class="lean-goal fragment" data-trim data-fragment-index="3">
+                R : Type u_1
+                m : Type u_2
+                n : Type u_3
+                P : matrix m n R
+                Q : matrix n m R
+                ⊢ (1 + P ⬝ Q).det = (1 - -P ⬝ Q).det
+              </code><code class="lean-goal fragment" data-trim data-fragment-index="4">
+                R : Type u_1
+                m : Type u_2
+                n : Type u_3
+                P : matrix m n R
+                Q : matrix n m R
+                ⊢ (1 + P ⬝ Q).det = (1 - -(P ⬝ Q)).det
+              </code><code class="lean-goal fragment" data-trim data-fragment-index="5">
+                goals accomplished 🎉
+              </code><code class="lean-goal fragment" data-trim data-fragment-index="6">
+                ⊢ (from_blocks 1 (-P) Q 1).det = (1 + Q ⬝ P).det
+              </code><code class="lean-goal fragment" data-trim data-fragment-index="7">
+                goals accomplished 🎉
+              </code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="mathlib-contributions">
+        <h2>Contributions to mathlib</h2>
+        <ul>
+          <li>Exterior algebra: $\bigwedge(V)$.
+            <a href="https://leanprover-community.github.io/mathlib_docs/find/exterior_algebra"><code>
+              exterior_algebra R V</code></a></li>
+          <li>Alternating maps: $F : V^n \to W$ where $v_i = v_j \implies F(\ldots, v_i, \ldots, v_j, \ldots) = 0$.
+            <a href="https://leanprover-community.github.io/mathlib_docs/find/alternating_map"><code>
+              alternating_map R V</code></a></li>
+          <li>Clifford algebra: $\mathcal{C}\ell(Q)$
+            <a href="https://leanprover-community.github.io/mathlib_docs/find/clifford_algebra"><code>
+              clifford_algebra Q</code></a></li>
+          <li>Dual numbers: $R[\varepsilon]$ or $x + \varepsilon y$, where $\varepsilon^2 = 0$
+            <a href="https://leanprover-community.github.io/mathlib_docs/find/clifford_algebra"><code>
+              dual_number R</code></a></li>
+          <li>Graded algebras: $A = \bigoplus_i A_i$ where $A_iA_j \subseteq A_{i+j}$
+            <a href="https://leanprover-community.github.io/mathlib_docs/find/graded_algebra"><code>
+              graded_algebra A</code></a></li>
+        </ul>
+      </section>
     </div>
   </div>
   <script src="reveal.js/dist/reveal.js"></script>
@@ -254,6 +397,7 @@
   <script src="reveal.js/plugin/math/math.js"></script>
   <script src="reveal.js/plugin/notes/notes.js"></script>
   <script src="js/lean.min.js"></script>
+  <script src="js/lean-goal.js"></script>
   <script>
     Reveal.initialize({
       mathjax3: {

@@ -1,5 +1,20 @@
+
+.slides {
+	/* For debugging */
+  border: 1px solid black !important;
+}
+
 .reveal pre {
 	width: auto;
+}
+
+p {
+	text-align: left;
+}
+
+.reveal ul {
+	display: block;
+	margin-left: calc(1em + var(--r-block-margin));
 }
 
 p > code {
@@ -10,4 +25,96 @@ p > code {
 
 mjx-container[jax="CHTML"][display="true"] {
     margin: var(--r-block-margin) 0 !important;
+}
+
+.parent-title {
+  display: table;
+  margin: auto;
+  padding-left: 20px;
+}
+.parent-title > span {
+  opacity: 0.5;
+  text-align: left;
+  display: block;
+  font-size: 50%;
+  margin-left: -20px;
+  margin-bottom: -5px;
+}
+
+.reveal .hljs:not(:first-child).fragment {
+    position: static;
+}
+
+.error {
+	text-decoration: underline wavy hsl(0, 85%, 62%);
+	position: relative;
+}
+.info {
+	text-decoration: underline wavy hsl(212, 100%, 61%);
+	position: relative;
+}
+.info::after,
+.error::after {
+	position: absolute;
+    padding: 5px;
+    border: 1px solid;
+    left: 0.5ex;
+    top: calc(0.5ex + 100%);
+    word-break: normal;
+    z-index: 2;
+    content: attr(title);
+}
+.error::after {
+	border-color: hsl(0, 85%, 62%);
+	background: hsl(0, 85%, 80%);
+}
+.info::after {
+	border-color: hsl(212, 100%, 80%);
+	background: hsl(212, 100%, 80%);
+}
+.reveal pre code {
+	overflow: inherit;
+}
+.fragment.visible .info::after,
+.fragment.visible .error::after,
+.fragment.current-fragment.visible .fragment.visible .info::after,
+.fragment.current-fragment.visible .fragment.visible .error::after {
+	display: none;
+}
+.fragment.current-fragment.visible .info::after,
+.fragment.current-fragment.visible .error::after {
+	display: block;
+}
+
+.reveal .r-stack > * {
+	margin: initial;
+}
+
+
+.lean-demo {
+  display: flex;
+  margin: auto;
+  gap:10px;
+}
+.lean-demo > pre {
+  flex: 5;
+}
+.lean-demo .lean-state {
+  flex: 3;
+}
+/*.lean-state pre {
+  padding: 5px;
+  margin-bottom: -10px;
+}*/
+.hljs-goal-done {
+  color: #569cd6;
+  font-weight: bolder;
+}
+.hljs-goal-hyp {
+  font-weight: bold;
+  color: #cc7a00;
+}
+.hljs-goal-sym {
+  font-weight: bold;
+  color: #367cb6;
 }
