@@ -203,3 +203,23 @@ p.reference > span {
   transform: translate(0, -40px);
   opacity: 0;
 }
+
+
+.grid {
+	display: grid;
+	column-gap: var(--r-block-margin);
+	row-gap: var(--r-block-margin);
+	margin-top: var(--r-block-margin);
+	margin-bottom: var(--r-block-margin);
+}
+
+.grid > * {
+	margin-top: calc(-1 * var(--r-block-margin));
+	margin-bottom: calc(-1 * var(--r-block-margin));
+}
+
+.reveal .grid > blockquote {
+	margin-left: 0;
+	margin-right: 0;
+	align-self: end;
+}

@@ -187,7 +187,7 @@
         <section>
           <h3>Expression trees</h3>
           <div>
-            <p>Quaternions</p>
+            <h4>Quaternions</h4>
             <pre><code class="pycon" data-trim data-noescape>
             &gt;&gt;&gt; (x, xi, xj, xk), (y, yi, yj, yk) = symbols('x x_i x_j x_k'), symbols('y y_i y_j y_k')
             &gt;&gt;&gt; xq, yq = Quaternion(x, xi, xj, xk), Quaternion(y, yi, yj, yk)
@@ -209,7 +209,7 @@
         </section>
         <section>
           <h3>Example: Checking matrix determinants</h3>
-          <div style="display: grid; grid-template: auto / auto auto auto; column-gap: var(--r-block-margin)">
+          <div class="grid" style="grid-template: auto / auto auto auto;">
             <div>
               <pre><code class="pycon" data-trim>
               >>> m, n = symbols('m, n')
@@ -228,7 +228,7 @@
               </code></pre>
             </div>
           </div>
-          <div style="display: grid; grid: auto auto auto / 1fr 2fr; align-items: end; column-gap: var(--r-block-margin)">
+          <div class="grid" style="grid: auto auto auto / 1fr 2fr; align-items: end;">
             <div data-fragment-index="0" class="fragment fade-in-then-semi-out">
               $$\operatorname{det} AB = \operatorname{det} A \operatorname{det} B$$
               <pre><code class="pycon" data-trim>
@@ -253,20 +253,27 @@
               <p><code class="python">MatMul._eval_determinant</code> gets us partway there, but doesn't finish the job.</p>
               <p><code class="python">simplify()</code> can clean up.</p>
             </div>
-            <div data-fragment-index="2" class="fragment fade-in-then-semi-out">
+            <div data-fragment-index="2" class="fragment">
               $$\operatorname{det} (I_m + PQ) = \operatorname{det} (I_n + QP)$$
-              <pre><code class="pycon" data-trim>
+              <pre class="r-stack"><code class="pycon fragment" data-trim data-fragment-index="2" >
               >>> I = Identity
               >>> Eq(det(I(m) + P*Q), det(I(n) + Q*P))
               $\left|{\mathbb{I} + PQ}\right| = \left|{\mathbb{I} + QP}\right|$
               >>> Eq(det(I(m) + P*Q), det(I(n) + Q*P)).simplify()
               NonSquareMatrixError: Det of a non-square matrix
+              </code><code class="pycon fragment" data-trim data-noescape data-fragment-index="3">
+              &gt;&gt;&gt; I = Identity
+              &gt;&gt;&gt; Eq(det(I(<b>n</b>) + A*B), det(I(n) + B*A))
+              $\left|{\mathbb{I} + AB}\right| = \left|{\mathbb{I} + BA}\right|$
+              &gt;&gt;&gt; Eq(det(I(<b>m</b>) + A*B), det(I(n) + B*A)).simplify()
+              AttributeError: 'Mul' object has no attribute
+                'shape'
               </code></pre>
             </div>
-            <div data-fragment-index="2" class="fragment fade-in-then-semi-out" style="text-align: left">
+            <div data-fragment-index="2" class="fragment" style="text-align: left">
               <p>(sometimes called the <q>Weinstein–Aronszajn</q> identity)</p>
               <p>There is no <code class="python">MatAdd._eval_determinant</code> to help here, it wouldn't generalize well anyway.</p>
-              <p>Simplification is ad-hoc, and sometimes crashes!</p>
+              <p>Simplification is ad-hoc, and sometimes crashes! Switching to square matrices makes things worse</p>
             </div>
           </div>
         </section>
@@ -581,25 +588,87 @@
           </div>
         </section>
       </section>
-      <section id="mathlib-contributions">
-        <h2>Contributions to mathlib</h2>
-        <ul>
-          <li>Exterior algebra: $\bigwedge(V)$.
-            <a href="https://leanprover-community.github.io/mathlib_docs/find/exterior_algebra"><code>
-              exterior_algebra R V</code></a></li>
-          <li>Alternating maps: $F : V^n \to W$ where $v_i = v_j \implies F(\ldots, v_i, \ldots, v_j, \ldots) = 0$.
-            <a href="https://leanprover-community.github.io/mathlib_docs/find/alternating_map"><code>
-              alternating_map R V</code></a></li>
-          <li>Clifford algebra: $\mathcal{C}\ell(Q)$
-            <a href="https://leanprover-community.github.io/mathlib_docs/find/clifford_algebra"><code>
-              clifford_algebra Q</code></a></li>
-          <li>Dual numbers: $R[\varepsilon]$ or $x + \varepsilon y$, where $\varepsilon^2 = 0$
-            <a href="https://leanprover-community.github.io/mathlib_docs/find/dual_number"><code>
-              dual_number R</code></a></li>
-          <li>Graded algebras: $A = \bigoplus_i A_i$ where $A_iA_j \subseteq A_{i+j}$
-            <a href="https://leanprover-community.github.io/mathlib_docs/find/graded_algebra"><code>
-              graded_algebra A</code></a></li>
-        </ul>
+      <section>
+        <section>
+          <h2>Mathlib</h2>
+        </section>
+        <section>
+          <h3>What does Mathlib know?</h3>
+          <div style="text-align: left">
+            <p>Of particular interest to engineers:</p>
+            <ul>
+              <li>Polynomials and power series</li>
+              <li>Linear algebra
+                <ul>
+                  <li>Vector subspaces</li>
+                  <li>Matrices</li>
+                  <li>Eigenspaces</li>
+                </ul></li>
+              <li>Multivariate calculus
+                <ul>
+                  <li>Partial derivatives</li>
+                  <li>Fourier series</li>
+                </ul>
+              </li>
+              <li>Probability theory</li>
+            </ul>
+        </section>
+        <section>
+          <h3>What does Mathlib know? - examples</h3>
+          <h4>Parseval's theorem:</h4>
+          <div class="grid" style="grid-template: auto / 1fr 1fr">
+            <blockquote>
+              <p>These amplitudes [$c_n$] can be related to the power content of the signal $g(t)$ over one period</p>
+              $$\sum_{n=-\infty}^{\infty}|c_n|^2 dt = \frac{1}{T}\int_{0}^{T}|g(t)|^2 dt$$
+              <p style="text-align: center">where $g(t) = \sum_{n=-\infty}^{\infty}c_ne^{jn\omega_0t}$</p>
+              <p class="reference">
+                <cite><a href="http://teaching.eng.cam.ac.uk/content/engineering-tripos-part-ib-2p6-fourier-transforms-signal-and-data-analysis-2020-21">CUED IB Paper 6</a>, Handout 2, Lent 2021</cite>
+                <span>Simon Godsill</span>
+              </p>
+            </blockquote>
+            <blockquote>
+              The sum of the squared norms of the Fourier coefficients equals the <code>L2</code> norm of the function.
+              <pre><code class="lean" data-trim>
+                lemma tsum_sq_fourier_series_repr
+                  (g : Lp ℂ 2 haar_circle) :
+                    ∑' n : ℤ, ∥fourier_series.repr g n∥ ^ 2
+                      = ∫ t : circle, ∥g t∥ ^ 2 ∂ haar_circle :=
+              </code></pre>
+              <p class="reference">
+                <cite><a href="https://leanprover-community.github.io/mathlib_docs/find/tsum_sq_fourier_series_repr">Fourier analysis on the circle - mathlib docs</a></cite>
+                <span>Heather Macbeth</span>
+              </p>
+            </blockquote>
+          </div>
+          <div style="margin-top: 40px">
+            <p style="text-align: center">Some translation required!</p>
+            <div style="display: grid; grid-template: auto auto auto / 1fr min-content 1fr; column-gap: 1em; text-align: left">
+              <q style="text-align: right">one period</q> &leftrightarrow; <code>t : circle</code>
+              <q style="text-align: right">$g(t) = \sum \cdots$</q> &leftrightarrow; <code>g : Lp ℂ 2 haar_circle</code>
+              <q style="text-align: right">$c_n$</q> &leftrightarrow; <code>fourier_series.repr g n</code>
+            </ul>
+          </div>
+        </section>
+        <section id="mathlib-contributions">
+          <h2>Contributions to mathlib</h2>
+          <ul>
+            <li>Exterior algebra: $\bigwedge(V)$.
+              <a href="https://leanprover-community.github.io/mathlib_docs/find/exterior_algebra"><code>
+                exterior_algebra R V</code></a></li>
+            <li>Alternating maps: $F : V^n \to W$ where $v_i = v_j \implies F(\ldots, v_i, \ldots, v_j, \ldots) = 0$.
+              <a href="https://leanprover-community.github.io/mathlib_docs/find/alternating_map"><code>
+                alternating_map R V</code></a></li>
+            <li>Clifford algebra: $\mathcal{C}\ell(Q)$
+              <a href="https://leanprover-community.github.io/mathlib_docs/find/clifford_algebra"><code>
+                clifford_algebra Q</code></a></li>
+            <li>Dual numbers: $R[\varepsilon]$ or $x + \varepsilon y$, where $\varepsilon^2 = 0$
+              <a href="https://leanprover-community.github.io/mathlib_docs/find/dual_number"><code>
+                dual_number R</code></a></li>
+            <li>Graded algebras: $A = \bigoplus_i A_i$ where $A_iA_j \subseteq A_{i+j}$
+              <a href="https://leanprover-community.github.io/mathlib_docs/find/graded_algebra"><code>
+                graded_algebra A</code></a></li>
+          </ul>
+        </section>
       </section>
     </div>
   </div>
