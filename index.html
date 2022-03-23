@@ -145,9 +145,9 @@
           <pre><code class="pycon" data-trim>
           >>> from sympy import *; from this_presentation import show_repr
           </code></pre>
-          <div style="display: grid; grid-template: auto / auto auto auto; column-gap: var(--r-block-margin)">
+          <div style="display: grid; grid-template: auto auto / 1fr 1fr; column-gap: var(--r-block-margin)">
             <div class="fragment">
-              <p>Real numbers</p>
+              <h4>Real numbers</h4>
               <pre><code class="pycon" data-trim data-noescape>
               &gt;&gt;&gt; x, y = symbols('x y', real=True)
               &gt;&gt;&gt; expr = (x + y)*(x - y); expr
@@ -158,7 +158,7 @@
               </code></pre>
             </div>
             <div class="fragment">
-              <p>Complex numbers</p>
+              <h4>Complex numbers</h4>
               <pre><code class="pycon" data-trim data-noescape>
               &gt;&gt;&gt; x, y = symbols('x y', complex=True)
               &gt;&gt;&gt; expr = (x + y)*(x - y); expr
@@ -169,7 +169,7 @@
               </code></pre>
             </div>
             <div class="fragment">
-              <p>Matrices</p>
+              <h4>Matrices</h4>
               <pre><code class="pycon" data-trim data-noescape>
               &gt;&gt;&gt; m, n = symbols('m n')
               &gt;&gt;&gt; X = MatrixSymbol('X', m, n)
@@ -183,7 +183,10 @@
               </code></pre>
             </div>
           </div>
-          <div class="fragment">
+        </section>
+        <section>
+          <h3>Expression trees</h3>
+          <div>
             <p>Quaternions</p>
             <pre><code class="pycon" data-trim data-noescape>
             &gt;&gt;&gt; (x, xi, xj, xk), (y, yi, yj, yk) = symbols('x x_i x_j x_k'), symbols('y y_i y_j y_k')
@@ -197,10 +200,7 @@
                        Add(Mul($x$, $y_k$), Mul($x_i$, $y_j$), Mul(Integer(-1), $x_j$, $y_i$), Mul($x_k$, $y$)))</span>
             </code></pre>
           </div>
-        </section>
-        <section>
-          <h3>Expression trees</h3>
-          <ul>
+          <ul class="fragment">
             <li>Real: <code>Add</code>, <code>Mul</code>, ...</li>
             <li>Complex: <code>Add</code>, <code>Mul</code>, ...</li>
             <li>Matrix: <code>MatrixAdd</code>, <code>MatrixMul</code>, ...</li>
@@ -256,13 +256,10 @@
             <div data-fragment-index="2" class="fragment fade-in-then-semi-out">
               $$\operatorname{det} (I_m + PQ) = \operatorname{det} (I_n + QP)$$
               <pre><code class="pycon" data-trim>
-              >>> Eq(det(Identity(m) + P * Q),
-                     det(Identity(n) + Q * P))
+              >>> I = Identity
+              >>> Eq(det(I(m) + P*Q), det(I(n) + Q*P))
               $\left|{\mathbb{I} + PQ}\right| = \left|{\mathbb{I} + QP}\right|$
-              >>> Eq(det(Identity(m) + P * Q),
-                     det(Identity(n) + Q * P)).simplify()
-              Traceback (most recent call last)
-                ...
+              >>> Eq(det(I(m) + P*Q), det(I(n) + Q*P)).simplify()
               NonSquareMatrixError: Det of a non-square matrix
               </code></pre>
             </div>
@@ -310,19 +307,100 @@
         </ul>
       </section>
       <section>
-        <pre> <code class="lean has-highlights" data-fragment-index="0" data-trim data-line-numbers="|1-2|4-5|7|8|10|11">
-          -- name : type := value (or "term")
-          def two : ℕ := 2
+        <section>
+          <h3><div class="parent-title"><span>Lean in Practice</span> Definitions, Types, and Terms</div></h3>
+          <pre style="font-size: 1.2em; display: inline-grid"><code class="lean" data-trim data-noescape>
+            <span class="fragment" data-fragment-index="0">-- name : type := value (or "term")
+            def two : ℕ := 2</span>
 
-          def double : ℕ → ℕ :=
-            λ a, two * a
+            <span class="fragment" data-fragment-index="1">def double : ℕ → ℕ :=
+            λ a, two * a</span>
 
-          def unlikely : Prop := ∃ (x : ℕ), x*x = 2
-          lemma unlikely_proof : unlikely := sorry
+            <span class="fragment" data-fragment-index="2">def unlikely : Prop := ∃ (x : ℕ), x*x = 2</span>
+            <span class="fragment" data-fragment-index="3">lemma unlikely_proof : unlikely := sorry</span>
 
-          lemma double_is_add_self : ∀ a, double a = a + a :=
-            by {intro a, apply two_mul}
+            <span class="fragment" data-fragment-index="4">lemma double_is_add_self : ∀ a, double a = a + a :=</span>
+            <span class="fragment" data-fragment-index="5">by { intro a, apply two_mul }</span>
           </code></pre>
+          <div class="r-stack">
+            <div class="fragment current-only" data-fragment-index="0">
+              Lean tries to resemble the math, <code>ℕ = nat</code>.
+              <blockquote style="width: 60%">
+                mathematicians [have] lower tolerance for unintuitive interfaces than computer scientists.
+                <p class="reference">
+                  <cite>CICM 2020 slack</cite>
+                  <span>Mario Carneiro, PhD in Logic, Lean Maintainer</span>
+                </p>
+              </blockquote>
+            </div>
+            <div class="fragment current-only" data-fragment-index="1">
+              <code>→</code> declares a function type.<br />
+              <code>λ</code> creates a function <i>term</i>.
+            </div>
+            <div class="fragment current-only" data-fragment-index="2">
+              A <code>Prop</code> is a mathematical statement
+            </div>
+            <div class="fragment current-only" data-fragment-index="3">
+              <p><code>Prop</code> instances are themselves <code>Type</code>s.</p>
+              <p>Values are their proofs.</p>
+            </div>
+            <div class="fragment current-only"  data-fragment-index="4">
+              <code>double_is_add_self 1</code> <br /> is a proof that <code>double 1 = 1 + 1</code>
+            </div>
+            <div class="fragment current-only"  data-fragment-index="5">
+              <code>intro</code> and  <code>apply</code> are tactics,<br />
+              to help us construct proofs interactively
+            </div>
+          </div>
+          <div class="r-stretch"></div>
+        </section>
+        <section>
+          <h3><div class="parent-title"><span>Lean in Practice</span> <code>class</code> for abstraction</div></h3>
+          <pre style="font-size: 1.2em; display: inline-grid"><code class="lean" data-trim data-noescape>
+            <span class="fragment" data-fragment-index="0">class add_comm_group (A : Type)
+              extends has_add A, has_zero A, has_neg A : Type :=</span>
+            <span class="fragment" data-fragment-index="2">(add_comm     : ∀ a b : A,         a + b = b + a      )
+            (add_assoc    : ∀ a b c : A, (a + b) + c = a + (b + c))
+            (zero_add     : ∀ a : A,           0 + a = a          )
+            (add_one      : ∀ a : A,           a + 0 = a          )
+            (add_left_neg : ∀ a : A,          -a + a = 0          )</span>
+          </code></pre>
+          <div class="r-stack">
+            <div class="fragment current-only" data-fragment-index="0">
+              <p><code>group</code> is the name of our type-class.</p>
+              <p>
+                <code>A</code> makes this a dependent type,<br />
+                <code>add_comm_group A</code> is a collection of proofs that <code>A</code> forms an abelian <code>group</code>.</p>
+            </div>
+            <div class="fragment current-only" data-fragment-index="1">
+              <p><code>extends</code> is inheritance.</p>
+
+              <p>Used here to provide <code>*</code>, <code>1</code> and <code>⁻¹</code> for <code>A</code>.</p>
+            </div>
+            <div class="fragment current-only" data-fragment-index="2">
+              The usual abelian group axioms, as fields which hold proofs.
+            </div>
+            <div class="fragment" data-fragment-index="3">
+              <div>
+                Type classes form an API
+              </div>
+              <div class="fragment"  data-fragment-index="4">
+                <hr />
+                <p>Showing $\mathbb{R}$ is an abelian group means <i>implementing</i> the API:</p>
+                <pre><code class="lean" data-trim>
+                instance : add_comm_group ℝ :=
+                { add_assoc := sorry,  add_comm := sorry, zero_add := sorry, add_zero := sorry, add_left_neg := sorry }
+                </code></pre>
+              </div>
+              <div class="fragment"  data-fragment-index="5">
+                <hr />
+                <p>Proofs working over an abelian group <i>use</i> the API,<br />
+                and generalize to <i>all</i> groups...</p>
+              </div>
+            </div>
+          </div>
+          <div class="r-stretch"></div>
+        </section>
       </section>
       <section id="mathlib-graph" data-background-iframe="https://eric-wieser.github.io/mathlib-import-graph?highlight=mathlib:linear_algebra.clifford_algebra.basic" data-background-interactive>
       </section>
@@ -375,7 +453,7 @@
                 </code></pre>
               </div>
             </div>
-            <div data-fragment-index="6" class="fragment semi-fade-out">
+            <div data-fragment-index="6" class="fragment semi-fade-out" style="text-align: left">
               <p data-fragment-index="1" class="fragment">
                 We need a proof that <code>A</code> is invertible, spelt <code>is_unit A</code></p>
               <p data-fragment-index="3" class="fragment"><code>simp</code> takes us to a dead end</p>
@@ -418,23 +496,25 @@
           </div>
           <div class="r-stretch"></div>
           <div class="fragment" data-fragment-index="1">
-            <div class="lean-demo" style="font-size: 120%">
+            <div class="lean-demo">
               <pre class="r-stack"><code class="lean" data-trim data-noescape>
                 /-- The Weinstein–Aronszajn identity -/
-                lemma matrix.det_one_plus_comm : det (1 + P⬝Q) = det (1 + Q⬝P) :=
+                lemma matrix.det_one_plus_comm :
+                  det (1 + P⬝Q) = det (1 + Q⬝P) :=
                 <span class="fragment" data-fragment-index="3">begin
                   calc det (1 + P⬝Q) = det (from_blocks 1 (-P) Q 1) : _
                                  ... = det (1 + Q⬝P)                : _,
                   <span class="fragment" data-fragment-index="4">{ <span class="fragment" data-fragment-index="5">rewrite det_from_blocks_one₂₂,</span>
                     <span class="fragment" data-fragment-index="6">rewrite matrix.neg_mul,</span>
                     <span class="fragment" data-fragment-index="7">rewrite sub_neg_eq_add,</span> },
-                  <span class="fragment" data-fragment-index="9">{ rw [det_from_blocks_one₁₁, matrix.mul_neg, sub_neg_eq_add] },</span></span>
+                  <span class="fragment" data-fragment-index="9">{ rw [det_from_blocks_one₁₁, matrix.mul_neg,
+                        sub_neg_eq_add] },</span></span>
                 end</span>
               </code></pre>
               <div class="lean-state">
                 <pre class="r-stack fragment" data-fragment-index="1"><code class="lean-goal fragment"
                   data-trim data-fragment-index="1" data-noescape>
-                  <span style="opacity: 0.75">R : Type u_1
+                  <span style="opacity: 0.5">R : Type u_1
                   m : Type u_2
                   n : Type u_3
                   _inst_1: comm_ring R
@@ -444,35 +524,35 @@
                   _inst_5: decidable_eq n</span>
                   P : matrix m n R
                   Q : matrix n m R
-                  ⊢ (1 + P ⬝ Q).det = (1 + Q ⬝ P).det
+                  ⊢ det (1 + P⬝Q) = det (1 + Q⬝P)
                 </code><code class="lean-goal fragment" data-trim data-fragment-index="2">
                   P : matrix m n R
                   Q : matrix n m R
-                  ⊢ (1 + P ⬝ Q).det = (1 + Q ⬝ P).det
+                  ⊢ det (1 + P⬝Q) = det (1 + Q⬝P)
                 </code><code class="lean-goal fragment" data-trim data-fragment-index="3">
                   P : matrix m n R
                   Q : matrix n m R
-                  ⊢ (1 + P ⬝ Q).det = (from_blocks 1 (-P) Q 1).det
+                  ⊢ det (1 + P⬝Q) = det (from_blocks 1 (-P) Q 1)
 
                   P : matrix m n R
                   Q : matrix n m R
-                  ⊢ (from_blocks 1 (-P) Q 1).det = (1 + Q ⬝ P).det
+                  ⊢ det (from_blocks 1 (-P) Q 1) = det (1 + Q⬝P)
                 </code><code class="lean-goal fragment" data-trim data-fragment-index="4">
                   P : matrix m n R
                   Q : matrix n m R
-                  ⊢ (1 + P ⬝ Q).det = (from_blocks 1 (-P) Q 1).det
+                  ⊢ det (1 + P⬝Q) = det (from_blocks 1 (-P) Q 1)
                 </code><code class="lean-goal fragment" data-trim data-fragment-index="5">
                   P : matrix m n R
                   Q : matrix n m R
-                  ⊢ (1 + P ⬝ Q).det = (1 - -P ⬝ Q).det
+                  ⊢ det (1 + P⬝Q) = det (1 - -P⬝Q)
                 </code><code class="lean-goal fragment" data-trim data-fragment-index="6">
                   P : matrix m n R
                   Q : matrix n m R
-                  ⊢ (1 + P ⬝ Q).det = (1 - -(P ⬝ Q)).det
+                  ⊢ det (1 + P⬝Q) = det (1 - -(P⬝Q))
                 </code><code class="lean-goal fragment" data-trim data-fragment-index="7">
                   goals accomplished 🎉
                 </code><code class="lean-goal fragment" data-trim data-fragment-index="8">
-                  ⊢ (from_blocks 1 (-P) Q 1).det = (1 + Q ⬝ P).det
+                  ⊢ det (from_blocks 1 (-P) Q 1) = det (1 + Q⬝P)
                 </code><code class="lean-goal fragment" data-trim data-fragment-index="9">
                   goals accomplished 🎉
                 </code></pre>
@@ -484,7 +564,7 @@
               <span class="fragment current-only" data-fragment-index="2">
                 Most of the goal view is noise, so let's cut to the signal</span>
               <span class="fragment current-only" data-fragment-index="3">
-                Outline the proof using the <code class="hljs lean">calc</code> tactic. Each <code class="hljs lean">_</code> is a hole, leaving us with two goals.</span>
+                Outline the proof using the <code class="hljs lean">calc</code> tactic. Each <code class="hljs lean">_</code> is a hole, leaving us with two goals (<code class="hljs-goal-sym">⊢</code>).</span>
               <span class="fragment current-only" data-fragment-index="4">
                 We can use <code class="hljs lean">{}</code> braces to focus on just the first goal.</span>
               <span class="fragment current-only" data-fragment-index="5">
@@ -514,7 +594,7 @@
             <a href="https://leanprover-community.github.io/mathlib_docs/find/clifford_algebra"><code>
               clifford_algebra Q</code></a></li>
           <li>Dual numbers: $R[\varepsilon]$ or $x + \varepsilon y$, where $\varepsilon^2 = 0$
-            <a href="https://leanprover-community.github.io/mathlib_docs/find/clifford_algebra"><code>
+            <a href="https://leanprover-community.github.io/mathlib_docs/find/dual_number"><code>
               dual_number R</code></a></li>
           <li>Graded algebras: $A = \bigoplus_i A_i$ where $A_iA_j \subseteq A_{i+j}$
             <a href="https://leanprover-community.github.io/mathlib_docs/find/graded_algebra"><code>

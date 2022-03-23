@@ -9,7 +9,7 @@
 }
 
 p {
-	text-align: left;
+	text-align: inherit;
 }
 
 .reveal ul {
@@ -76,8 +76,12 @@ mjx-container[jax="CHTML"][display="true"] {
 	border-color: hsl(212, 100%, 80%);
 	background: hsl(212, 100%, 80%);
 }
+.reveal pre {
+	font-size: 0.75em;
+}
 .reveal pre code {
 	overflow: inherit;
+	max-height: none;
 }
 .fragment.visible .info::after,
 .fragment.visible .error::after,
@@ -96,16 +100,16 @@ mjx-container[jax="CHTML"][display="true"] {
 
 
 .lean-demo {
-  display: flex;
+  display: grid;
+  grid-template: auto / auto auto; column-gap: var(--r-block-margin);
   margin: auto;
-  gap:10px;
 }
-.lean-demo > pre {
+/*.lean-demo > pre {
   flex: 5;
 }
 .lean-demo .lean-state {
   flex: 3;
-}
+}*/
 /*.lean-state pre {
   padding: 5px;
   margin-bottom: -10px;
