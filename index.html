@@ -25,7 +25,7 @@
 <body>
   <div class="reveal">
     <div class="slides">
-      <section>
+      <section class="center">
         <h1>Non-commutative algebras, computer algebra systems, and theorem provers</h1>
 
         <p>Eric Wieser<br/> Cambridge University Engineering Department</p>
@@ -39,7 +39,7 @@
       <section>
         <section>
           <h2>Examples of non-commutative algebras</h2>
-          <p>Most algebra we manipulate has commutative <emph>multiplication</emph>, $ab = ba$</p>
+          <p>Most algebra we manipulate has commutative <em>multiplication</em>, $ab = ba$</p>
           <ul>
             <li>the real numbers $\mathbb{R}$</li>
             <li>the complex numbers $\mathbb{C}$ ($x + y\mathrm{i}$)</li>
@@ -106,7 +106,7 @@
             <div>
               <p>Notable implementations</p>
               <div style="height:50px; position:relative; width: 90%; margin: auto; margin-bottom: 20px">
-                <canvas id="cas-timeline" />
+                <canvas id="cas-timeline"></canvas>
               </div>
               <ul style="columns: 3; list-style-type: none">
                 <li>Axiom (1965, BSD License)</li>
@@ -281,7 +281,7 @@
       <section>
         <h2>Theorem proving languages - History</h2>
         <div style="height:50px; position:relative; width: 90%; margin: auto; margin-bottom: 20px">
-          <canvas id="lean-timeline" />
+          <canvas id="lean-timeline"></canvas>
         </div>
         <ul>
           <li class="fragment">Relatively new (compared to other actively used tools)
@@ -409,8 +409,6 @@
           <div class="r-stretch"></div>
         </section>
       </section>
-      <section id="mathlib-graph" data-background-iframe="https://eric-wieser.github.io/mathlib-import-graph?highlight=mathlib:linear_algebra.clifford_algebra.basic" data-background-interactive>
-      </section>
       <section>
         <section id="matrix-determinant-lean">
           <h3>Example: Checking matrix determinants</h3>
@@ -436,7 +434,7 @@
               <div class="fragment" data-fragment-index="1">
                 $$\operatorname{det} ABA^{-1} = \operatorname{det} B$$
                 <pre class="r-stack"><code class="lean fragment" data-trim data-noescape
-                    data-fragment-index="1" class="fragment">
+                    data-fragment-index="1">
                   example : det (A⬝B⬝A⁻¹) = det B :=
                   sorry
                 </code><code class="lean fragment" data-trim data-noescape
@@ -589,7 +587,7 @@
         </section>
       </section>
       <section>
-        <section>
+        <section class="center">
           <h2>Mathlib</h2>
         </section>
         <section>
@@ -597,7 +595,6 @@
           <div style="text-align: left">
             <p>Of particular interest to engineers:</p>
             <ul>
-              <li>Polynomials and power series</li>
               <li>Linear algebra
                 <ul>
                   <li>Vector subspaces</li>
@@ -610,12 +607,13 @@
                   <li>Fourier series</li>
                 </ul>
               </li>
+              <li>Polynomials and power series</li>
               <li>Probability theory</li>
             </ul>
+          </div>
         </section>
-        <section>
-          <h3>What does Mathlib know? - examples</h3>
-          <h4>Parseval's theorem:</h4>
+        <section id="mathlib-knows-parseval">
+          <h3><div class="parent-title"><span>What does Mathlib know?</span>Parseval's theorem</div></h3>
           <div class="grid" style="grid-template: auto / 1fr 1fr">
             <blockquote>
               <p>These amplitudes [$c_n$] can be related to the power content of the signal $g(t)$ over one period</p>
@@ -623,32 +621,104 @@
               <p style="text-align: center">where $g(t) = \sum_{n=-\infty}^{\infty}c_ne^{jn\omega_0t}$</p>
               <p class="reference">
                 <cite><a href="http://teaching.eng.cam.ac.uk/content/engineering-tripos-part-ib-2p6-fourier-transforms-signal-and-data-analysis-2020-21">CUED IB Paper 6</a>, Handout 2, Lent 2021</cite>
-                <span>Simon Godsill</span>
+                <span>S. Godsill</span>
               </p>
             </blockquote>
             <blockquote>
-              The sum of the squared norms of the Fourier coefficients equals the <code>L2</code> norm of the function.
+              The sum of the squared norms of the Fourier coefficients equals the $L^2$ norm of the function.
               <pre><code class="lean" data-trim>
                 lemma tsum_sq_fourier_series_repr
                   (g : Lp ℂ 2 haar_circle) :
-                    ∑' n : ℤ, ∥fourier_series.repr g n∥ ^ 2
-                      = ∫ t : circle, ∥g t∥ ^ 2 ∂ haar_circle :=
+                    ∑' n : ℤ, ∥fourier_series.repr g n∥^2
+                      = ∫ t : circle, ∥g t∥^2 ∂haar_circle :=
               </code></pre>
               <p class="reference">
-                <cite><a href="https://leanprover-community.github.io/mathlib_docs/find/tsum_sq_fourier_series_repr">Fourier analysis on the circle - mathlib docs</a></cite>
-                <span>Heather Macbeth</span>
+                <cite><a href="https://leanprover-community.github.io/mathlib_docs/find/tsum_sq_fourier_series_repr">Fourier analysis on the circle</a></cite>
+                <span>Mathlib docs</span>
               </p>
             </blockquote>
           </div>
-          <div style="margin-top: 40px">
+          <div class="fragment">
             <p style="text-align: center">Some translation required!</p>
-            <div style="display: grid; grid-template: auto auto auto / 1fr min-content 1fr; column-gap: 1em; text-align: left">
+            <div style="display: grid; grid-template: auto auto auto / 1fr min-content 1fr; column-gap: 1em; text-align: left; margin-bottom: var(--r-block-margin)">
               <q style="text-align: right">one period</q> &leftrightarrow; <code>t : circle</code>
-              <q style="text-align: right">$g(t) = \sum \cdots$</q> &leftrightarrow; <code>g : Lp ℂ 2 haar_circle</code>
+              <q style="text-align: right">$g(t) = \sum \cdots$</q> &leftrightarrow; <span>
+                <code class="lean">g : Lp ℂ 2 haar_circle</code><br />
+                <small>(<code class="lean">g : circle → ℂ</code>, with finite $L^2$ norm)</small>
+              </span>
               <q style="text-align: right">$c_n$</q> &leftrightarrow; <code>fourier_series.repr g n</code>
-            </ul>
+            </div>
+          </div>
+          <div class="r-stretch"></div>
+        </section>
+        <section id="mathlib-knows-cayley-hamilton">
+          <h3><div class="parent-title"><span>What does Mathlib know?</span>The Cayley-Hamilton theorem</div></h3>
+          <div class="grid" style="grid-template: auto / 1fr 1fr">
+            <blockquote>
+              The characteristic polynomial of $A$ is defined as
+              \begin{align}
+              p_{A}(\lambda)&=\det(\lambda I_{n}-A) \\
+              \textit{[...]}\quad&=\lambda^{n}+c_{n-1}\lambda^{n-1}+\cdots+c_{1}\lambda+c_{0}
+              \end{align}
+              One can create an analogous polynomial $p_{A}(A)$ [...].
+              The Cayley–Hamilton theorem states that $p_A(A) = 0$
+              <p class="reference">
+                <cite><a href="https://en.wikipedia.org/wiki/Cayley%E2%80%93Hamilton_theorem">Cayley–Hamilton theorem</a></cite>
+                <span>Wikipedia</span>
+              </p>
+            </blockquote>
+            <blockquote>
+              The characteristic polynomial of a matrix, applied to the matrix itself, is zero.
+               This holds over any commutative ring.
+              <pre><code class="lean" data-trim>
+                lemma matrix.aeval_self_charpoly {R n : Type*}
+                  [comm_ring R] [decidable_eq n] [fintype n]
+                  (A : matrix n n R) :
+                    polynomial.aeval A A.charpoly = 0
+              </code></pre>
+              <p class="reference">
+                <cite><a href="https://leanprover-community.github.io/mathlib_docs/find/matrix.aeval_self_charpoly">Characteristic polynomials and the Cayley-Hamilton theorem</a></cite>
+                <span>Mathlib docs</span>
+              </p>
+            </blockquote>
+          </div>
+          <div class="fragment" style="display: grid; grid-template: auto auto auto / 1fr min-content 1fr; column-gap: 1em; text-align: left; margin-bottom: var(--r-block-margin)">
+            <q style="text-align: right">$p_A$</q> &leftrightarrow; <code>A.charpoly</code>
+            <q style="text-align: right">$p(A)$</q> &leftrightarrow; <code>polynomial.aeval A p</code>
+          </div>
+          <div class="r-stretch"></div>
+          <div class="fragment">
+            <blockquote>
+              <p>Note that by [the] Cayley-Hamilton theorem,
+              $e^{A\tau} = I\alpha_0(\tau) + \cdots + A^{n-1}\alpha_{n-1}$</p>
+              <p class="reference">
+                <cite><a href="http://teaching.eng.cam.ac.uk/content/engineering-tripos-part-iia-3f2-systems-control-2021-22">3F2: Systems and Control</a>, Lecture 4: controllability</cite>
+                <span>R. Sepulchre</span>
+              </p>
+            </blockquote>
+            <p>Mathlib does not yet have this corollary, but it is close&hellip;</p>
           </div>
         </section>
+        <section id="mathlib-knows-math">
+          <div class="grid r-stretch" style="grid-template: min-content auto / 1fr 1fr; height: 100%; margin-top: 0">
+            <h3 style="grid-column: 1 / span 2"><div class="parent-title"><span>What does Mathlib know?</span>Half an Undergraduate Mathematics Degree</div></h3>
+            <div class="scroll-container">
+              <iframe style="height: 520vh; width: 100%; max-width: none; max-height: none" src="https://leanprover-community.github.io/undergrad.html" scrolling="no"></iframe>
+              <div class="fragment" style="position: absolute; top: 170vh" data-fragment-index="0" data-scroll-into-view></div>
+              <div class="fragment" style="position: absolute; top: 230vh" data-fragment-index="1" data-scroll-into-view></div>
+              <div class="fragment" data-fragment-index="2" data-scroll-into-view></div>
+            </div>
+            <div class="scroll-container">
+              <iframe style="height: 550vh; width: 100%; max-width: none; max-height: none" src="https://leanprover-community.github.io/undergrad_todo.html" scrolling="no"></iframe>
+              <div class="fragment" style="position: absolute; top: 125vh" data-fragment-index="0" data-scroll-into-view></div>
+              <div class="fragment" style="position: absolute; top: 185vh" data-fragment-index="1" data-scroll-into-view></div>
+              <div class="fragment" style="position: absolute; top: 340vh" data-fragment-index="2" data-scroll-into-view></div>
+            </div>
+          </div>
+        </section>
+        <section id="mathlib-knows-spaghetti" data-background-iframe="https://eric-wieser.github.io/mathlib-import-graph?highlight=mathlib:linear_algebra.matrix.determinant" data-background-interactive>
+        </section>
+
         <section id="mathlib-contributions">
           <h2>Contributions to mathlib</h2>
           <ul>
@@ -708,13 +778,36 @@
         RevealNotes,
       ],
       history: true,
-      center: true,
+      center: false,
       // defaultTiming: 40,
       slideNumber: 'c/t',
       width: 1856,
       height: 1016,
       // showNotes: 'separate-page'
     });
+
+    Reveal.on('fragmenthidden', event => {
+      var activeFragments = Reveal.getCurrentSlide().querySelectorAll('.current-fragment');
+      var seen = new Set();
+      Array.from(activeFragments).forEach(f => {
+        if (f && f.hasAttribute('data-scroll-into-view')) {
+          f.parentElement.scrollTop = f.offsetTop;
+          seen.add(f.parentElement);
+        }
+      });
+      event.fragments.forEach(f => {
+        if (f.hasAttribute('data-scroll-into-view') && !seen.has(f.parentElement)) {
+          f.parentElement.scrollTop = 0
+        }
+      });
+    } );
+    Reveal.on('fragmentshown', event => {
+      event.fragments.forEach(f => {
+        if (f.hasAttribute('data-scroll-into-view')) {
+          f.parentElement.scrollTop = f.offsetTop;
+        }
+      });
+    } );
   </script>
   <script src="js/inline_svg.js"></script>
 </body>

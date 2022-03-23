@@ -132,7 +132,7 @@ mjx-container[jax="CHTML"][display="true"] {
 .reveal blockquote {
   padding: 20px;
   position: relative;
-  margin-bottom: 70px;
+  margin-bottom: 75px;
   text-align: left;
   background: #0000000d;
   box-shadow: none;
@@ -159,6 +159,7 @@ blockquote p.reference {
     margin-top: 5px;
     min-height: 50px;
     vertical-align: bottom;
+    line-height: 1em;
 }
 blockquote p.reference::before {
     position: absolute;
@@ -221,5 +222,29 @@ p.reference > span {
 .reveal .grid > blockquote {
 	margin-left: 0;
 	margin-right: 0;
+	margin-top: 0;
 	align-self: end;
+}
+.reveal .grid > iframe {
+	height: 100%;
+	max-height: none;
+	width: 100%;
+	max-width: none;
+	margin: 0;
+	box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
+}
+.reveal .scroll-container {
+	overflow-y: scroll;
+	scroll-behavior: smooth;
+	box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
+	position: relative;
+}
+./*reveal .scroll-container {
+	overflow-y: scroll;
+	scroll-behavior: smooth;
+	box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
+}
+*/
+.reveal .grid > h3 {
+	margin: 0;
 }
