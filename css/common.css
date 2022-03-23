@@ -147,7 +147,7 @@ mjx-container[jax="CHTML"][display="true"] {
 /* black.css does something wacky here */
 .reveal blockquote p:first-child,
 .reveal blockquote p:last-child {
-  display: initial; }
+  display: revert; }
 
 blockquote p.reference {
     text-align: right;

@@ -138,37 +138,75 @@
         </section>
         <section>
           <h2>Some sympy examples</h2>
-          TODO
+          <blockquote>
+            <div class="grid" style="grid-template: auto auto / 1fr 1fr; align-items: end; margin-bottom: 0">
+              <div>
+                <p>Take the derivative of $\sin{(x)}e^x$</p>
+                <pre><code class="pycon" data-trim data-no-escape>
+                &gt;&gt;&gt; diff(sin(x)*exp(x), x)
+                $e^{x} \sin{\left(x \right)} + e^{x} \cos{\left(x \right)}$
+                </code></pre>
+              </div>
+              <div>
+                <p>Compute $\int_{-\infty}^\infty \sin{(x^2)}\,dx$</p>
+                <pre><code class="pycon" data-trim data-no-escape>
+                &gt;&gt;&gt; integrate(exp(x)*sin(x) + exp(x)*cos(x), x)
+                $e^{x} \sin{\left(x \right)}$
+                </code></pre>
+              </div>
+              <div>
+                <p>Solve $x^2 - 2 = 0$</p>
+                <pre><code class="pycon" data-trim data-no-escape>
+                &gt;&gt;&gt; solve(x**2 - 2, x)
+                $\left[ - \sqrt{2}, \  \sqrt{2}\right]$
+                </code></pre>
+              </div>
+              <div>
+                <p>Solve the differential equation $y'' - y = e^t$</p>
+                <pre><code class="pycon" data-trim data-no-escape>
+                  &gt;&gt;&gt; y = Function('y')
+                  &gt;&gt;&gt; dsolve(Eq(y(t).diff(t, t) - y(t), exp(t)), y(t))
+                  $y{\left(t \right)} = C_{2} e^{- t} + \left(C_{1} + \frac{t}{2}\right) e^{t}$
+                </code></pre>
+              </div>
+            </div>
+            <p class="reference">
+              <cite><a href="https://docs.sympy.org/latest/tutorial/intro.html#the-power-of-symbolic-computation">
+                The Power of Symbolic Computation
+              </a></cite>
+              <span>SymPy.org</span>
+            </p>
+          </blockquote>
         </section>
         <section>
           <h3>Expression trees</h3>
           <pre><code class="pycon" data-trim>
           >>> from sympy import *; from this_presentation import show_repr
           </code></pre>
-          <div style="display: grid; grid-template: auto auto / 1fr 1fr; column-gap: var(--r-block-margin)">
-            <div class="fragment">
+          <div style="display: grid; align-items: end; grid-template: auto auto / 1fr 1fr; column-gap: var(--r-block-margin)">
+            <div class="fragment" data-fragment-index="1">
               <h4>Real numbers</h4>
               <pre><code class="pycon" data-trim data-noescape>
               &gt;&gt;&gt; x, y = symbols('x y', real=True)
               &gt;&gt;&gt; expr = (x + y)*(x - y); expr
               $(x - y)(x + y)$
-              <span class="fragment">&gt;&gt;&gt; show_repr(expr)
+              <span class="fragment" data-fragment-index="2">&gt;&gt;&gt; show_repr(expr)
               Mul(Add($x$, Mul(Integer(-1), $y$)),
                   Add($x$, $y$))</span>
               </code></pre>
             </div>
-            <div class="fragment">
+            <div class="fragment" data-fragment-index="3">
               <h4>Complex numbers</h4>
               <pre><code class="pycon" data-trim data-noescape>
               &gt;&gt;&gt; x, y = symbols('x y', complex=True)
               &gt;&gt;&gt; expr = (x + y)*(x - y); expr
               $(x - y)(x + y)$
-              <span class="fragment">&gt;&gt;&gt; show_repr(expr)
+              <span class="fragment" data-fragment-index="4">&gt;&gt;&gt; show_repr(expr)
               Mul(Add($x$, Mul(Integer(-1), $y$)),
                   Add($x$, $y$))</span>
               </code></pre>
             </div>
-            <div class="fragment">
+            <div class="fragment" data-fragment-index="5">
               <h4>Matrices</h4>
               <pre><code class="pycon" data-trim data-noescape>
               &gt;&gt;&gt; m, n = symbols('m n')
@@ -176,11 +214,29 @@
               &gt;&gt;&gt; Y = MatrixSymbol('Y', m, n)
               &gt;&gt;&gt; expr = (X + Y)*(X - Y).T; expr
               $(X + Y)(X^T - Y^T)$
-              <span class="fragment">&gt;&gt;&gt; show_repr(expr)
+              <span class="fragment" data-fragment-index="6">&gt;&gt;&gt; show_repr(expr)
               MatMul(MatAdd($X$, $Y$),
                      MatAdd(Transpose($X$),
                             MatMul(Integer(-1), Transpose($Y$))))</span>
               </code></pre>
+            </div>
+            <div style="display: table;">
+              <div style="display: table-row" class="fragment" data-fragment-index="2">
+                <span style="display: table-cell; text-align: right">Real:&nbsp;</span>
+                <span style="display: table-cell; text-align: left">
+                  <code>Symbol</code>, <code>Add</code>, <code>Mul</code>, &hellip;</span></div>
+              <div style="display: table-row" class="fragment" data-fragment-index="4">
+                <span style="display: table-cell; text-align: right">Complex:&nbsp;</span>
+                <span style="display: table-cell; text-align: left">
+                  <code>Symbol</code>, <code>Add</code>, <code>Mul</code>, &hellip;</span></div>
+              <div style="display: table-row" class="fragment" data-fragment-index="6">
+                <span style="display: table-cell; text-align: right">Matrix:&nbsp;</span>
+                <span style="display: table-cell; text-align: left">
+                  <code>MatrixSymbol</code>, <code>MatrixAdd</code>, <code>MatrixMul</code>, &hellip;</span></div>
+              <div style="display: table-row" class="fragment" data-fragment-index="7">
+                <span style="display: table-cell; text-align: right">Quaternion:&nbsp;</span>
+                <span style="display: table-cell; text-align: left">
+                &hellip;</span></div>
             </div>
           </div>
         </section>
@@ -188,9 +244,10 @@
           <h3>Expression trees</h3>
           <div>
             <h4>Quaternions</h4>
+            <p>No symbolic quaternions; only quaternions with symbolic coefficients.</p>
             <pre><code class="pycon" data-trim data-noescape>
-            &gt;&gt;&gt; (x, xi, xj, xk), (y, yi, yj, yk) = symbols('x x_i x_j x_k'), symbols('y y_i y_j y_k')
-            &gt;&gt;&gt; xq, yq = Quaternion(x, xi, xj, xk), Quaternion(y, yi, yj, yk)
+            &gt;&gt;&gt; x, xi, xj, xk = symbols('x x_i x_j x_k');  xq = Quaternion(x, xi, xj, xk)
+            &gt;&gt;&gt; y, yi, yj, yk = symbols('y y_i y_j y_k');  yq = Quaternion(y, yi, yj, yk)
             &gt;&gt;&gt; expr = xq * yq; expr
             $\left(x y - x_{i} y_{i} - x_{j} y_{j} - x_{k} y_{k}\right) + \left(x y_{i} + x_{i} y + x_{j} y_{k} - x_{k} y_{j}\right) i + \left(x y_{j} - x_{i} y_{k} + x_{j} y + x_{k} y_{i}\right) j + \left(x y_{k} + x_{i} y_{j} - x_{j} y_{i} + x_{k} y\right)$
             <span class="fragment">&gt;&gt;&gt; show_repr(expr)
@@ -200,12 +257,28 @@
                        Add(Mul($x$, $y_k$), Mul($x_i$, $y_j$), Mul(Integer(-1), $x_j$, $y_i$), Mul($x_k$, $y$)))</span>
             </code></pre>
           </div>
-          <ul class="fragment">
-            <li>Real: <code>Add</code>, <code>Mul</code>, ...</li>
-            <li>Complex: <code>Add</code>, <code>Mul</code>, ...</li>
-            <li>Matrix: <code>MatrixAdd</code>, <code>MatrixMul</code>, ...</li>
-            <li>Quaternion: ???</li>
-          </ul>
+          <p class="fragment">This makes quaternions hard to work with:</p>
+          <div class="grid" style="grid-template: auto / auto auto">
+            <div class="fragment">
+              <pre><code class="pycon" data-trim>
+              &gt;&gt;&gt; (xq * xq * xq**-1 * yq).simplify()
+              $\left(x y - x_{i} y_{i} - x_{j} y_{j} - x_{k} y_{k}\right)$
+              $\qquad + \left(x y_{i} + x_{i} y + x_{j} y_{k} - x_{k} y_{j}\right) i$
+              $\qquad + \left(x y_{j} - x_{i} y_{k} + x_{j} y + x_{k} y_{i}\right) j$
+              $\qquad + \left(x y_{k} + x_{i} y_{j} - x_{j} y_{i} + x_{k} y\right) k$
+              </code></pre>
+              (would prefer $x_qy_q$)
+            </div>
+            <div class="fragment">
+              <pre><code class="pycon" style="font-size: 75%" data-trim data-noescape>
+              &gt;&gt;&gt; def q_diff(p, dq):  # like ∇Φ, but for Φ taking quaternions
+              ...     I, J, K = Quaternion(0,1,0,0), Quaternion(0,0,1,0), Quaternion(0,0,0,1)
+              ...     return p.diff(dq.a) + I*p.diff(dq.b) + J*p.diff(dq.c) + K*p.diff(dq.d)
+              &gt;&gt;&gt; q_diff(xq*yq, xq)
+              $- 2 y + - 2 y_{i} i + - 2 y_{j} j + - 2 y_{k} k$
+              </code></pre>
+              <p>(would prefer $-2y_q$)</p>
+            </div>
         </section>
         <section>
           <h3>Example: Checking matrix determinants</h3>
