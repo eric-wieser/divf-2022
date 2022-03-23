@@ -28,7 +28,7 @@
       <section class="center">
         <h1>Non-commutative algebras, computer algebra systems, and theorem provers</h1>
 
-        <p>Eric Wieser<br/> Cambridge University Engineering Department</p>
+        <p>Eric Wieser<br/> Signal Processing Group</p>
         <small>slides: <a href="https://eric-wieser.github.io/divf-2022">
         eric-wieser.github.io/divf-2022</a></small>
         <small style="display: block; text-align: center; opacity: 0.5">2022-03-25</small>
@@ -37,21 +37,37 @@
         </aside>
       </section>
       <section>
+        <section class="center">
+          <h2>Non-commutative algebras</h2>
+        </section>
         <section>
-          <h2>Examples of non-commutative algebras</h2>
-          <p>Most algebra we manipulate has commutative <em>multiplication</em>, $ab = ba$</p>
-          <ul>
-            <li>the real numbers $\mathbb{R}$</li>
-            <li>the complex numbers $\mathbb{C}$ ($x + y\mathrm{i}$)</li>
-          </ul>
-          <p>Geometry is inherently non-commutative:</p>
-          <ul>
-            <li>rotations in 3D don't commute</li>
-            <li>the oriented plane spanning $u$ and $v$ faces the opposite way to the one spanning $v$ and $u$</li>
-          </ul>
-          <p>Any algebraic system representing geometry of this kind will have non-commutative multiplication!</p>
+          <h3><div class="parent-title"><span>Non-commutative algebras</span> Geometric motivation</div></h3>
+          <div class="grid" style="grid-template: auto / 1fr 1fr; text-align: left">
+            <div>
+              <p>Geometry is inherently non-commutative:</p>
+              <ul>
+                <li>applying 3D rotations in a different order gives a different result</li>
+                <li>the oriented plane spanning $u$ and $v$ faces the opposite way to the one spanning $v$ and $u$</li>
+              </ul>
+            </div>
+            <div>
+              <p>&hellip; algebraic representations of geometry are too:</p>
+              <ul>
+                <li>for rotation matrices, composition is multiplication, and $R_1R_2 \ne R_2R_1$ in general<br /></li>
+                <li>the normal vector of such a plane (in 3D) can be found with the cross product, and $u\times v = -v\times u$.</li>
+              </ul>
+            </div>
+          </div>
+          <p style="text-align: left">
+            The matrix algebra $\mathbb{R}^{n \times n}$ is the typical choice for representing geometry, but is by no means the only choice available:
+          </p>
+          <div class="grid" style="grid-template: 1fr / auto auto auto">
+            <p>Quaternions</p>
+            <p>Exterior powers</p>
+            <p>Geometric Algebra</p>
+          </div>
 
-          <ul>
+       <!--    <ul>
             <li>Matrices, $\mathbb{R}^{m \times n}$
               <ul>
                 <li>Elements of the form
@@ -69,7 +85,60 @@
             <li>The exterior algebra, $\bigwedge(V)$
               <ul><li>Element of the form $a + \sum_{i}a_i\mathrm{e}_i + \sum_{i,j,i&lt;j}a_{ij}(\mathrm{e}_i \wedge \mathrm{e}_j) + \sum_{i,j,k,i&lt;j&lt;k}a_{ijh}(\mathrm{e}_i \wedge \mathrm{e}_j \wedge \mathrm{e}_k) + \cdots$</li></ul>
             <li>The geometric algebra, $\mathcal{G}(\mathbb{R}^n)$</li>
-          </ul>
+          </ul> -->
+        </section>
+        <section>
+          <h3><div class="parent-title"><span>Non-commutative algebras</span> Geometric examples</div></h3>
+          <h4>Quaternions, $\mathbb{Q}$</h4>
+          <div style="text-align: left; margin-left: auto; margin-right: auto;" class="fragment">
+            <p>Like the complex numbers, $q = r + x\mathrm{i} + y\mathrm{j} + z\mathrm{k}$, but with $i^2 = j^2 = k^2 = ijk = −1$.</p>
+            <p>In 3D, a rotation around the axis $u$ by $\theta$ can be represented as:</p>
+            $$e^{\frac{\theta}{2}{(u_x\mathrm{i} + u_y\mathrm{j} + u_z\mathrm{k})}} = \cos \frac{\theta}{2} + (u_x\mathrm{i} + u_y\mathrm{j} + u_z\mathrm{k}) \sin \frac{\theta}{2}$$</p>
+            <p>Applying a quaternion rotation is done as $qvq^{-1}$.</p>
+            <p>A division ring, unlike the matrix algebra; all non-zero quaternions have an inverse.</p>
+          </div>
+          <div class="grid" style="grid-template: min-content auto / auto auto">
+            <h4>Exterior&nbsp;algebra, $\bigwedge(V)$</h4>
+            <h4>Geometric&nbsp;algebra, $\mathcal{G}(Q)$</h4>
+            <div style="text-align: left" class="fragment">
+              <p>For an arbitrary vector space $V$ containing $u, v$, $u \wedge v = -v \wedge u$ represents an oriented plane at the origin spanning $u$ then $v$.</p>
+              <p>Unlike the cross product, generalizes to higher dimensions: $u \wedge v \wedge w$ is an oriented volume.</p>
+            </div>
+            <div style="text-align: left" class="fragment">
+              <p>An extension of exterior algebra that includes a metric $Q$, which result in a dot product.</p>
+              <p>Multiplication of vectors satisfies:</p>
+              $$uv = u\cdot v + u \wedge v$$
+            </div>
+          </div>
+        </section>
+        <section>
+          <h3><div class="parent-title"><span>Non-commutative algebras</span>Weaker algebraic structures</div></h3>
+          <div class="grid" style="grid-template-columns: min-content auto">
+            <div style="text-align: right"><p>$ab \ne ba$</p></div>
+            <div style="text-align: left">
+              <p>Non-commutative multiplication is an example of a <q>weakening</q> of our algebraic rules that's particularly easy to motivate through geometry.</p>
+            </div>
+            <div style="text-align: right" class="fragment" data-fragment-index="0"><p>$ a \ne 0, b \ne 0, ab = 0$</p></div>
+            <div style="text-align: left" class="fragment" data-fragment-index="0">
+              <p>Some algebras, including $\mathbb{R}^{n \times n}$ and $\bigwedge(B)$ and $\mathcal{G}(Q)$, have <q>zero divisors</q>.</p>
+              <p>This means $ab = ac \centernot\implies b = c$!</p>
+            </div>
+            <div style="text-align: right" class="fragment" data-fragment-index="1"><p>$a(bc) \ne (ab)c$</p></div>
+            <div style="text-align: left" class="fragment" data-fragment-index="1">
+              <p>Non-associative multiplication is fairly common too, for instance the vector cross product:</p>
+              $$u \times (v \times w) = (u \times v) \times w + v \times (u \times w)$$
+              <p>More examples: Lie algebras, Octonions, &hellip;</p>
+            </div>
+          </div>
+          <div class="r-stretch">
+          <div class="fragment" data-fragment-index="2">
+            <h3>This talk</h3>
+            <div style="width: auto; margin: auto; text-align: left; display: table">
+              <p>What software tools can aid us with algebra?</p>
+              <p>Can they cope with these weaker algebraic structures?</p>
+              <p>Is the way they handle matrices generalizable to other algebras of interest?</p>
+            </div>
+          </div>
         </section>
       </section>
       <section>
@@ -832,9 +901,9 @@
     Reveal.initialize({
       mathjax3: {
         mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js',
-        loader: {load: ['[tex]/mathtools']},
+        loader: {load: ['[tex]/mathtools', '[tex]/centernot']},
         tex: {
-          packages: {'[+]': ['mathtools']},
+          packages: {'[+]': ['mathtools', 'centernot']},
         },
         chtml: {
           // This seems to break rendering on slides that weren't onscreen at render time
