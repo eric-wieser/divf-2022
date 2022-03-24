@@ -42,20 +42,22 @@
         </section>
         <section>
           <h3><div class="parent-title"><span>Non-commutative algebras</span> Geometric motivation</div></h3>
-          <div class="grid" style="grid-template: auto / 1fr 1fr; text-align: left">
-            <div>
-              <p>Geometry is inherently non-commutative:</p>
-              <ul>
-                <li>applying 3D rotations in a different order gives a different result</li>
-                <li>the oriented plane spanning $u$ and $v$ faces the opposite way to the one spanning $v$ and $u$</li>
-              </ul>
-            </div>
-            <div>
-              <p>&hellip; algebraic representations of geometry are too:</p>
-              <ul>
-                <li>for rotation matrices, composition is multiplication, and $R_1R_2 \ne R_2R_1$ in general<br /></li>
-                <li>the normal vector of such a plane (in 3D) can be found with the cross product, and $u\times v = -v\times u$.</li>
-              </ul>
+          <div class="r-stretch" style="display: grid; align-items: center">
+            <div class="grid" style="grid-template: auto / 1fr 1fr; text-align: left">
+              <div>
+                <p>Geometry is inherently non-commutative:</p>
+                <ul>
+                  <li>applying 3D rotations in a different order gives a different result</li>
+                  <li>the oriented plane spanning $u$ and $v$ faces the opposite way to the one spanning $v$ and $u$</li>
+                </ul>
+              </div>
+              <div>
+                <p>&hellip; algebraic representations of geometry are too:</p>
+                <ul>
+                  <li>for rotation matrices, composition is multiplication, and $R_1R_2 \ne R_2R_1$ in general<br /></li>
+                  <li>the normal vector of such a plane (in 3D) can be found with the cross product, and $u\times v = -v\times u$.</li>
+                </ul>
+              </div>
             </div>
           </div>
           <p style="text-align: left">
@@ -66,34 +68,14 @@
             <p>Exterior powers</p>
             <p>Geometric Algebra</p>
           </div>
-
-       <!--    <ul>
-            <li>Matrices, $\mathbb{R}^{m \times n}$
-              <ul>
-                <li>Elements of the form
-                  $\left[\begin{smallmatrix}
-                    a_{11} & \cdots & a_{1n} \\
-                    \vdots & \ddots & \vdots \\
-                    a_{m1} & \cdots & a_{mn} \\
-                  \end{smallmatrix}\right]$</li>
-              </ul></li>
-            <li>Quaternions, $\mathbb{Q}$:
-              <ul>
-                <li>Elements of the form $r + x\mathrm{i} + y\mathrm{j} + z\mathrm{k}$</li>
-                <li>Rotation around the axis $u$ by $\theta$ is $e^{\frac{\theta}{2}{(u_x\mathrm{i} + u_y\mathrm{j} + u_z\mathrm{k})}} = \cos \frac{\theta}{2} + (u_x\mathrm{i} + u_y\mathrm{j} + u_z\mathrm{k}) \sin \frac{\theta}{2}$</li>
-              </ul></li>
-            <li>The exterior algebra, $\bigwedge(V)$
-              <ul><li>Element of the form $a + \sum_{i}a_i\mathrm{e}_i + \sum_{i,j,i&lt;j}a_{ij}(\mathrm{e}_i \wedge \mathrm{e}_j) + \sum_{i,j,k,i&lt;j&lt;k}a_{ijh}(\mathrm{e}_i \wedge \mathrm{e}_j \wedge \mathrm{e}_k) + \cdots$</li></ul>
-            <li>The geometric algebra, $\mathcal{G}(\mathbb{R}^n)$</li>
-          </ul> -->
         </section>
         <section>
           <h3><div class="parent-title"><span>Non-commutative algebras</span> Geometric examples</div></h3>
-          <h4>Quaternions, $\mathbb{Q}$</h4>
+          <h4>Quaternions, $\mathbb{H}$</h4>
           <div style="text-align: left; margin-left: auto; margin-right: auto;" class="fragment">
             <p>Like the complex numbers, $q = r + x\mathrm{i} + y\mathrm{j} + z\mathrm{k}$, but with $i^2 = j^2 = k^2 = ijk = −1$.</p>
             <p>In 3D, a rotation around the axis $u$ by $\theta$ can be represented as:</p>
-            $$e^{\frac{\theta}{2}{(u_x\mathrm{i} + u_y\mathrm{j} + u_z\mathrm{k})}} = \cos \frac{\theta}{2} + (u_x\mathrm{i} + u_y\mathrm{j} + u_z\mathrm{k}) \sin \frac{\theta}{2}$$</p>
+            $$e^{\frac{\theta}{2}{(u_x\mathrm{i} + u_y\mathrm{j} + u_z\mathrm{k})}} = \cos \frac{\theta}{2} + (u_x\mathrm{i} + u_y\mathrm{j} + u_z\mathrm{k}) \sin \frac{\theta}{2}$$
             <p>Applying a quaternion rotation is done as $qvq^{-1}$.</p>
             <p>A division ring, unlike the matrix algebra; all non-zero quaternions have an inverse.</p>
           </div>
@@ -130,7 +112,7 @@
               <p>More examples: Lie algebras, Octonions, &hellip;</p>
             </div>
           </div>
-          <div class="r-stretch">
+          <div class="r-stretch"></div>
           <div class="fragment" data-fragment-index="2">
             <h3>This talk</h3>
             <div style="width: auto; margin: auto; text-align: left; display: table">
@@ -172,20 +154,20 @@
               </ul>
             </div>
           </div>
-            <div>
-              <p>Notable implementations</p>
-              <div style="height:50px; position:relative; width: 90%; margin: auto; margin-bottom: 20px">
-                <canvas id="cas-timeline"></canvas>
-              </div>
-              <ul style="columns: 3; list-style-type: none">
-                <li>Axiom (1965, BSD License)</li>
-                <li style="text-align: right">Maxima (1982, GPL License)</li>
-                <li>Maple (1982, Proprietary)</li>
-                <li style="text-align: right">Magma (1993, Proprietary) </li>
-                <li>Mathematica (1998, Proprietary)</li>
-                <li style="text-align: right">SageMath (2004, GPL)</li>
-              </ul>
+          <div class="fragment">
+            <p>Notable implementations</p>
+            <div style="height:50px; position:relative; width: 90%; margin: auto; margin-bottom: 20px">
+              <canvas id="cas-timeline"></canvas>
             </div>
+            <ul style="columns: 3; list-style-type: none">
+              <li>Axiom (1965, BSD License)</li>
+              <li style="text-align: right">Maxima (1982, GPL License)</li>
+              <li>Maple (1982, Proprietary)</li>
+              <li style="text-align: right">Magma (1993, Proprietary) </li>
+              <li>Mathematica (1998, Proprietary)</li>
+              <li style="text-align: right">SageMath (2004, GPL)</li>
+            </ul>
+          </div>
         </section>
         <section>
           <h2>Sympy</h2>
@@ -206,49 +188,51 @@
           </blockquote>
         </section>
         <section>
-          <h2>Some sympy examples</h2>
-          <blockquote>
-            <div class="grid" style="grid-template: auto auto / 1fr 1fr; align-items: end; margin-bottom: 0">
-              <div>
-                <p>Take the derivative of $\sin{(x)}e^x$</p>
-                <pre><code class="pycon" data-trim data-no-escape>
-                &gt;&gt;&gt; diff(sin(x)*exp(x), x)
-                $e^{x} \sin{\left(x \right)} + e^{x} \cos{\left(x \right)}$
-                </code></pre>
+          <h3><div class="parent-title"><span>Sympy</span> Examples</div></h3>
+          <div class="r-stretch" style="display: grid; align-items: center">
+            <blockquote>
+              <div class="grid" style="grid-template: auto auto / 1fr 1fr; align-items: end; margin-bottom: 0">
+                <div>
+                  <p>Take the derivative of $\sin{(x)}e^x$</p>
+                  <pre><code class="pycon" data-trim data-no-escape>
+                  &gt;&gt;&gt; diff(sin(x)*exp(x), x)
+                  $e^{x} \sin{\left(x \right)} + e^{x} \cos{\left(x \right)}$
+                  </code></pre>
+                </div>
+                <div>
+                  <p>Compute $\int_{-\infty}^\infty \sin{(x^2)}\,dx$</p>
+                  <pre><code class="pycon" data-trim data-no-escape>
+                  &gt;&gt;&gt; integrate(exp(x)*sin(x) + exp(x)*cos(x), x)
+                  $e^{x} \sin{\left(x \right)}$
+                  </code></pre>
+                </div>
+                <div>
+                  <p>Solve $x^2 - 2 = 0$</p>
+                  <pre><code class="pycon" data-trim data-no-escape>
+                  &gt;&gt;&gt; solve(x**2 - 2, x)
+                  $\left[ - \sqrt{2}, \  \sqrt{2}\right]$
+                  </code></pre>
+                </div>
+                <div>
+                  <p>Solve the differential equation $y'' - y = e^t$</p>
+                  <pre><code class="pycon" data-trim data-no-escape>
+                    &gt;&gt;&gt; y = Function('y')
+                    &gt;&gt;&gt; dsolve(Eq(y(t).diff(t, t) - y(t), exp(t)), y(t))
+                    $y{\left(t \right)} = C_{2} e^{- t} + \left(C_{1} + \frac{t}{2}\right) e^{t}$
+                  </code></pre>
+                </div>
               </div>
-              <div>
-                <p>Compute $\int_{-\infty}^\infty \sin{(x^2)}\,dx$</p>
-                <pre><code class="pycon" data-trim data-no-escape>
-                &gt;&gt;&gt; integrate(exp(x)*sin(x) + exp(x)*cos(x), x)
-                $e^{x} \sin{\left(x \right)}$
-                </code></pre>
-              </div>
-              <div>
-                <p>Solve $x^2 - 2 = 0$</p>
-                <pre><code class="pycon" data-trim data-no-escape>
-                &gt;&gt;&gt; solve(x**2 - 2, x)
-                $\left[ - \sqrt{2}, \  \sqrt{2}\right]$
-                </code></pre>
-              </div>
-              <div>
-                <p>Solve the differential equation $y'' - y = e^t$</p>
-                <pre><code class="pycon" data-trim data-no-escape>
-                  &gt;&gt;&gt; y = Function('y')
-                  &gt;&gt;&gt; dsolve(Eq(y(t).diff(t, t) - y(t), exp(t)), y(t))
-                  $y{\left(t \right)} = C_{2} e^{- t} + \left(C_{1} + \frac{t}{2}\right) e^{t}$
-                </code></pre>
-              </div>
-            </div>
-            <p class="reference">
-              <cite><a href="https://docs.sympy.org/latest/tutorial/intro.html#the-power-of-symbolic-computation">
-                The Power of Symbolic Computation
-              </a></cite>
-              <span>SymPy.org</span>
-            </p>
-          </blockquote>
+              <p class="reference">
+                <cite><a href="https://docs.sympy.org/latest/tutorial/intro.html#the-power-of-symbolic-computation">
+                  The Power of Symbolic Computation
+                </a></cite>
+                <span>SymPy.org</span>
+              </p>
+            </blockquote>
+          </div>
         </section>
         <section>
-          <h3>Expression trees</h3>
+          <h3><div class="parent-title"><span>Sympy</span>Expression trees</div></h3>
           <pre><code class="pycon" data-trim>
           >>> from sympy import *; from this_presentation import show_repr
           </code></pre>
@@ -289,28 +273,33 @@
                             MatMul(Integer(-1), Transpose($Y$))))</span>
               </code></pre>
             </div>
-            <div style="display: table;">
-              <div style="display: table-row" class="fragment" data-fragment-index="2">
-                <span style="display: table-cell; text-align: right">Real:&nbsp;</span>
-                <span style="display: table-cell; text-align: left">
-                  <code>Symbol</code>, <code>Add</code>, <code>Mul</code>, &hellip;</span></div>
-              <div style="display: table-row" class="fragment" data-fragment-index="4">
-                <span style="display: table-cell; text-align: right">Complex:&nbsp;</span>
-                <span style="display: table-cell; text-align: left">
-                  <code>Symbol</code>, <code>Add</code>, <code>Mul</code>, &hellip;</span></div>
-              <div style="display: table-row" class="fragment" data-fragment-index="6">
-                <span style="display: table-cell; text-align: right">Matrix:&nbsp;</span>
-                <span style="display: table-cell; text-align: left">
-                  <code>MatrixSymbol</code>, <code>MatrixAdd</code>, <code>MatrixMul</code>, &hellip;</span></div>
-              <div style="display: table-row" class="fragment" data-fragment-index="7">
-                <span style="display: table-cell; text-align: right">Quaternion:&nbsp;</span>
-                <span style="display: table-cell; text-align: left">
-                &hellip;</span></div>
+            <div>
+              <div style="text-align: center" class="fragment" data-fragment-index="2">
+                Underlying representations
+              </div>
+              <div style="display: table;">
+                <div style="display: table-row" class="fragment" data-fragment-index="2">
+                  <span style="display: table-cell; text-align: right">Real:&nbsp;</span>
+                  <span style="display: table-cell; text-align: left">
+                    <code>Symbol</code>, <code>Add</code>, <code>Mul</code>, &hellip;</span></div>
+                <div style="display: table-row" class="fragment" data-fragment-index="4">
+                  <span style="display: table-cell; text-align: right">Complex:&nbsp;</span>
+                  <span style="display: table-cell; text-align: left">
+                    <code>Symbol</code>, <code>Add</code>, <code>Mul</code>, &hellip;</span></div>
+                <div style="display: table-row" class="fragment" data-fragment-index="6">
+                  <span style="display: table-cell; text-align: right">Matrix:&nbsp;</span>
+                  <span style="display: table-cell; text-align: left">
+                    <code>MatrixSymbol</code>, <code>MatrixAdd</code>, <code>MatrixMul</code>, &hellip;</span></div>
+                <div style="display: table-row" class="fragment" data-fragment-index="7">
+                  <span style="display: table-cell; text-align: right">Quaternion:&nbsp;</span>
+                  <span style="display: table-cell; text-align: left">
+                  &hellip;</span></div>
+              </div>
             </div>
           </div>
         </section>
         <section>
-          <h3>Expression trees</h3>
+          <h3><div class="parent-title"><span>Sympy</span>Expression trees</div></h3>
           <div>
             <h4>Quaternions</h4>
             <p>No symbolic quaternions; only quaternions with symbolic coefficients.</p>
@@ -327,30 +316,29 @@
             </code></pre>
           </div>
           <p class="fragment">This makes quaternions hard to work with:</p>
-          <div class="grid" style="grid-template: auto / auto auto">
+          <div class="grid" style="grid-template: auto / auto auto; align-items: end">
             <div class="fragment">
-              <pre><code class="pycon" data-trim>
+              <pre><code class="pycon" data-trim data-noescape>
               &gt;&gt;&gt; (xq * xq * xq**-1 * yq).simplify()
-              $\left(x y - x_{i} y_{i} - x_{j} y_{j} - x_{k} y_{k}\right)$
-              $\qquad + \left(x y_{i} + x_{i} y + x_{j} y_{k} - x_{k} y_{j}\right) i$
-              $\qquad + \left(x y_{j} - x_{i} y_{k} + x_{j} y + x_{k} y_{i}\right) j$
-              $\qquad + \left(x y_{k} + x_{i} y_{j} - x_{j} y_{i} + x_{k} y\right) k$
+              <div style="font-size: 75%; line-height: 1.3em">$\left(x y - x_{i} y_{i} - x_{j} y_{j} - x_{k} y_{k}\right) + \left(x y_{i} + x_{i} y + x_{j} y_{k} - x_{k} y_{j}\right) i$
+              $\qquad + \left(x y_{j} - x_{i} y_{k} + x_{j} y + x_{k} y_{i}\right) j + \left(x y_{k} + x_{i} y_{j} - x_{j} y_{i} + x_{k} y\right) k$</div>
               </code></pre>
-              (would prefer $x_qy_q$)
+              <p>(would prefer $x_qx_qx_1^{-1}y_q = x_qy_q$)</p>
             </div>
             <div class="fragment">
-              <pre><code class="pycon" style="font-size: 75%" data-trim data-noescape>
+              <pre style="font-size: 60%"><code class="pycon" data-trim data-noescape>
               &gt;&gt;&gt; def q_diff(p, dq):  # like ∇Φ, but for Φ taking quaternions
               ...     I, J, K = Quaternion(0,1,0,0), Quaternion(0,0,1,0), Quaternion(0,0,0,1)
               ...     return p.diff(dq.a) + I*p.diff(dq.b) + J*p.diff(dq.c) + K*p.diff(dq.d)
               &gt;&gt;&gt; q_diff(xq*yq, xq)
               $- 2 y + - 2 y_{i} i + - 2 y_{j} j + - 2 y_{k} k$
               </code></pre>
-              <p>(would prefer $-2y_q$)</p>
+              <p>(would prefer $\nabla_{x_q}(x_qy_q) = -2y_q$)</p>
             </div>
+          </div>
         </section>
         <section>
-          <h3>Example: Checking matrix determinants</h3>
+          <h3><div class="parent-title"><span>Sympy</span>Examples with matrix determinants</div></h3>
           <div class="grid" style="grid-template: auto / auto auto auto;">
             <div>
               <pre><code class="pycon" data-trim>
@@ -419,6 +407,32 @@
             </div>
           </div>
         </section>
+        <section>
+          <h3><div class="parent-title"><span>Sympy</span>What's going wrong?</div></h3>
+          <p>Let's imagine we want to support a new algebra, <code>MyAlg</code>. We have two big hurdles:</p>
+          <div class="r-stretch" style="display: grid; align-items: center">
+            <div class="grid" style="grid-template-columns: 1fr 1fr">
+              <div class="fragment">
+                <h4 style="margin-top: var(--r-block-margin)">Extending the expression tree</h4>
+                <div style="text-align: left">
+                  <p>It looks like we have to build new <code>MyAlgAdd</code>, <code>MyAlgMul</code>, &hellip; objects.</p>
+                  <p>This scales poorly if we want to work with things like matrices of <code>MyAlg</code>; do we need <code>MatrixMyAlgAdd</code> e.t.c.?</p>
+                  <p>If we get this wrong, things like <code>simplify()</code> fail if they expect <code>MyMul</code> but get an <code>Mul</code>.</p>
+                </div>
+              </div>
+              <div class="fragment">
+                <h4 style="margin-top: var(--r-block-margin)">Supporting symbols</h4>
+                <div style="text-align: left">
+                  <p>It's not enough to define our objects as simple structures with fields like <code>Quaternion</code>, like we would in a conventional programming language.</p>
+                  <p>Every one of our expression tree objects needs to know how to simplify itself.</p>
+                  <p>This scales poorly to compound expressions like $\operatorname{det}(1 + AB) = \operatorname{det}(1 + BA)$, where simplification only makes sense globally.</p>
+                  <p><strong>We're responsible for verifying that our simplifications are mathematically sound!</p></strong>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="fragment">What if our programming language could handle all of these things for us?</p>
+        </section>
       </section>
       <section>
         <h2>Theorem proving languages - History</h2>
@@ -458,17 +472,17 @@
       <section>
         <section>
           <h3><div class="parent-title"><span>Lean in Practice</span> Definitions, Types, and Terms</div></h3>
-          <pre style="font-size: 1.2em; display: inline-grid"><code class="lean" data-trim data-noescape>
+          <pre style="font-size: 1em; display: inline-grid"><code class="lean" data-trim data-noescape>
             <span class="fragment" data-fragment-index="0">-- name : type := value (or "term")
             def two : ℕ := 2</span>
 
             <span class="fragment" data-fragment-index="1">def double : ℕ → ℕ :=
             λ a, two * a</span>
 
-            <span class="fragment" data-fragment-index="2">def unlikely : Prop := ∃ (x : ℕ), x*x = 2</span>
+            <span class="fragment" data-fragment-index="2">def unlikely : Prop := ∃ x : ℕ, x*x = 2</span>
             <span class="fragment" data-fragment-index="3">lemma unlikely_proof : unlikely := sorry</span>
 
-            <span class="fragment" data-fragment-index="4">lemma double_is_add_self : ∀ a, double a = a + a :=</span>
+            <span class="fragment" data-fragment-index="4">lemma double_is_add_self : ∀ a : ℕ, double a = a + a :=</span>
             <span class="fragment" data-fragment-index="5">by { intro a, apply two_mul }</span>
           </code></pre>
           <div class="r-stack">
@@ -494,7 +508,9 @@
               <p>Values are their proofs.</p>
             </div>
             <div class="fragment current-only"  data-fragment-index="4">
-              <code>double_is_add_self 1</code> <br /> is a proof that <code>double 1 = 1 + 1</code>
+              <p>Note that <code>a</code> is analogous to a <code>sympy.Symbol</code> here</p>
+              <p>Symbols in mathematical statements are the same thing as function arguments!</p>
+              <p><code>double_is_add_self 1</code> is a proof that <code>double 1 = 1 + 1</code></p>
             </div>
             <div class="fragment current-only"  data-fragment-index="5">
               <code>intro</code> and  <code>apply</code> are tactics,<br />
@@ -505,9 +521,9 @@
         </section>
         <section>
           <h3><div class="parent-title"><span>Lean in Practice</span> <code>class</code> for abstraction</div></h3>
-          <pre style="font-size: 1.2em; display: inline-grid"><code class="lean" data-trim data-noescape>
-            <span class="fragment" data-fragment-index="0">class add_comm_group (A : Type)
-              extends has_add A, has_zero A, has_neg A : Type :=</span>
+          <pre style="font-size: 1em; display: inline-grid"><code class="lean" data-trim data-noescape>
+            <span class="fragment" data-fragment-index="0">class add_comm_group (A : Type)</span>
+            <span class="fragment" data-fragment-index="1">  extends has_add A, has_zero A, has_neg A : Type :=</span>
             <span class="fragment" data-fragment-index="2">(add_comm     : ∀ a b : A,         a + b = b + a      )
             (add_assoc    : ∀ a b c : A, (a + b) + c = a + (b + c))
             (zero_add     : ∀ a : A,           0 + a = a          )
@@ -516,7 +532,7 @@
           </code></pre>
           <div class="r-stack">
             <div class="fragment current-only" data-fragment-index="0">
-              <p><code>group</code> is the name of our type-class.</p>
+              <p><code>add_comm_group</code> is the name of our type-class.</p>
               <p>
                 <code>A</code> makes this a dependent type,<br />
                 <code>add_comm_group A</code> is a collection of proofs that <code>A</code> forms an abelian <code>group</code>.</p>
@@ -524,7 +540,7 @@
             <div class="fragment current-only" data-fragment-index="1">
               <p><code>extends</code> is inheritance.</p>
 
-              <p>Used here to provide <code>*</code>, <code>1</code> and <code>⁻¹</code> for <code>A</code>.</p>
+              <p>Used here to provide <code>+</code>, <code>0</code> and <code>-</code> for <code>A</code>.</p>
             </div>
             <div class="fragment current-only" data-fragment-index="2">
               The usual abelian group axioms, as fields which hold proofs.
@@ -533,30 +549,34 @@
               <div>
                 Type classes form an API
               </div>
-              <div class="fragment"  data-fragment-index="4">
-                <hr />
-                <p>Showing $\mathbb{R}$ is an abelian group means <i>implementing</i> the API:</p>
-                <pre><code class="lean" data-trim>
-                instance : add_comm_group ℝ :=
-                { add_assoc := sorry,  add_comm := sorry, zero_add := sorry, add_zero := sorry, add_left_neg := sorry }
-                </code></pre>
-              </div>
-              <div class="fragment"  data-fragment-index="5">
-                <hr />
-                <p>Proofs working over an abelian group <i>use</i> the API,<br />
-                and generalize to <i>all</i> groups...</p>
+              <div class="grid" style="grid-template-columns: 1fr 1fr">
+                <div class="fragment"  data-fragment-index="4">
+                  <p>Proofs working over an abelian group <i>use</i> the API,
+                  and generalize to <i>all</i> abelian groups...</p>
+                  <pre><code class="lean" data-trim>
+                  lemma neg_add {A : Type u} [add_comm_group A]
+                    (a b : G) : -(a + b) = -a + -b := sorry
+                  </code></pre>
+                </div>
+                <div class="fragment" data-fragment-index="5">
+                  <p>Showing $\mathbb{H}$ is an abelian group means <i>implementing</i> the API:</p>
+                  <pre><code class="lean" data-trim>
+                  instance : add_comm_group ℍ :=
+                  { add_assoc := sorry, add_comm := sorry,
+                    zero_add := sorry,  add_zero := sorry,
+                    add_left_neg := sorry }
+                  </code></pre>
+                </div>
               </div>
             </div>
           </div>
           <div class="r-stretch"></div>
         </section>
-      </section>
-      <section>
         <section id="matrix-determinant-lean">
-          <h3>Example: Checking matrix determinants</h3>
+          <h3><div class="parent-title"><span>Lean in Practice</span>Examples with matrix determinants</div></h3>
           <pre><code class="lean" data-trim>
             import linear_algebra.matrix.nonsingular_inverse
-            variables {R m n : Type*} [comm_ring R] [fintype m] [fintype n] [decidable_eq m] [decidable_eq n]
+            variables {R m n : Type} [comm_ring R] [fintype m] [fintype n] [decidable_eq m] [decidable_eq n]
             variables (A B : matrix n n R) (P : matrix m n R) (Q : matrix n m R)
             open matrix         -- for `det`
             open_locale matrix  -- for `⬝`
@@ -619,9 +639,9 @@
           </div>
         </section>
         <section>
-          <h3>Proving the Weinstein–Aronszajn identity in lean</h3>
+          <h3><div class="parent-title"><span>Lean in Practice</span>Proving the Weinstein–Aronszajn identity</div></h3>
           <p>How do we prove $\operatorname{det} (1 + PQ) = \operatorname{det} (1 + QP)$ by hand?</p>
-          <div style="font-size: 90%">
+          <div style="font-size: 80%">
             \begin{align}
               \operatorname{det}\begin{bmatrix}A & B \\ C & D\end{bmatrix}
               &= \operatorname{det} D \cdot \operatorname{det}(A - BD^{-1}C)
@@ -629,7 +649,7 @@
               &= \operatorname{det}(I - (-P)Q) = \operatorname{det}(I + PQ)
             \end{align}
           </div>
-          <div style="font-size: 90%" class="fragment" data-fragment-index="0">
+          <div style="font-size: 80%" class="fragment" data-fragment-index="0">
             \begin{align}
               \operatorname{det}\begin{bmatrix}A & B \\ C & D\end{bmatrix}
               &= \operatorname{det} A \cdot \operatorname{det}(D - CA^{-1}B)
@@ -661,9 +681,9 @@
               <div class="lean-state">
                 <pre class="r-stack fragment" data-fragment-index="1"><code class="lean-goal fragment"
                   data-trim data-fragment-index="1" data-noescape>
-                  <span style="opacity: 0.5">R : Type u_1
-                  m : Type u_2
-                  n : Type u_3
+                  <span style="opacity: 0.5">R : Type
+                  m : Type
+                  n : Type
                   _inst_1: comm_ring R
                   _inst_2: fintype m
                   _inst_3: fintype n
@@ -782,13 +802,17 @@
           </div>
           <div class="fragment">
             <p style="text-align: center">Some translation required!</p>
-            <div style="display: grid; grid-template: auto auto auto / 1fr min-content 1fr; column-gap: 1em; text-align: left; margin-bottom: var(--r-block-margin)">
+            <div style="display: grid; grid-template: auto auto auto auto / 1fr min-content 1fr; column-gap: 1em; text-align: left; margin-bottom: var(--r-block-margin)">
               <q style="text-align: right">one period</q> &leftrightarrow; <code>t : circle</code>
-              <q style="text-align: right">$g(t) = \sum \cdots$</q> &leftrightarrow; <span>
-                <code class="lean">g : Lp ℂ 2 haar_circle</code><br />
-                <small>(<code class="lean">g : circle → ℂ</code>, with finite $L^2$ norm)</small>
-              </span>
               <q style="text-align: right">$c_n$</q> &leftrightarrow; <code>fourier_series.repr g n</code>
+              <q style="text-align: right">$\frac{1}{T}dt$</q> &leftrightarrow; <span>
+                <code>∂haar_circle</code>
+                <small style="display: block">(the <q>measure</q> around a circle that sums to 1)</small>
+              </span>
+              <q style="text-align: right">$g(t) = \sum \cdots$</q> &leftrightarrow; <span>
+                <code class="lean">g : Lp ℂ 2 haar_circle</code>
+                <small style="display: block">(<code class="lean">g</code> is a function of type <code>circle → ℂ</code>, with finite $L^2$ norm)</small>
+              </span>
             </div>
           </div>
           <div class="r-stretch"></div>
@@ -803,7 +827,7 @@
               \textit{[...]}\quad&=\lambda^{n}+c_{n-1}\lambda^{n-1}+\cdots+c_{1}\lambda+c_{0}
               \end{align}
               One can create an analogous polynomial $p_{A}(A)$ [...].
-              The Cayley–Hamilton theorem states that $p_A(A) = 0$
+              The Cayley–Hamilton theorem states that $p_A(A) = 0$.
               <p class="reference">
                 <cite><a href="https://en.wikipedia.org/wiki/Cayley%E2%80%93Hamilton_theorem">Cayley–Hamilton theorem</a></cite>
                 <span>Wikipedia</span>
@@ -813,7 +837,7 @@
               The characteristic polynomial of a matrix, applied to the matrix itself, is zero.
                This holds over any commutative ring.
               <pre><code class="lean" data-trim>
-                lemma matrix.aeval_self_charpoly {R n : Type*}
+                lemma matrix.aeval_self_charpoly {R n : Type}
                   [comm_ring R] [decidable_eq n] [fintype n]
                   (A : matrix n n R) :
                     polynomial.aeval A A.charpoly = 0
@@ -842,20 +866,26 @@
           </div>
         </section>
         <section id="mathlib-knows-math">
-          <div class="grid r-stretch" style="grid-template: min-content auto / 1fr 1fr; height: 100%; margin-top: 0">
-            <h3 style="grid-column: 1 / span 2"><div class="parent-title"><span>What does Mathlib know?</span>Half an Undergraduate Mathematics Degree</div></h3>
-            <div class="scroll-container">
+          <div class="grid r-stretch" style="grid-template: min-content auto min-content / 1fr 1fr; height: 100%; margin-top: 0">
+            <h3 style="grid-column: 1 / span 2; margin-bottom: 0"><div class="parent-title"><span>What does Mathlib know?</span>Half an Undergraduate Mathematics Degree</div></h3>
+            <div class="scroll-container" style="margin-bottom: 0">
               <iframe style="height: 520vh; width: 100%; max-width: none; max-height: none" src="https://leanprover-community.github.io/undergrad.html" scrolling="no"></iframe>
               <div class="fragment" style="position: absolute; top: 170vh" data-fragment-index="0" data-scroll-into-view></div>
               <div class="fragment" style="position: absolute; top: 230vh" data-fragment-index="1" data-scroll-into-view></div>
               <div class="fragment" data-fragment-index="2" data-scroll-into-view></div>
             </div>
-            <div class="scroll-container">
+            <div class="scroll-container" style="margin-bottom: 0">
               <iframe style="height: 550vh; width: 100%; max-width: none; max-height: none" src="https://leanprover-community.github.io/undergrad_todo.html" scrolling="no"></iframe>
               <div class="fragment" style="position: absolute; top: 125vh" data-fragment-index="0" data-scroll-into-view></div>
               <div class="fragment" style="position: absolute; top: 185vh" data-fragment-index="1" data-scroll-into-view></div>
               <div class="fragment" style="position: absolute; top: 340vh" data-fragment-index="2" data-scroll-into-view></div>
             </div>
+            <small><a href="https://leanprover-community.github.io/undergrad.html">
+              leanprover-community.github.io/undergrad.html
+            </a></small>
+            <small><a href="https://leanprover-community.github.io/undergrad_todo.html">
+              leanprover-community.github.io/undergrad_todo.html
+            </a></small>
           </div>
         </section>
         <section id="mathlib-knows-spaghetti" data-background-iframe="https://eric-wieser.github.io/mathlib-import-graph?highlight=mathlib:linear_algebra.matrix.determinant" data-background-interactive>

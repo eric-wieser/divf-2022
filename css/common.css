@@ -248,3 +248,5 @@ p.reference > span {
 .reveal .grid > h3 {
 	margin: 0;
 }
+
+.reveal blockquote pre { font-style: normal }
