@@ -978,6 +978,7 @@
   <script src="js/lean.min.js"></script>
   <script src="js/lean-goal.js"></script>
   <script src="js/vendor/Chart.min.js"></script>
+  <script src="js/vendor/alt-arrows.js"></script>
   <script src="js/charts/cas.js"></script>
   <script src="js/charts/provers.js"></script>
   <script>
@@ -1012,6 +1013,10 @@
       slideNumber: 'c/t',
       width: 1856,
       height: 1016,
+      keyboard: {
+       39: 'next', // Right Arrow
+       37: 'prev'  // Left Arrow
+      }
       // showNotes: 'separate-page'
     });
 
