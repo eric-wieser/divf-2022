@@ -95,32 +95,27 @@
         </section>
         <section>
           <h3><div class="parent-title"><span>Non-commutative algebras</span>Weaker algebraic structures</div></h3>
-          <div class="grid" style="grid-template-columns: min-content auto">
-            <div style="text-align: right"><p>$ab \ne ba$</p></div>
-            <div style="text-align: left">
-              <p>Non-commutative multiplication is an example of a <q>weakening</q> of our algebraic rules that's particularly easy to motivate through geometry.</p>
-            </div>
-            <div style="text-align: right" class="fragment" data-fragment-index="0"><p>$ a \ne 0, b \ne 0, ab = 0$</p></div>
-            <div style="text-align: left" class="fragment" data-fragment-index="0">
-              <p>Some algebras, including $\mathbb{R}^{n \times n}$ and $\bigwedge(B)$ and $\mathcal{G}(Q)$, have <q>zero divisors</q>.</p>
+          <dl>
+            <dt class="fragment fade-in-then-semi-out" data-fragment-index="0">$ab \ne ba$; non-commutativity</dt>
+            <dd class="fragment fade-in-then-semi-out" data-fragment-index="0">
+              <p>As we saw, this is particularly easy to motivate through geometry. This paves the way to further <q>weakening</q> of our algebraic rules.</p>
+            </dd>
+            <dt class="fragment fade-in-then-semi-out" data-fragment-index="1">$a \ne 0, b \ne 0, ab = 0$; zero divisors</dt>
+            <dd class="fragment fade-in-then-semi-out" data-fragment-index="1">
+              <p>$\mathbb{R}^{n \times n}$ and $\bigwedge(B)$ and $\mathcal{G}(Q)$ all have this property.</p>
               <p>This means $ab = ac \centernot\implies b = c$!</p>
-            </div>
-            <div style="text-align: right" class="fragment" data-fragment-index="1"><p>$a(bc) \ne (ab)c$</p></div>
-            <div style="text-align: left" class="fragment" data-fragment-index="1">
-              <p>Non-associative multiplication is fairly common too, for instance the vector cross product:</p>
+            </dd>
+            <dt class="fragment fade-in-then-semi-out" data-fragment-index="2">$a(bc) \ne (ab)c$; non-associativity</dt>
+            <dd class="fragment fade-in-then-semi-out" data-fragment-index="2">
+              <p>A simple example is the vector cross product:</p>
               $$u \times (v \times w) = (u \times v) \times w + v \times (u \times w)$$
               <p>More examples: Lie algebras, Octonions, &hellip;</p>
-            </div>
-          </div>
-          <div class="r-stretch"></div>
-          <div class="fragment" data-fragment-index="2">
-            <h3>This talk</h3>
-            <div style="width: auto; margin: auto; text-align: left; display: table">
-              <p>What software tools can aid us with algebra?</p>
-              <p>Can they cope with these weaker algebraic structures?</p>
-              <p>Is the way they handle matrices generalizable to other algebras of interest?</p>
-            </div>
-          </div>
+            </dd>
+          </dl>
+          <p class="fragment" data-fragment-index="3">
+            Forgetting these weaknesses leads to algebraic mistakes.</p>
+          <p class="fragment" data-fragment-index="4">
+            Can we software help us keep track of them?</p>
         </section>
       </section>
       <section>
@@ -133,10 +128,10 @@
               <span>Wikipedia</span>
             </p>
           </blockquote>
-          <div style="display: grid; grid-template: auto / auto auto; column-gap: var(--r-block-margin)">
+          <div class="grid" style="grid-template: auto / 1fr 1fr;">
             <div>
               <p>Useful for</p>
-              <ul>
+              <ul style="font-size: 0.8em">
                 <li>Roughly checking your work</li>
                 <li>Answering what-if questions experimentally</li>
                 <li>Solving large but tedious equations quickly</li>
@@ -145,7 +140,7 @@
             </div>
             <div>
               <p>Typical features</p>
-              <ul>
+              <ul style="font-size: 0.8em">
                 <li>Algebraic simplification</li>
                 <li>Root finding</li>
                 <li>Integration and differentiation</li>
@@ -159,14 +154,14 @@
             <div style="height:50px; position:relative; width: 90%; margin: auto; margin-bottom: 20px">
               <canvas id="cas-timeline"></canvas>
             </div>
-            <ul style="columns: 3; list-style-type: none">
-              <li>Axiom (1965, BSD License)</li>
-              <li style="text-align: right">Maxima (1982, GPL License)</li>
-              <li>Maple (1982, Proprietary)</li>
-              <li style="text-align: right">Magma (1993, Proprietary) </li>
-              <li>Mathematica (1998, Proprietary)</li>
-              <li style="text-align: right">SageMath (2004, GPL)</li>
-            </ul>
+            <div style="display: grid; grid-auto-flow: column">
+              <div>Axiom<br /><small>(1965, BSD)</small></div>
+              <div>Maxima<br /><small>(1982, GPL)</small></div>
+              <div>Maple<br /><small>(1982, Proprietary)</small></div>
+              <div>Magma<br /><small>(1993, Proprietary)</small> </div>
+              <div>Mathematica<br /><small>(1998, Proprietary)</small></div>
+              <div>SageMath<br /><small>(2004, GPL)</small></div>
+            </div>
           </div>
         </section>
         <section>
@@ -189,54 +184,52 @@
         </section>
         <section>
           <h3><div class="parent-title"><span>Sympy</span> Examples</div></h3>
-          <div class="r-stretch" style="display: grid; align-items: center">
-            <blockquote>
-              <div class="grid" style="grid-template: auto auto / 1fr 1fr; align-items: end; margin-bottom: 0">
-                <div>
-                  <p>Take the derivative of $\sin{(x)}e^x$</p>
-                  <pre><code class="pycon" data-trim data-no-escape>
-                  &gt;&gt;&gt; diff(sin(x)*exp(x), x)
-                  $e^{x} \sin{\left(x \right)} + e^{x} \cos{\left(x \right)}$
-                  </code></pre>
-                </div>
-                <div>
-                  <p>Compute $\int_{-\infty}^\infty \sin{(x^2)}\,dx$</p>
-                  <pre><code class="pycon" data-trim data-no-escape>
-                  &gt;&gt;&gt; integrate(exp(x)*sin(x) + exp(x)*cos(x), x)
-                  $e^{x} \sin{\left(x \right)}$
-                  </code></pre>
-                </div>
-                <div>
-                  <p>Solve $x^2 - 2 = 0$</p>
-                  <pre><code class="pycon" data-trim data-no-escape>
-                  &gt;&gt;&gt; solve(x**2 - 2, x)
-                  $\left[ - \sqrt{2}, \  \sqrt{2}\right]$
-                  </code></pre>
-                </div>
-                <div>
-                  <p>Solve the differential equation $y'' - y = e^t$</p>
-                  <pre><code class="pycon" data-trim data-no-escape>
-                    &gt;&gt;&gt; y = Function('y')
-                    &gt;&gt;&gt; dsolve(Eq(y(t).diff(t, t) - y(t), exp(t)), y(t))
-                    $y{\left(t \right)} = C_{2} e^{- t} + \left(C_{1} + \frac{t}{2}\right) e^{t}$
-                  </code></pre>
-                </div>
+          <blockquote>
+            <div class="grid" style="align-items: end">
+              <div>
+                <p>Solve $x^2 - 2 = 0$</p>
+                <pre><code class="pycon" data-trim data-no-escape>
+                &gt;&gt;&gt; solve(x**2 - 2, x)
+                $\left[ - \sqrt{2}, \  \sqrt{2}\right]$
+                </code></pre>
               </div>
-              <p class="reference">
-                <cite><a href="https://docs.sympy.org/latest/tutorial/intro.html#the-power-of-symbolic-computation">
-                  The Power of Symbolic Computation
-                </a></cite>
-                <span>SymPy.org</span>
-              </p>
-            </blockquote>
-          </div>
+              <div>
+                <p>Take the derivative of $\sin{(x)}e^x$</p>
+                <pre><code class="pycon" data-trim data-no-escape>
+                &gt;&gt;&gt; diff(sin(x)*exp(x), x)
+                $e^{x} \sin{\left(x \right)} + e^{x} \cos{\left(x \right)}$
+                </code></pre>
+              </div>
+              <div>
+                <p>Compute $\int_{-\infty}^\infty \sin{(x^2)}\,dx$</p>
+                <pre><code class="pycon" data-trim data-no-escape>
+                &gt;&gt;&gt; integrate(exp(x)*sin(x) + exp(x)*cos(x), x)
+                $e^{x} \sin{\left(x \right)}$
+                </code></pre>
+              </div>
+              <div>
+                <p>Solve the differential equation $y'' - y = e^t$</p>
+                <pre><code class="pycon" data-trim data-no-escape>
+                  &gt;&gt;&gt; y = Function('y')
+                  &gt;&gt;&gt; dsolve(Eq(y(t).diff(t, t) - y(t), exp(t)), y(t))
+                  $y{\left(t \right)} = C_{2} e^{- t} + \left(C_{1} + \frac{t}{2}\right) e^{t}$
+                </code></pre>
+              </div>
+            </div>
+            <p class="reference">
+              <cite><a href="https://docs.sympy.org/latest/tutorial/intro.html#the-power-of-symbolic-computation">
+                The Power of Symbolic Computation
+              </a></cite>
+              <span>SymPy.org</span>
+            </p>
+          </blockquote>
         </section>
         <section>
           <h3><div class="parent-title"><span>Sympy</span>Expression trees</div></h3>
           <pre><code class="pycon" data-trim>
           >>> from sympy import *; from this_presentation import show_repr
           </code></pre>
-          <div style="display: grid; align-items: end; grid-template: auto auto / 1fr 1fr; column-gap: var(--r-block-margin)">
+          <div style="display: grid; grid-template: auto auto / 1fr 1fr; column-gap: var(--r-block-margin)">
             <div class="fragment" data-fragment-index="1">
               <h4>Real numbers</h4>
               <pre><code class="pycon" data-trim data-noescape>
@@ -259,6 +252,20 @@
                   Add($x$, $y$))</span>
               </code></pre>
             </div>
+            <div>
+              <h4 class="fragment" data-fragment-index="2">
+                Underlying representations
+              </h4>
+              <dl>
+                <dt class="fragment" data-fragment-index="2">Real</dt>
+                <dd class="fragment" data-fragment-index="2"><code>Symbol</code>, <code>Add</code>, <code>Mul</code>, &hellip;</dd>
+                <dt class="fragment" data-fragment-index="4">Complex</dt>
+                <dd class="fragment" data-fragment-index="4"><code>Symbol</code>, <code>Add</code>, <code>Mul</code>, &hellip;</dd>
+                <dt class="fragment" data-fragment-index="6">Matrix</dt>
+                <dd class="fragment" data-fragment-index="6"><code>MatrixSymbol</code>, <code>MatAdd</code>, <code>MatMul</code>, &hellip;</dd>
+                <dt class="fragment" data-fragment-index="7">Quaternions?</dt>
+              </dl>
+            </div>
             <div class="fragment" data-fragment-index="5">
               <h4>Matrices</h4>
               <pre><code class="pycon" data-trim data-noescape>
@@ -268,33 +275,12 @@
               &gt;&gt;&gt; expr = (X + Y)*(X - Y).T; expr
               $(X + Y)(X^T - Y^T)$
               <span class="fragment" data-fragment-index="6">&gt;&gt;&gt; show_repr(expr)
-              MatMul(MatAdd($X$, $Y$),
-                     MatAdd(Transpose($X$),
-                            MatMul(Integer(-1), Transpose($Y$))))</span>
+              MatMul(
+                  MatAdd($X$, $Y$),
+                  MatAdd(
+                      Transpose($X$),
+                      MatMul(Integer(-1), Transpose($Y$))))</span>
               </code></pre>
-            </div>
-            <div>
-              <div style="text-align: center" class="fragment" data-fragment-index="2">
-                Underlying representations
-              </div>
-              <div style="display: table;">
-                <div style="display: table-row" class="fragment" data-fragment-index="2">
-                  <span style="display: table-cell; text-align: right">Real:&nbsp;</span>
-                  <span style="display: table-cell; text-align: left">
-                    <code>Symbol</code>, <code>Add</code>, <code>Mul</code>, &hellip;</span></div>
-                <div style="display: table-row" class="fragment" data-fragment-index="4">
-                  <span style="display: table-cell; text-align: right">Complex:&nbsp;</span>
-                  <span style="display: table-cell; text-align: left">
-                    <code>Symbol</code>, <code>Add</code>, <code>Mul</code>, &hellip;</span></div>
-                <div style="display: table-row" class="fragment" data-fragment-index="6">
-                  <span style="display: table-cell; text-align: right">Matrix:&nbsp;</span>
-                  <span style="display: table-cell; text-align: left">
-                    <code>MatrixSymbol</code>, <code>MatrixAdd</code>, <code>MatrixMul</code>, &hellip;</span></div>
-                <div style="display: table-row" class="fragment" data-fragment-index="7">
-                  <span style="display: table-cell; text-align: right">Quaternion:&nbsp;</span>
-                  <span style="display: table-cell; text-align: left">
-                  &hellip;</span></div>
-              </div>
             </div>
           </div>
         </section>
@@ -307,39 +293,42 @@
             &gt;&gt;&gt; x, xi, xj, xk = symbols('x x_i x_j x_k');  xq = Quaternion(x, xi, xj, xk)
             &gt;&gt;&gt; y, yi, yj, yk = symbols('y y_i y_j y_k');  yq = Quaternion(y, yi, yj, yk)
             &gt;&gt;&gt; expr = xq * yq; expr
-            $\left(x y - x_{i} y_{i} - x_{j} y_{j} - x_{k} y_{k}\right) + \left(x y_{i} + x_{i} y + x_{j} y_{k} - x_{k} y_{j}\right) i + \left(x y_{j} - x_{i} y_{k} + x_{j} y + x_{k} y_{i}\right) j + \left(x y_{k} + x_{i} y_{j} - x_{j} y_{i} + x_{k} y\right)$
+            $\left(x y - x_{i} y_{i} - x_{j} y_{j} - x_{k} y_{k}\right) + \left(x y_{i} + x_{i} y + x_{j} y_{k} - x_{k} y_{j}\right) i$
+            $\quad+ \left(x y_{j} - x_{i} y_{k} + x_{j} y + x_{k} y_{i}\right) j + \left(x y_{k} + x_{i} y_{j} - x_{j} y_{i} + x_{k} y\right)$
             <span class="fragment">&gt;&gt;&gt; show_repr(expr)
-            Quaternion(Add(Mul($x$, $y$), Mul(Integer(-1), $x_i$, $y_i$), Mul(Integer(-1), $x_j$, $y_j$), Mul(Integer(-1), $x_k$, $y_k$)),
+            <span style="font-size: 80%; line-height: 1.3em">Quaternion(Add(Mul($x$, $y$), Mul(Integer(-1), $x_i$, $y_i$), Mul(Integer(-1), $x_j$, $y_j$), Mul(Integer(-1), $x_k$, $y_k$)),
                        Add(Mul($x$, $y_i$), Mul($x_i$, $y$), Mul($x_j$, $y_k$), Mul(Integer(-1), $x_k$, $y_j$)),
                        Add(Mul($x$, $y_j$), Mul(Integer(-1), $x_i$, $y_k$), Mul($x_j$, $y$), Mul($x_k$, $y_i$)),
-                       Add(Mul($x$, $y_k$), Mul($x_i$, $y_j$), Mul(Integer(-1), $x_j$, $y_i$), Mul($x_k$, $y$)))</span>
+                       Add(Mul($x$, $y_k$), Mul($x_i$, $y_j$), Mul(Integer(-1), $x_j$, $y_i$), Mul($x_k$, $y$)))</span></span>
             </code></pre>
           </div>
           <p class="fragment">This makes quaternions hard to work with:</p>
-          <div class="grid" style="grid-template: auto / auto auto; align-items: end">
+          <div class="grid" style="grid-template-columns: auto auto; align-items: center;">
+            <div class="fragment"><p>$x_qx_qx_q^{-1}y_q = x_qy_q$</p></div>
             <div class="fragment">
               <pre><code class="pycon" data-trim data-noescape>
               &gt;&gt;&gt; (xq * xq * xq**-1 * yq).simplify()
-              <div style="font-size: 75%; line-height: 1.3em">$\left(x y - x_{i} y_{i} - x_{j} y_{j} - x_{k} y_{k}\right) + \left(x y_{i} + x_{i} y + x_{j} y_{k} - x_{k} y_{j}\right) i$
+              <div style="font-size: 80%; line-height: 1.3em">$\left(x y - x_{i} y_{i} - x_{j} y_{j} - x_{k} y_{k}\right) + \left(x y_{i} + x_{i} y + x_{j} y_{k} - x_{k} y_{j}\right) i$
               $\qquad + \left(x y_{j} - x_{i} y_{k} + x_{j} y + x_{k} y_{i}\right) j + \left(x y_{k} + x_{i} y_{j} - x_{j} y_{i} + x_{k} y\right) k$</div>
               </code></pre>
-              <p>(would prefer $x_qx_qx_1^{-1}y_q = x_qy_q$)</p>
             </div>
+            <div class="fragment"><p>$\nabla_{\!x_q}(x_qy_q) = -2y_q$</p></div>
             <div class="fragment">
               <pre style="font-size: 60%"><code class="pycon" data-trim data-noescape>
-              &gt;&gt;&gt; def q_diff(p, dq):  # like ∇Φ, but for Φ taking quaternions
-              ...     I, J, K = Quaternion(0,1,0,0), Quaternion(0,0,1,0), Quaternion(0,0,0,1)
-              ...     return p.diff(dq.a) + I*p.diff(dq.b) + J*p.diff(dq.c) + K*p.diff(dq.d)
+              <span style="opacity: 0.5">&gt;&gt;&gt; def q_diff(Φ, dq):  # similar to ∇Φ
+              ...     ℍ = Quaternion
+              ...     I,J,K = ℍ(0,1,0,0),ℍ(0,0,1,0),ℍ(0,0,0,1)
+              ...     return (Φ.diff(dq.a) + I*Φ.diff(dq.b)
+              ...         + J*Φ.diff(dq.c) + K*Φ.diff(dq.d))</span>
               &gt;&gt;&gt; q_diff(xq*yq, xq)
               $- 2 y + - 2 y_{i} i + - 2 y_{j} j + - 2 y_{k} k$
               </code></pre>
-              <p>(would prefer $\nabla_{x_q}(x_qy_q) = -2y_q$)</p>
             </div>
           </div>
         </section>
         <section>
           <h3><div class="parent-title"><span>Sympy</span>Examples with matrix determinants</div></h3>
-          <div class="grid" style="grid-template: auto / auto auto auto;">
+          <div class="grid" style="grid-template-columns: auto auto auto;">
             <div>
               <pre><code class="pycon" data-trim>
               >>> m, n = symbols('m, n')
@@ -358,7 +347,7 @@
               </code></pre>
             </div>
           </div>
-          <div class="grid" style="grid: auto auto auto / 1fr 2fr; align-items: end;">
+          <div class="grid" style="grid-template-columns: auto auto">
             <div data-fragment-index="0" class="fragment fade-in-then-semi-out">
               $$\operatorname{det} AB = \operatorname{det} A \operatorname{det} B$$
               <pre><code class="pycon" data-trim>
@@ -368,7 +357,7 @@
             </div>
             <div data-fragment-index="0"  class="fragment fade-in-then-semi-out" style="text-align: left">
               <p><code class="python">Eq</code> can be used to write down a symbolic equality.</p>
-              <p><code>sympy</code> is automatically performing this simplification for us, via <code class="python">MatMul._eval_determinant</code>.</p>
+              <p><code class="python">MatMul._eval_determinant</code> is expanding the determinant for us.</p>
             </div>
             <div data-fragment-index="1"  class="fragment fade-in-then-semi-out">
               $$\operatorname{det} ABA^{-1} = \operatorname{det} B$$
@@ -380,30 +369,33 @@
               </code></pre>
             </div>
             <div data-fragment-index="1" class="fragment fade-in-then-semi-out" style="text-align: left">
-              <p><code class="python">MatMul._eval_determinant</code> gets us partway there, but doesn't finish the job.</p>
+              <p><code class="python">_eval_determinant</code> gets us partway there, but doesn't finish the job.</p>
               <p><code class="python">simplify()</code> can clean up.</p>
             </div>
             <div data-fragment-index="2" class="fragment">
               $$\operatorname{det} (I_m + PQ) = \operatorname{det} (I_n + QP)$$
+              <small style="display: block; margin-top: -20px">(sometimes called the <q>Weinstein–Aronszajn</q> identity)</small>
               <pre class="r-stack"><code class="pycon fragment" data-trim data-fragment-index="2" >
               >>> I = Identity
               >>> Eq(det(I(m) + P*Q), det(I(n) + Q*P))
               $\left|{\mathbb{I} + PQ}\right| = \left|{\mathbb{I} + QP}\right|$
-              >>> Eq(det(I(m) + P*Q), det(I(n) + Q*P)).simplify()
-              NonSquareMatrixError: Det of a non-square matrix
+              >>> Eq(det(I(m) + P*Q),
+              ...    det(I(n) + Q*P)).simplify()
+              NonSquareMatrixError:
+                Det of a non-square matrix
               </code><code class="pycon fragment" data-trim data-noescape data-fragment-index="3">
               &gt;&gt;&gt; I = Identity
               &gt;&gt;&gt; Eq(det(I(<b>n</b>) + A*B), det(I(n) + B*A))
               $\left|{\mathbb{I} + AB}\right| = \left|{\mathbb{I} + BA}\right|$
-              &gt;&gt;&gt; Eq(det(I(<b>m</b>) + A*B), det(I(n) + B*A)).simplify()
-              AttributeError: 'Mul' object has no attribute
-                'shape'
+              &gt;&gt;&gt; Eq(det(I(<b>n</b>) + A*B),
+              ...    det(I(n) + B*A)).simplify()
+              AttributeError:
+                'Mul' object has no attribute 'shape'
               </code></pre>
             </div>
             <div data-fragment-index="2" class="fragment" style="text-align: left">
-              <p>(sometimes called the <q>Weinstein–Aronszajn</q> identity)</p>
-              <p>There is no <code class="python">MatAdd._eval_determinant</code> to help here, it wouldn't generalize well anyway.</p>
-              <p>Simplification is ad-hoc, and sometimes crashes! Switching to square matrices makes things worse</p>
+              <p>There is no <code class="python">MatAdd._eval_determinant</code> to help here.</p>
+              <p><code>simplify()</code> is ad-hoc, and sometimes crashes! <span class="fragment" data-fragment-index="3">Switching to square matrices makes things worse!</span></p>
             </div>
           </div>
         </section>
@@ -426,7 +418,7 @@
                   <p>It's not enough to define our objects as simple structures with fields like <code>Quaternion</code>, like we would in a conventional programming language.</p>
                   <p>Every one of our expression tree objects needs to know how to simplify itself.</p>
                   <p>This scales poorly to compound expressions like $\operatorname{det}(1 + AB) = \operatorname{det}(1 + BA)$, where simplification only makes sense globally.</p>
-                  <p><strong>We're responsible for verifying that our simplifications are mathematically sound!</p></strong>
+                  <p><strong>We're responsible for verifying that our simplifications are mathematically sound!</strong></p>
                 </div>
               </div>
             </div>
@@ -521,7 +513,7 @@
         </section>
         <section>
           <h3><div class="parent-title"><span>Lean in Practice</span> <code>class</code> for abstraction</div></h3>
-          <pre style="font-size: 1em; display: inline-grid"><code class="lean" data-trim data-noescape>
+          <pre style="font-size: 0.9em; display: inline-grid"><code class="lean" data-trim data-noescape>
             <span class="fragment" data-fragment-index="0">class add_comm_group (A : Type)</span>
             <span class="fragment" data-fragment-index="1">  extends has_add A, has_zero A, has_neg A : Type :=</span>
             <span class="fragment" data-fragment-index="2">(add_comm     : ∀ a b : A,         a + b = b + a      )
@@ -549,25 +541,30 @@
               <div>
                 Type classes form an API
               </div>
-              <div class="grid" style="grid-template-columns: 1fr 1fr">
                 <div class="fragment"  data-fragment-index="4">
-                  <p>Proofs working over an abelian group <i>use</i> the API,
-                  and generalize to <i>all</i> abelian groups...</p>
+                  <p>Theorems <i>consume</i> the API so as to generalize to <i>all</i> abelian groups...</p>
                   <pre><code class="lean" data-trim>
-                  lemma neg_add {A : Type u} [add_comm_group A]
-                    (a b : G) : -(a + b) = -a + -b := sorry
+                  lemma neg_add {A : Type u} [add_comm_group A] (a b : G) :
+                    -(a + b) = -a + -b := sorry
                   </code></pre>
                 </div>
                 <div class="fragment" data-fragment-index="5">
-                  <p>Showing $\mathbb{H}$ is an abelian group means <i>implementing</i> the API:</p>
-                  <pre><code class="lean" data-trim>
-                  instance : add_comm_group ℍ :=
-                  { add_assoc := sorry, add_comm := sorry,
-                    zero_add := sorry,  add_zero := sorry,
-                    add_left_neg := sorry }
-                  </code></pre>
+                  <p>$\mathbb{H}$ and $\mathbb{R}^{m\times n}$ <i>implement</i> the API to prove they are abelian:</p>
+                  <div class="grid" style="grid-template-columns: 1fr 1fr">
+                    <pre><code class="lean" data-trim>
+                    instance : add_comm_group ℍ :=
+                    { add_assoc := sorry, add_comm := sorry,
+                      zero_add := sorry,  add_zero := sorry,
+                      add_left_neg := sorry }
+                    </code></pre>
+                    <pre><code class="lean" data-trim>
+                    instance : add_comm_group (matrix m n ℝ) :=
+                    { add_assoc := sorry, add_comm := sorry,
+                      zero_add := sorry,  add_zero := sorry,
+                      add_left_neg := sorry }
+                    </code></pre>
+                  </div>
                 </div>
-              </div>
             </div>
           </div>
           <div class="r-stretch"></div>
@@ -581,9 +578,12 @@
             open matrix         -- for `det`
             open_locale matrix  -- for `⬝`
           </code></pre>
-          <div style="display: grid; grid: auto auto auto / 1fr 2fr; align-items: end; column-gap: var(--r-block-margin)">
+          <div class="grid" style="grid-template-columns: 1fr 2fr;">
             <div data-fragment-index="0" class="fragment fade-in-then-semi-out">
               $$\operatorname{det} AB = \operatorname{det} A \operatorname{det} B$$
+            </div>
+            <div></div>
+            <div data-fragment-index="0" class="fragment fade-in-then-semi-out">
               <pre><code class="lean" data-trim>
               example : det (A⬝B) = det A * det B :=
               by simp
@@ -593,29 +593,37 @@
               <p><code>⬝</code> is matrix multiply.</p>
             </div>
             <div data-fragment-index="6" class="fragment semi-fade-out">
+              <div class="fragment" data-fragment-index="1">$$\operatorname{det} ABA^{-1} = \operatorname{det} B$$</div>
+            </div>
+            <div></div>
+            <div data-fragment-index="6" class="fragment semi-fade-out">
               <div class="fragment" data-fragment-index="1">
-                $$\operatorname{det} ABA^{-1} = \operatorname{det} B$$
                 <pre class="r-stack"><code class="lean fragment" data-trim data-noescape
                     data-fragment-index="1">
-                  example : det (A⬝B⬝A⁻¹) = det B :=
+                  example :
+                    det (A⬝B⬝A⁻¹) = det B :=
                   sorry
                 </code><code class="lean fragment" data-trim data-noescape
                     data-fragment-index="2">
-                  example (hA : is_unit A) : det (A⬝B⬝A⁻¹) = det B :=
+                  example (hA : is_unit A) :
+                    det (A⬝B⬝A⁻¹) = det B :=
                   sorry
                 </code><code class="lean fragment" data-trim data-noescape
                     data-fragment-index="3">
-                  example (hA : is_unit A) : det (A⬝B⬝A⁻¹) = det B :=
-                  by <span class="error" title="⊢ A.det * B.det * ring.inverse A.det = B.det">simp [hA]<!--
+                  example (hA : is_unit A) :
+                    det (A⬝B⬝A⁻¹) = det B :=
+                  by <span class="error" title="⊢ A.det * B.det * ring.inverse A.det&#10;    = B.det">simp [hA]<!--
                   --></span>
                 </code><code class="lean fragment" data-trim data-noescape
                     data-fragment-index="4">
-                  example (hA : is_unit A) : det (A⬝B⬝A⁻¹) = det B :=
+                  example (hA : is_unit A) :
+                    det (A⬝B⬝A⁻¹) = det B :=
                   by <span class="info" title="Try this: exact det_conj hA B">library_search<!--
                   --></span>
                 </code><code class="lean fragment" data-trim data-noescape
                     data-fragment-index="5">
-                  example (hA : is_unit A) : det (A⬝B⬝A⁻¹) = det B :=
+                  example (hA : is_unit A) :
+                    det (A⬝B⬝A⁻¹) = det B :=
                   by exact det_conj hA B
                 </code></pre>
               </div>
@@ -624,10 +632,12 @@
               <p data-fragment-index="1" class="fragment">
                 We need a proof that <code>A</code> is invertible, spelt <code>is_unit A</code></p>
               <p data-fragment-index="3" class="fragment"><code>simp</code> takes us to a dead end</p>
-              <p data-fragment-index="5" class="fragment"><code>library_search</code> finds that Lean knows this result</p>
+              <p data-fragment-index="4" class="fragment"><code>library_search</code> finds that Lean knows this result</p>
             </div>
             <div data-fragment-index="6" class="fragment fade-in-then-semi-out">
               $$\operatorname{det} (I_m + PQ) = \operatorname{det} (I_n + QP)$$
+            </div><div></div>
+            <div data-fragment-index="6" class="fragment fade-in-then-semi-out">
               <pre><code class="lean" data-trim data-noescape>
               example : det (1 + P⬝Q) = det (1 + Q⬝P) :=
               by <span class="error" title="(1 + P ⬝ Q).det = (1 + Q ⬝ P).det">simp</span>
@@ -641,7 +651,7 @@
         <section>
           <h3><div class="parent-title"><span>Lean in Practice</span>Proving the Weinstein–Aronszajn identity</div></h3>
           <p>How do we prove $\operatorname{det} (1 + PQ) = \operatorname{det} (1 + QP)$ by hand?</p>
-          <div style="font-size: 80%">
+          <div style="font-size: 60%">
             \begin{align}
               \operatorname{det}\begin{bmatrix}A & B \\ C & D\end{bmatrix}
               &= \operatorname{det} D \cdot \operatorname{det}(A - BD^{-1}C)
@@ -649,7 +659,7 @@
               &= \operatorname{det}(I - (-P)Q) = \operatorname{det}(I + PQ)
             \end{align}
           </div>
-          <div style="font-size: 80%" class="fragment" data-fragment-index="0">
+          <div style="font-size: 60%" class="fragment" data-fragment-index="0">
             \begin{align}
               \operatorname{det}\begin{bmatrix}A & B \\ C & D\end{bmatrix}
               &= \operatorname{det} A \cdot \operatorname{det}(D - CA^{-1}B)
@@ -658,8 +668,8 @@
             \end{align}
           </div>
           <div style="display: grid; grid-template: auto / 1fr 1fr; column-gap: var(--r-block-margin); text-align: center">
-            <div>(Standard result with schur complement)</div>
-            <div>(Set $A = I$, $B=-P$, $C=Q$ and $D = I$)</div>
+            <small>(Standard result with schur complement)</small>
+            <small>(Set $A = I$, $B=-P$, $C=Q$ and $D = I$)</small>
           </div>
           <div class="r-stretch"></div>
           <div class="fragment" data-fragment-index="1">
@@ -699,15 +709,18 @@
                 </code><code class="lean-goal fragment" data-trim data-fragment-index="3">
                   P : matrix m n R
                   Q : matrix n m R
-                  ⊢ det (1 + P⬝Q) = det (from_blocks 1 (-P) Q 1)
+                  ⊢ det (1 + P⬝Q) =
+                      det (from_blocks 1 (-P) Q 1)
 
                   P : matrix m n R
                   Q : matrix n m R
-                  ⊢ det (from_blocks 1 (-P) Q 1) = det (1 + Q⬝P)
+                  ⊢ det (from_blocks 1 (-P) Q 1) =
+                      det (1 + Q⬝P)
                 </code><code class="lean-goal fragment" data-trim data-fragment-index="4">
                   P : matrix m n R
                   Q : matrix n m R
-                  ⊢ det (1 + P⬝Q) = det (from_blocks 1 (-P) Q 1)
+                  ⊢ det (1 + P⬝Q) =
+                      det (from_blocks 1 (-P) Q 1)
                 </code><code class="lean-goal fragment" data-trim data-fragment-index="5">
                   P : matrix m n R
                   Q : matrix n m R
@@ -756,9 +769,9 @@
         </section>
         <section>
           <h3>Mathlib</h3>
-          <div class="grid" style="grid-template-columns: auto auto; text-align: left">
+          <div style="text-align: left">
             <div class="fragment">
-              <p>A mathematical library for Lean,<br/>comparable to:</p>
+              <p>A mathematical library for Lean, comparable to:</p>
               <ul>
                 <li>Coq's <q>mathematical components</q></li>
                 <li>Isabelle's <q>HOL-Analysis</q></li>
@@ -766,13 +779,12 @@
             </div>
             <div class="fragment">
               <p>Curated by a diverse set of almost 250 <a href="https://leanprover-community.github.io/meet.html#maintainers">maintainers</a> and <a href="https://github.com/math-comp/math-comp/graphs/contributors">contributors</a>:</p>
-                <ul style="font-size: 90%">
-                  <li>role: <span style="opacity: 0.75">Professors, Post-docs, PhD students, Undergrads</span></li>
-                  <li>origin: <span style="opacity: 0.75">USA, France, The Netherlands, UK, Canada, Australia, &hellip;</span></li>
-                  <li>expertise: <span style="opacity: 0.75">Mathematics, Computer Science, Physics, AI, &hellip;</span></li>
-                </ul>
-              </div>
-            </ul>
+              <ul>
+                <li>role: <span style="opacity: 0.75">Professors, Post-docs, PhD students, Undergrads</span></li>
+                <li>origin: <span style="opacity: 0.75">USA, France, The Netherlands, UK, Canada, Australia, &hellip;</span></li>
+                <li>expertise: <span style="opacity: 0.75">Mathematics, Computer Science, Physics, AI, &hellip;</span></li>
+              </ul>
+            </div>
           </div>
 
           <div class="fragment">
@@ -790,21 +802,21 @@
           <h3><div class="parent-title"><span>What does Mathlib know?</span>Parseval's theorem</div></h3>
           <div class="grid" style="grid-template: auto / 1fr 1fr">
             <blockquote>
-              <p>These amplitudes [$c_n$] can be related to the power content of the signal $g(t)$ over one period</p>
+              <p style="font-size: 80%">These amplitudes [$c_n$] can be related to the power content of the signal $g(t)$ over one period</p>
               $$\sum_{n=-\infty}^{\infty}|c_n|^2 dt = \frac{1}{T}\int_{0}^{T}|g(t)|^2 dt$$
-              <p style="text-align: center">where $g(t) = \sum_{n=-\infty}^{\infty}c_ne^{jn\omega_0t}$</p>
+              <p style="font-size: 80%; text-align: center">where $g(t) = \sum_{n=-\infty}^{\infty}c_ne^{jn\omega_0t}$</p>
               <p class="reference">
                 <cite><a href="http://teaching.eng.cam.ac.uk/content/engineering-tripos-part-ib-2p6-fourier-transforms-signal-and-data-analysis-2020-21">CUED IB Paper 6</a>, Handout 2, Lent 2021</cite>
                 <span>S. Godsill</span>
               </p>
             </blockquote>
             <blockquote>
-              The sum of the squared norms of the Fourier coefficients equals the $L^2$ norm of the function.
+              <p style="font-size: 80%">The sum of the squared norms of the Fourier coefficients equals the $L^2$ norm of the function.</p>
               <pre><code class="lean" data-trim>
                 lemma tsum_sq_fourier_series_repr
                   (g : Lp ℂ 2 haar_circle) :
                     ∑' n : ℤ, ∥fourier_series.repr g n∥^2
-                      = ∫ t : circle, ∥g t∥^2 ∂haar_circle :=
+                      = ∫ t : circle, ∥g t∥^2 ∂haar_circle
               </code></pre>
               <p class="reference">
                 <cite><a href="https://leanprover-community.github.io/mathlib_docs/find/tsum_sq_fourier_series_repr">Fourier analysis on the circle</a></cite>
@@ -815,8 +827,8 @@
           <div class="fragment">
             <p style="text-align: center">Some translation required!</p>
             <div style="display: grid; grid-template: auto auto auto auto / 1fr min-content 1fr; column-gap: 1em; text-align: left; margin-bottom: var(--r-block-margin)">
-              <q style="text-align: right">one period</q> &leftrightarrow; <code>t : circle</code>
-              <q style="text-align: right">$c_n$</q> &leftrightarrow; <code>fourier_series.repr g n</code>
+              <q style="text-align: right">one period</q> &leftrightarrow; <span><code>t : circle</code></span>
+              <q style="text-align: right">$c_n$</q> &leftrightarrow; <span><code>fourier_series.repr g n</code></span>
               <q style="text-align: right">$\frac{1}{T}dt$</q> &leftrightarrow; <span>
                 <code>∂haar_circle</code>
                 <small style="display: block">(the <q>measure</q> around a circle that sums to 1)</small>
@@ -833,24 +845,27 @@
           <h3><div class="parent-title"><span>What does Mathlib know?</span>The Cayley-Hamilton theorem</div></h3>
           <div class="grid" style="grid-template: auto / 1fr 1fr">
             <blockquote>
-              The characteristic polynomial of $A$ is defined as
-              \begin{align}
-              p_{A}(\lambda)&=\det(\lambda I_{n}-A) \\
-              \textit{[...]}\quad&=\lambda^{n}+c_{n-1}\lambda^{n-1}+\cdots+c_{1}\lambda+c_{0}
-              \end{align}
-              One can create an analogous polynomial $p_{A}(A)$ [...].
-              The Cayley–Hamilton theorem states that $p_A(A) = 0$.
+              <p style="font-size: 80%">
+                The characteristic polynomial of $A$ is defined as
+                \begin{align}
+                p_{A}(\lambda)&=\det(\lambda I_{n}-A) \\
+                \textit{[...]}\quad&=\lambda^{n}+c_{n-1}\lambda^{n-1}+\cdots+c_{1}\lambda+c_{0}
+                \end{align}
+                One can create an analogous polynomial $p_{A}(A)$ [...].
+                The Cayley–Hamilton theorem states that $p_A(A) = 0$.
+              </p>
               <p class="reference">
                 <cite><a href="https://en.wikipedia.org/wiki/Cayley%E2%80%93Hamilton_theorem">Cayley–Hamilton theorem</a></cite>
                 <span>Wikipedia</span>
               </p>
             </blockquote>
             <blockquote>
-              The characteristic polynomial of a matrix, applied to the matrix itself, is zero.
-               This holds over any commutative ring.
+              <p style="font-size: 80%">The characteristic polynomial of a matrix, applied to the matrix itself, is zero.
+               This holds over any commutative ring.</p>
               <pre><code class="lean" data-trim>
-                lemma matrix.aeval_self_charpoly {R n : Type}
-                  [comm_ring R] [decidable_eq n] [fintype n]
+                lemma matrix.aeval_self_charpoly
+                  {R : Type} [comm_ring R]
+                  {n : Type} [decidable_eq n] [fintype n]
                   (A : matrix n n R) :
                     polynomial.aeval A A.charpoly = 0
               </code></pre>
@@ -861,13 +876,12 @@
             </blockquote>
           </div>
           <div class="fragment" style="display: grid; grid-template: auto auto auto / 1fr min-content 1fr; column-gap: 1em; text-align: left; margin-bottom: var(--r-block-margin)">
-            <q style="text-align: right">$p_A$</q> &leftrightarrow; <code>A.charpoly</code>
-            <q style="text-align: right">$p(A)$</q> &leftrightarrow; <code>polynomial.aeval A p</code>
+            <q style="text-align: right">$p_A$</q> &leftrightarrow; <span><code>A.charpoly</code></span>
+            <q style="text-align: right">$p(A)$</q> &leftrightarrow; <span><code>polynomial.aeval A p</code></span>
           </div>
-          <div class="r-stretch"></div>
           <div class="fragment">
             <blockquote>
-              <p>Note that by [the] Cayley-Hamilton theorem,
+              <p style="font-size: 80%">Note that by [the] Cayley-Hamilton theorem,
               $e^{A\tau} = I\alpha_0(\tau) + \cdots + A^{n-1}\alpha_{n-1}$</p>
               <p class="reference">
                 <cite><a href="http://teaching.eng.cam.ac.uk/content/engineering-tripos-part-iia-3f2-systems-control-2021-22">3F2: Systems and Control</a>, Lecture 4: controllability</cite>
@@ -924,15 +938,15 @@
 
         <section id="mathlib-contributions">
           <h3><div class="parent-title"><span>What does Mathlib know?</span>The algebra that I taught it</div></h3>
-          <div class="grid" style="grid-template-columns: auto auto; text-align: left">
-            <div><p style="text-align: right"><a href="https://leanprover-community.github.io/mathlib_docs/find/dual_number"><code>
-              dual_number R</code></a></p></div>
-            <div>
-              <p>Dual numbers: $R[\varepsilon]$ or $x + \varepsilon y$, where $\varepsilon^2 = 0$</p>
-            </div>
-            <div><p style="text-align: right"><a href="https://leanprover-community.github.io/mathlib_docs/find/alternating_map"><code>
-                alternating_map&nbsp;R&nbsp;V&nbsp;W&nbsp;ι</code></a></p></div>
-            <div>
+          <dl style="display: block">
+            <dt class="fragment" data-fragment-index="0"><a href="https://leanprover-community.github.io/mathlib_docs/find/dual_number"><code>
+              dual_number R</code></a></dt>
+            <dd class="fragment" data-fragment-index="0">
+              <p>Dual numbers: $R[\varepsilon]$ or $x + \varepsilon y$, where $\varepsilon^2 = 0$.</p>
+            </dd>
+            <dt class="fragment" data-fragment-index="1"><a href="https://leanprover-community.github.io/mathlib_docs/find/alternating_map"><code>
+                alternating_map&nbsp;R&nbsp;V&nbsp;W&nbsp;ι</code></a></dt>
+            <dd class="fragment" data-fragment-index="1">
               <p>Alternating maps: $F : V^n \to W$ where $F(\ldots, v_i, \ldots, v_j, \ldots) = 0$ if $v_i = v_j$ for some $i \ne j$.</p>
               <pre style="font-size: 60%"><code class="lean" data-trim>
               /-- det is an `alternating_map` in the rows of the matrix. -/
@@ -943,30 +957,53 @@
               theorem alternating_map.map_linear_dependent
                 [no_zero_smul_divisors K W] (f : alternating_map K V W ι)
                 (v : ι → V) (h : ¬linear_independent K v) : f v = 0
-              </code></pre></li>
-            </div>
-            <div><p style="text-align: right"><a href="https://leanprover-community.github.io/mathlib_docs/find/clifford_algebra"><code>
-                clifford_algebra Q</code></a></p></div>
-            <div>
-              <p>Geometric algebra, $\mathcal{G}(Q)$ (<q>Clifford algebra</q> to mathematicians)</p>
+              </code></pre>
+            </dd>
+            <dt class="fragment" data-fragment-index="2"><a href="https://leanprover-community.github.io/mathlib_docs/find/clifford_algebra"><code>
+                clifford_algebra Q</code></a></dt>
+            <dd class="fragment" data-fragment-index="2">
+              <p>Geometric algebra, $\mathcal{G}(Q)$ (<q>Clifford algebra</q> to mathematicians).</p>
               <pre style="font-size: 60%"><code class="lean" data-trim>
                 /-- The clifford algebra over `quaternion_Q` is isomorphic to `ℍ`. -/
                 def clifford_algebra_quaternion.equiv :
                   clifford_algebra quaternion_Q ≃ₐ[ℝ] ℍ[ℝ]
               </code></pre>
-            </div>
-            <div><p style="text-align: right"><a href="https://leanprover-community.github.io/mathlib_docs/find/graded_algebra"><code>
-                graded_algebra A</code></a></p></div>
-            <div>
+            </dd>
+          </dl>
+        </section>
+        <section id="mathlib-contributions-2">
+          <h3><div class="parent-title"><span>What does Mathlib know?</span>The algebra that I taught it</div></h3>
+          <dl style="display: block">
+            <dt><a href="https://leanprover-community.github.io/mathlib_docs/find/graded_algebra"><code>
+                graded_algebra A</code></a></dt>
+            <dd>
               <p>Graded algebras: $A = \bigoplus_i A_i$ where $A_iA_j \subseteq A_{i+j}$</p>
               <pre style="font-size: 60%"><code class="lean" data-trim>
-                /-- The clifford algebra is graded by the even and odd parts. -/
-                def clifford_algebra.graded_algebra :
-                  graded_algebra (clifford_algebra.even_odd Q)
+                structure set_like.graded_monoid (A : ι → S) :
+                (one_mem : 1 ∈ A 0)
+                (mul_mem : ∀ {i j : ι} {gi gj : R}, gi ∈ A i → gj ∈ A j → gi * gj ∈ A (i + j))
               </code></pre>
-            </div>
-          </div>
-          <p>&hellip;along with hundreds of smaller results in linear algebra, ring theory, and more.</p>
+              <pre style="font-size: 60%"><code class="lean" data-trim>
+              /-- An internally-graded `R`-algebra `A` is one that can be decomposed into a
+              collection of `submodule R A`s indexed by `ι` such that the canonical map
+              `A → ⨁ i, 𝒜 i` is bijective. -/
+              class graded_algebra extends set_like.graded_monoid 𝒜 :=
+              (decompose' : A → ⨁ i, 𝒜 i)
+              (left_inv : function.left_inverse decompose' (direct_sum.submodule_coe 𝒜))
+              (right_inv : function.right_inverse decompose' (direct_sum.submodule_coe 𝒜))
+              </code></pre>
+              <pre style="font-size: 60%"><code class="lean" data-trim>
+              /-- The clifford algebra is graded by the even and odd parts. -/
+              def clifford_algebra.graded_algebra :
+                graded_algebra (clifford_algebra.even_odd Q)
+              </code></pre>
+            </dd>
+            <dt>Miscellaneous proofs</dt>
+            <dd>The matrix lemma we proved in this presentation, and hundreds of smaller results in linear algebra, ring theory, and more.</dd>
+          </dl>
+        </section>
+        <section id="mathlib-contributions-you">
+          <h3><div class="parent-title"><span>What does Mathlib know?</span>The algebra this audience wants to teach it?</div></h3>
         </section>
       </section>
     </div>
@@ -978,7 +1015,6 @@
   <script src="js/lean.min.js"></script>
   <script src="js/lean-goal.js"></script>
   <script src="js/vendor/Chart.min.js"></script>
-  <script src="js/vendor/alt-arrows.js"></script>
   <script src="js/charts/cas.js"></script>
   <script src="js/charts/provers.js"></script>
   <script>
@@ -1011,12 +1047,10 @@
       center: false,
       // defaultTiming: 40,
       slideNumber: 'c/t',
-      width: 1856,
-      height: 1016,
-      keyboard: {
-       39: 'next', // Right Arrow
-       37: 'prev'  // Left Arrow
-      }
+      width: 1280*0.96,
+      height: 1024*0.96,
+      margin: 0.04,
+      navigationMode: 'linear',
       // showNotes: 'separate-page'
     });
 
