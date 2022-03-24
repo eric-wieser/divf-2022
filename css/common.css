@@ -1,7 +1,7 @@
 
 .slides {
 	/* For debugging */
-  border: 1px solid black !important;
+  /*border: 1px solid black !important;*/
 }
 
 .reveal pre {
@@ -177,7 +177,7 @@ blockquote p.reference::before {
 }
 
 p.reference {
-  font-size: 50%;
+  font-size: 75%;
 }
 p.reference > cite {
   display: block;
