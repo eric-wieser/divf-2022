@@ -744,6 +744,8 @@
                 Now we can go back to the other goal. We can solve it the same way, &hellip;</span>
               <span class="fragment current-only" data-fragment-index="9">
                 &hellip; but let's write it more concisely.</span>
+              <span class="fragment current-only" data-fragment-index="10">
+                How did Lean know <code>det_from_blocks_one₁₁</code> and <code>det_from_blocks_one₂₂</code>?.</span>
             </div>
           </div>
         </section>
@@ -753,25 +755,37 @@
           <h2>Mathlib</h2>
         </section>
         <section>
-          <h3>What does Mathlib know?</h3>
-          <div style="text-align: left">
-            <p>Of particular interest to engineers:</p>
+          <h3>Mathlib</h3>
+          <div class="grid" style="grid-template-columns: auto auto">
             <ul>
-              <li>Linear algebra
+              <li class="fragment">A Mathematical library for Lean</li>
+              <li class="fragment">Comparable to
                 <ul>
-                  <li>Vector subspaces</li>
-                  <li>Matrices</li>
-                  <li>Eigenspaces</li>
-                </ul></li>
-              <li>Multivariate calculus
-                <ul>
-                  <li>Partial derivatives</li>
-                  <li>Fourier series</li>
+                  <li>Coq's <q>mathematical components</q></li>
+                  <li>Isabelle's <q>HOL-Analysis</q></li>
                 </ul>
               </li>
-              <li>Polynomials and power series</li>
-              <li>Probability theory</li>
             </ul>
+            <ul>
+              <li class="fragment">
+                Curated by a diverse set of almost 250 <a href="https://leanprover-community.github.io/meet.html#maintainers">maintainers</a> and <a href="https://github.com/math-comp/math-comp/graphs/contributors">contributors</a>:
+                <ul style="font-size: 90%">
+                  <li>role: <span style="opacity: 0.75">Professors, Post-docs, PhD students, Undergrads</span></li>
+                  <li>origin: <span style="opacity: 0.75">USA, France, The Netherlands, UK, Canada, Australia, &hellip;</span></li>
+                  <li>expertise: <span style="opacity: 0.75">Mathematics, Computer Science, Physics, AI, &hellip;</span></li>
+                </ul></li>
+            </ul>
+          </div>
+
+          <div class="fragment">
+            <div style="display: grid; grid-template-columns: auto auto auto; font-size: 1.2em">
+              <p><span style="display: block; opacity: 0.8; font-size: 75%">Definitions</span> 34455</p>
+              <p><span style="display: block; opacity: 0.8; font-size: 75%">Theorems</span> 82184</p>
+              <p><span style="display: block; opacity: 0.8; font-size: 75%">Lines of code</span> 0.83 million </p>
+            </div>
+
+            <img src="images/mathlib-stats.png" style="background: transparent; display: block; margin: auto" />
+            <a href="https://leanprover-community.github.io/mathlib_stats.html" style="font-size: 50%; display: block">https://leanprover-community.github.io/mathlib_stats.html</a>
           </div>
         </section>
         <section id="mathlib-knows-parseval">
@@ -887,6 +901,25 @@
               leanprover-community.github.io/undergrad_todo.html
             </a></small>
           </div>
+          <aside class="notes">
+            <p>Of particular interest to engineers:</p>
+            <ul>
+              <li>Linear algebra
+                <ul>
+                  <li>Vector subspaces</li>
+                  <li>Matrices</li>
+                  <li>Eigenspaces</li>
+                </ul></li>
+              <li>Multivariate calculus
+                <ul>
+                  <li>Partial derivatives</li>
+                  <li>Fourier series</li>
+                </ul>
+              </li>
+              <li>Polynomials and power series</li>
+              <li>Probability theory</li>
+            </ul>
+          </aside>
         </section>
         <section id="mathlib-knows-spaghetti" data-background-iframe="https://eric-wieser.github.io/mathlib-import-graph?highlight=mathlib:linear_algebra.matrix.determinant" data-background-interactive>
         </section>
