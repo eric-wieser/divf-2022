@@ -892,24 +892,50 @@
         </section>
 
         <section id="mathlib-contributions">
-          <h2>Contributions to mathlib</h2>
-          <ul>
-            <li>Exterior algebra: $\bigwedge(V)$.
-              <a href="https://leanprover-community.github.io/mathlib_docs/find/exterior_algebra"><code>
-                exterior_algebra R V</code></a></li>
-            <li>Alternating maps: $F : V^n \to W$ where $v_i = v_j \implies F(\ldots, v_i, \ldots, v_j, \ldots) = 0$.
-              <a href="https://leanprover-community.github.io/mathlib_docs/find/alternating_map"><code>
-                alternating_map R V</code></a></li>
-            <li>Clifford algebra: $\mathcal{C}\ell(Q)$
-              <a href="https://leanprover-community.github.io/mathlib_docs/find/clifford_algebra"><code>
-                clifford_algebra Q</code></a></li>
-            <li>Dual numbers: $R[\varepsilon]$ or $x + \varepsilon y$, where $\varepsilon^2 = 0$
-              <a href="https://leanprover-community.github.io/mathlib_docs/find/dual_number"><code>
-                dual_number R</code></a></li>
-            <li>Graded algebras: $A = \bigoplus_i A_i$ where $A_iA_j \subseteq A_{i+j}$
-              <a href="https://leanprover-community.github.io/mathlib_docs/find/graded_algebra"><code>
-                graded_algebra A</code></a></li>
-          </ul>
+          <h3><div class="parent-title"><span>What does Mathlib know?</span>The algebra that I taught it</div></h3>
+          <div class="grid" style="grid-template-columns: auto auto; text-align: left">
+            <div><p style="text-align: right"><a href="https://leanprover-community.github.io/mathlib_docs/find/dual_number"><code>
+              dual_number R</code></a></p></div>
+            <div>
+              <p>Dual numbers: $R[\varepsilon]$ or $x + \varepsilon y$, where $\varepsilon^2 = 0$</p>
+            </div>
+            <div><p style="text-align: right"><a href="https://leanprover-community.github.io/mathlib_docs/find/alternating_map"><code>
+                alternating_map&nbsp;R&nbsp;V&nbsp;W&nbsp;ι</code></a></p></div>
+            <div>
+              <p>Alternating maps: $F : V^n \to W$ where $F(\ldots, v_i, \ldots, v_j, \ldots) = 0$ if $v_i = v_j$ for some $i \ne j$.</p>
+              <pre style="font-size: 60%"><code class="lean" data-trim>
+              /-- det is an `alternating_map` in the rows of the matrix. -/
+              def matrix.det_row_alternating : alternating_map R (n → R) R n
+              </code></pre>
+              <pre style="font-size: 60%"><code class="lean" data-trim>
+              /-- If the arguments are linearly dependent then the result is `0`. -/
+              theorem alternating_map.map_linear_dependent
+                [no_zero_smul_divisors K W] (f : alternating_map K V W ι)
+                (v : ι → V) (h : ¬linear_independent K v) : f v = 0
+              </code></pre></li>
+            </div>
+            <div><p style="text-align: right"><a href="https://leanprover-community.github.io/mathlib_docs/find/clifford_algebra"><code>
+                clifford_algebra Q</code></a></p></div>
+            <div>
+              <p>Geometric algebra, $\mathcal{G}(Q)$ (<q>Clifford algebra</q> to mathematicians)</p>
+              <pre style="font-size: 60%"><code class="lean" data-trim>
+                /-- The clifford algebra over `quaternion_Q` is isomorphic to `ℍ`. -/
+                def clifford_algebra_quaternion.equiv :
+                  clifford_algebra quaternion_Q ≃ₐ[ℝ] ℍ[ℝ]
+              </code></pre>
+            </div>
+            <div><p style="text-align: right"><a href="https://leanprover-community.github.io/mathlib_docs/find/graded_algebra"><code>
+                graded_algebra A</code></a></p></div>
+            <div>
+              <p>Graded algebras: $A = \bigoplus_i A_i$ where $A_iA_j \subseteq A_{i+j}$</p>
+              <pre style="font-size: 60%"><code class="lean" data-trim>
+                /-- The clifford algebra is graded by the even and odd parts. -/
+                def clifford_algebra.graded_algebra :
+                  graded_algebra (clifford_algebra.even_odd Q)
+              </code></pre>
+            </div>
+          </div>
+          <p>&hellip;along with hundreds of smaller results in linear algebra, ring theory, and more.</p>
         </section>
       </section>
     </div>
