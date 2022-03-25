@@ -31,7 +31,7 @@
             <div>
               <h1 style="font-size: 2em">Non-commutative algebras,<br />computer algebra systems,<br />and theorem provers</h1>
 
-              <p>Eric Wieser<br/> Signal Processing Group</p>
+              <p>Eric Wieser (<code>efw27@</code>)<br/> Signal Processing Group</p>
               <small>slides: <a href="https://eric-wieser.github.io/divf-2022">
               eric-wieser.github.io/divf-2022</a></small>
               <small style="display: block; text-align: center; opacity: 0.5">2022-03-25</small>
@@ -452,7 +452,6 @@
             </p>
           </blockquote>
         </section>
-        <!-- TODO: add a summary slide of what theorem provers do? -->
         <section id="theorem-prover-implementations">
           <h3><div class="parent-title"><span>Theorem provers</span>Notable implementations</div></h3>
           <div style="height:50px; position:relative; width: 90%; margin: auto; margin-bottom: 20px">
@@ -488,7 +487,30 @@
             </div></li>
           </ul>
         </section>
-        <!-- TODO: add a provers vs CAS tradeoffs -->
+        <section id="theorem-prover-differences">
+          <h3><div class="parent-title"><span>Theorem provers</span>Differences with computer algebra systems</div></h3>
+          <div class="r-stretch" style="display: grid; align-items: center">
+            <div class="grid" style="grid-template-columns: 1fr 1fr;">
+              <div class="fragment">
+                <h4>Computer algebra systems</h4>
+                <div style="text-align: left">
+                  <p>Easier and faster to use</p>
+                  <p>More of a focus of algorithms to solve specific problems</p>
+                  <p>Sometimes tricky to extend</p>
+                  <p>No strong guarantees of correctness</p>
+                </div>
+              </div>
+              <div class="fragment">
+                <h4>Theorem provers</h4>
+                <div style="text-align: left">
+                  <p>Steeper learning curve</p>
+                  <p>Focus on correctness; very small <q>core</q> which requires trust.</p>
+                  <p>Very extensible, as even things like equality, <code>=</code>, are built as extensions to the core!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </section>
       <section>
         <section id="lean" style="height: var(--slide-height)">
@@ -551,14 +573,49 @@
           </div>
           <div class="r-stretch"></div>
           <aside class="notes">
-            <!--TODO: copy from the other presentation-->
+            <ul>
+              <li>let's start with the basics - we'll define a name for the natural number two
+                <ul>
+                  <li> lean is big on unicode (and there are tools to making typing them easy)</li>
+                </ul>
+              </li>
+              <li>here's a function that doubles a natural number
+                <ul>
+                  <li> so far, this looks like just another functional programming language</li>
+                </ul>
+              </li>
+              <li>here's where we move onto the theorem-proving side of lean.
+                <ul>
+                  <li> proposition is a special type for storing terms that make mathematical claims</li>
+                  <li> here we say there exists a natural number which squares to two</li>
+                  <li> obviously there doesn't, but `Prop` doesn't know or care</li>
+                </ul>
+              </li>
+              <li>What's special about `Prop` terms is they are themselves `Type`s
+                <ul>
+                  <li> A term of type `unlikely` is a proof of the statement</li>
+                  <li> `sorry` is a way of cheating to prove anything, but lean knows you cheated</li>
+                </ul>
+              </li>
+              <li>Typically the statement and proof are made at the same time
+                <ul>
+                  <li> Here we show (read statement)</li>
+                  <li> `∀ a` make this a function which produces a proof for any value of `a`.</li>
+                </ul>
+              </li>
+              <li>This time, the proof is cheat free
+                <ul>
+                  <li> I'll go more into writing these proofs later</li>
+                </ul>
+              </li>
+            </ul>
           </aside>
         </section>
         <section id="lean-typeclasses">
           <h3><div class="parent-title"><span>Lean in Practice</span> <code>class</code> for abstraction</div></h3>
           <pre style="font-size: 0.9em; display: inline-grid"><code class="lean" data-trim data-noescape>
             <span class="fragment" data-fragment-index="0">class add_comm_group (A : Type)</span>
-            <span class="fragment" data-fragment-index="1">  extends has_add A, has_zero A, has_neg A</span> : Type :=
+            <span class="fragment" data-fragment-index="1">  extends has_add A, has_zero A, has_neg A</span><span class="fragment" data-fragment-index="0"> : Type :=</span>
             <span class="fragment" data-fragment-index="2">(add_comm     : ∀ a b : A,         a + b = b + a      )
             (add_assoc    : ∀ a b c : A, (a + b) + c = a + (b + c))
             (zero_add     : ∀ a : A,           0 + a = a          )
@@ -1053,7 +1110,6 @@
                   | succ (n : mynat) : mynat
                 </code></pre>
                 <div><p style="font-size: 80%">In this [in-browser] game, you get own version of the natural numbers, called <code>mynat</code>, in an interactive theorem prover called Lean. [...] You're going to prove mathematical theorems using the Lean theorem prover.<br /><strong>In other words, you're going to solve levels in a computer game.</strong></p></div>
-                <!-- TODO -->
                 <p class="reference">
                   <cite><a href="https://www.ma.imperial.ac.uk/~buzzard/xena/natural_number_game/">The Natural Number Game</a></cite>
                   <span>Kevin Buzzard and Mohammad Pedramfar</span>
