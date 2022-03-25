@@ -13,7 +13,7 @@ Reveal.addEventListener('ready', function (event) {
     // The data for our dataset
     data: {
         datasets: [{
-            pointBackgroundColor: '#42affa',
+            pointBackgroundColor: '#2a76dd',
             pointRadius: 5,
             data: all_dates.date.map(x => { return {x: x, y: 0}; })
         }]

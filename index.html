@@ -40,7 +40,7 @@
         </section>
       </section>
       <section>
-        <section style="height: var(--slide-height)">
+        <section style="height: var(--slide-height)" id="non-commutative">
           <div style="display: grid; align-items: center; height: 100%">
             <div>
               <h2>Non-commutative algebras</h2>
@@ -48,7 +48,7 @@
             </div>
           </div>
         </section>
-        <section>
+        <section id="noncommutative-geometric">
           <h3><div class="parent-title"><span>Non-commutative algebras</span> Geometric motivation</div></h3>
           <div class="r-stretch" style="display: grid; align-items: center">
             <div class="grid" style="grid-template: auto / 1fr 1fr; text-align: left">
@@ -77,7 +77,7 @@
             <p>Geometric algebra<br />$\mathcal{G}(Q)$</p>
           </div>
         </section>
-        <section id="noncommutative-geometric" data-auto-animate>
+        <section id="noncommutative-geometric-2" data-auto-animate>
           <h3><div class="parent-title"><span>Non-commutative algebras</span> Geometric examples</div></h3>
           <h4>Quaternions, $\mathbb{H}$</h4>
           <div style="text-align: left; margin-left: auto; margin-right: auto;" class="fragment">
@@ -91,7 +91,7 @@
           <h4 style="opacity: 0.5" data-id="exterior_heading">Exterior algebra, $\bigwedge(V)$</h4>
           <h4 style="opacity: 0.5" data-id="geometric_heading">Geometric algebra, $\mathcal{G}(Q)$</h4>
         </section>
-        <section id="noncommutative-geometric-2" data-auto-animate>
+        <section id="noncommutative-geometric-3" data-auto-animate>
           <h3><div class="parent-title"><span>Non-commutative algebras</span> Geometric examples</div></h3>
           <h4 style="opacity: 0.5">Quaternions, $\mathbb{H}$</h4>
           <h4 data-id="exterior_heading">Exterior&nbsp;algebra, $\bigwedge(V)$</h4>
@@ -440,12 +440,12 @@
         </section>
       </section>
       <section>
-        <section>
-          <h3>What is a theorem prover?</h3>
+        <section id="theorem-provers">
+          <h2>Theorem provers</h2>
           <blockquote>
-            <p>A proof assistant [or theorem prover] is a piece of software that provides a language for defining objects, specifying properties of these objects, and proving that these specifications hold. The system checks that these proofs are correct down to their logical foundation.</p>
+            <p>A proof assistant [or theorem prover] is a piece of software that provides <b>a language for defining objects, specifying properties of these objects, and proving that these specifications hold</b>. The system checks that these proofs are correct down to their logical foundation.</p>
 
-            <p>These tools are often used to verify the correctness of programs. But they can also be used for abstract mathematics [...]. In a formalization, all definitions are precisely specified and all proofs are virtually guaranteed to be correct.</p>
+            <p>These tools are often used to verify the correctness of programs. But they can also be used for abstract mathematics [...]. In a formalization, all definitions are precisely specified and <b>all proofs are virtually guaranteed to be correct</b>.</p>
             <p class="reference">
               <cite><a href="https://leanprover-community.github.io/#what-is-a-proof-assistant">What is a proof assistant?</a></cite>
               <span>Lean community website</span>
@@ -453,64 +453,71 @@
           </blockquote>
         </section>
         <!-- TODO: add a summary slide of what theorem provers do? -->
-        <section>
-          <h2>Theorem proving languages - History</h2>
+        <section id="theorem-prover-implementations">
+          <h3><div class="parent-title"><span>Theorem provers</span>Notable implementations</div></h3>
           <div style="height:50px; position:relative; width: 90%; margin: auto; margin-bottom: 20px">
             <canvas id="lean-timeline"></canvas>
           </div>
           <ul>
-            <li class="fragment">Relatively new (compared to other actively used tools)
+            <li class="fragment" data-fragment-index="0"><div class="fragment semi-fade-out" data-fragment-index="3">About a decade less mature than computer algebra systems (<span style="color: gray">gray</span>)
               <ul>
-                <li style="font-size: smaller">Mizar (<span style="color: #42affa">1973</span>), Isabelle (<span style="color: #42affa">1986</span>), HOL Family (<span style="color: #42affa">1988</span>)</li>
-                <li style="font-size: smaller">Coq (<span style="color: #42affa">1989</span>), Metamath (<span style="color: #42affa">1993</span>), Agda (<span style="color: #42affa">2007</span>)</li>
+                <li style="font-size: smaller">Mizar (<span style="color: #2a76dd">1973</span>), Isabelle (<span style="color: #2a76dd">1986</span>), HOL Family (<span style="color: #2a76dd">1988</span>)</li>
+                <li style="font-size: smaller">Coq (<span style="color: #2a76dd">1989</span>), Metamath (<span style="color: #2a76dd">1993</span>), Agda (<span style="color: #2a76dd">2007</span>)</li>
                 <li style="font-size: smaller">Lean 1 (<span style="color: green">2013</span>) & Lean 2 (<span style="color: green">2015</span>)</li>
               </ul>
               <blockquote>
-                Lean had the advantage of being born later and learning from past mistakes.
+                <p style="font-size: 80%">Lean had the advantage of being born later and learning from past mistakes.</p>
                 <p class="reference">
                   <cite>CICM 2020 slack</cite>
                   <span>Mario Carneiro, Lean Maintainer</span>
                 </p>
               </blockquote>
-            </li>
-            <li class="fragment">Lean 3 (<span style="color: green">2016</span>)
+            </div></li>
+            <li class="fragment" data-fragment-index="1">Lean 3 (<span style="color: green">2016</span>)
               <ul>
                 <li style="font-size: smaller">Actively maintained by the community (v3.24.0 to v3.35.1 in 2021)</li>
                 <li style="font-size: smaller">Can be used <a href="https://leanprover.github.io/live/latest/">in-browser</a> or in supported IDEs: <a href="https://github.com/leanprover/vscode-lean">VS Code</a> and <a href="https://github.com/leanprover/lean-mode">Emacs</a></li>
               </ul>
             </li>
-            <li class="fragment">Lean 4 (<span style="color: orange">202x</span>)
+            <li class="fragment" data-fragment-index="2"><div class="fragment semi-fade-out" data-fragment-index="3">Lean 4 (<span style="color: orange">202⍰</span>)
               <ul>
                 <li style="font-size: smaller">Better support for domain-specific syntax and custom automation</li>
                 <li style="font-size: smaller">Native code and its formal verification in one language</li>
                 <li style="font-size: smaller">In active development at Microsoft Research</li>
               </ul>
-            </li>
+            </div></li>
           </ul>
         </section>
         <!-- TODO: add a provers vs CAS tradeoffs -->
       </section>
       <section>
+        <section id="lean" style="height: var(--slide-height)">
+          <div style="display: grid; align-items: center; height: 100%">
+            <div>
+              <h2>Lean in Practice</h2>
+            </div>
+          </div>
+        </section>
         <section id="lean-syntax">
           <h3><div class="parent-title"><span>Lean in Practice</span> Definitions, Types, and Terms</div></h3>
           <pre style="font-size: 0.9em; display: inline-grid"><code class="lean" data-trim data-noescape>
             <span class="fragment" data-fragment-index="0">-- name : type := value (or "term")
             def two : ℕ := 2</span>
 
-            <span class="fragment" data-fragment-index="1">def double : ℕ → ℕ :=
-            λ a, two * a</span>
+            <span class="fragment" data-fragment-index="1">def double (a : ℕ) : ℕ :=
+            two * a</span>
 
-            <span class="fragment" data-fragment-index="2">def unlikely : Prop := ∃ x : ℕ, x*x = 2</span>
+            <span class="fragment" data-fragment-index="2">def unlikely : Prop := ∃ x : ℕ, double x = 3</span>
             <span class="fragment" data-fragment-index="3">lemma unlikely_proof : unlikely := sorry</span>
 
-            <span class="fragment" data-fragment-index="4">lemma double_is_add_self : ∀ a : ℕ, double a = a + a :=</span>
-            <span class="fragment" data-fragment-index="5">by { intro a, apply two_mul }</span>
+            <span class="fragment" data-fragment-index="4">lemma double_is_add_self (a : ℕ) : double a = a + a :=</span>
+            <span class="fragment" data-fragment-index="5">by { dsimp [double, two], apply two_mul }</span>
           </code></pre>
           <div class="r-stack">
             <div class="fragment current-only" data-fragment-index="0">
               Lean tries to resemble the math, <code>ℕ = nat</code>.
-              <blockquote style="width: 60%">
-                mathematicians [have] lower tolerance for unintuitive interfaces than computer scientists.
+              <blockquote>
+                <p>mathematicians [have] lower tolerance for unintuitive interfaces than computer scientists.</p>
                 <p class="reference">
                   <cite>CICM 2020 slack</cite>
                   <span>Mario Carneiro, PhD in Logic, Lean Maintainer</span>
@@ -518,8 +525,10 @@
               </blockquote>
             </div>
             <div class="fragment current-only" data-fragment-index="1">
-              <code>→</code> declares a function type.<br />
-              <code>λ</code> creates a function <i>term</i>.
+              <code>double</code> is function that takes and outputs a <code>ℕ</code>.
+              It has type <code>ℕ → ℕ</code>.
+             <!--  <code>→</code> declares a function type.<br />
+              <code>λ</code> creates a function <i>term</i>. -->
             </div>
             <div class="fragment current-only" data-fragment-index="2">
               A <code>Prop</code> is a mathematical statement
@@ -534,8 +543,9 @@
               <p><code>double_is_add_self 1</code> is a proof that <code>double 1 = 1 + 1</code></p>
             </div>
             <div class="fragment current-only"  data-fragment-index="5">
-              <code>intro</code> and  <code>apply</code> are tactics,<br />
-              to help us construct proofs interactively
+              <p><code>dsimp</code> and <code>apply</code> are tactics, 
+              to help us construct proofs interactively.</p>
+              <p><code>two_mul</code> is a <code>lemma</code> from the library.</p>
             </div>
           </div>
           <div class="r-stretch"></div>
@@ -682,7 +692,7 @@
         <section id="lean-weinstein-aronszajn">
           <h3><div class="parent-title"><span>Lean in Practice</span>Proving the Weinstein–Aronszajn identity</div></h3>
           <p>How do we prove $\operatorname{det} (1 + PQ) = \operatorname{det} (1 + QP)$ by hand?</p>
-          <div style="font-size: 75%">
+          <div style="font-size: 68%">
             \begin{align}
               \operatorname{det}\begin{bmatrix}A & B \\ C & D\end{bmatrix}
               &= \operatorname{det} D \cdot \operatorname{det}(A - BD^{-1}C)
@@ -690,7 +700,7 @@
               &= \operatorname{det}(I - (-P)Q) = \operatorname{det}(I + PQ)
             \end{align}
           </div>
-          <div style="font-size: 75%" class="fragment" data-fragment-index="0">
+          <div style="font-size: 68%" class="fragment" data-fragment-index="0">
             \begin{align}
               \operatorname{det}\begin{bmatrix}A & B \\ C & D\end{bmatrix}
               &= \operatorname{det} A \cdot \operatorname{det}(D - CA^{-1}B)
@@ -763,7 +773,8 @@
                 </code><code class="lean-goal fragment" data-trim data-fragment-index="7">
                   goals accomplished 🎉
                 </code><code class="lean-goal fragment" data-trim data-fragment-index="8">
-                  ⊢ det (from_blocks 1 (-P) Q 1) = det (1 + Q⬝P)
+                  ⊢ det (from_blocks 1 (-P) Q 1) =
+                      det (1 + Q⬝P)
                 </code><code class="lean-goal fragment" data-trim data-fragment-index="9">
                   goals accomplished 🎉
                 </code></pre>
@@ -1165,6 +1176,7 @@
       height: 1024*0.96,
       margin: 0.04,
       navigationMode: 'linear',
+      totalTime: 20*60,
       // showNotes: 'separate-page'
     });
 

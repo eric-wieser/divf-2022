@@ -1,6 +1,10 @@
 
 // draw a chart
 Reveal.addEventListener('ready', function (event) {
+  var cas = {
+    date: [1965, 1982, 1982, 1993, 1998, 2004],
+    name: ["Axiom", "Maxima", "Maple", "Magma", "Mathematica", "SageMath"]
+  };
   var all_dates = {
     date: [1973, 1986, 1988, 1989, 1993, 2007],
     name: ["Mizar", "Isabelle", "HOL Family", "Coq", "Metamath", "Agda"]
@@ -22,7 +26,11 @@ Reveal.addEventListener('ready', function (event) {
     // The data for our dataset
     data: {
         datasets: [{
-            pointBackgroundColor: '#42affa',
+            pointBackgroundColor: 'gray',
+            pointRadius: 5,
+            data: cas.date.map(x => { return {x: x, y: 1}; })
+        }, {
+            pointBackgroundColor: '#2a76dd',
             pointRadius: 5,
             data: all_dates.date.map(x => { return {x: x, y: 0}; })
         }, {
@@ -48,7 +56,7 @@ Reveal.addEventListener('ready', function (event) {
           gridLines: {
             display: false,
           },
-          ticks: {min: -1, max: 1},
+          ticks: {min: -0.5, max: 1.5},
         }],
         xAxes: [{
           type: 'linear',
