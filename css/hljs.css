@@ -124,9 +124,5 @@
 }
 
 .hljs-sorry {
-  background-color: #82071e;
-  color: #f6f8fa;
-  border-radius: 0.1em;
-  line-height: 1em;
-  display: inline-block;
+  color: #82071e;
 }

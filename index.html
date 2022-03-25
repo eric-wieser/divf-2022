@@ -504,10 +504,10 @@
             <span class="fragment" data-fragment-index="0">-- name : type := value (or "term")
             def two : ℕ := 2</span>
 
-            <span class="fragment" data-fragment-index="1">def double (a : ℕ) : ℕ :=
-            two * a</span>
+            <span class="fragment" data-fragment-index="1">def double (a : ℕ) : ℕ := two * a</span>
 
-            <span class="fragment" data-fragment-index="2">def unlikely : Prop := ∃ x : ℕ, double x = 3</span>
+            <span class="fragment" data-fragment-index="2">-- syntax for `Exists (λ x : ℕ, eq (double x) 3)`
+            def unlikely : Prop := ∃ x : ℕ, double x = 3</span>
             <span class="fragment" data-fragment-index="3">lemma unlikely_proof : unlikely := sorry</span>
 
             <span class="fragment" data-fragment-index="4">lemma double_is_add_self (a : ℕ) : double a = a + a :=</span>
@@ -531,7 +531,8 @@
               <code>λ</code> creates a function <i>term</i>. -->
             </div>
             <div class="fragment current-only" data-fragment-index="2">
-              A <code>Prop</code> is a mathematical statement
+              <p>A <code>Prop</code> is a mathematical statement.</p>
+              <p>Behind this nice syntax lies an expression tree</p>
             </div>
             <div class="fragment current-only" data-fragment-index="3">
               <p><code>Prop</code> instances are themselves <code>Type</code>s.</p>
@@ -539,7 +540,7 @@
             </div>
             <div class="fragment current-only"  data-fragment-index="4">
               <p>Note that <code>a</code> is analogous to a <code>sympy.Symbol</code> here</p>
-              <p>Symbols in mathematical statements are the same thing as function arguments!</p>
+              <p>Arguments to functions and symbols in mathematical statements are the same thing!</p>
               <p><code>double_is_add_self 1</code> is a proof that <code>double 1 = 1 + 1</code></p>
             </div>
             <div class="fragment current-only"  data-fragment-index="5">
@@ -557,7 +558,7 @@
           <h3><div class="parent-title"><span>Lean in Practice</span> <code>class</code> for abstraction</div></h3>
           <pre style="font-size: 0.9em; display: inline-grid"><code class="lean" data-trim data-noescape>
             <span class="fragment" data-fragment-index="0">class add_comm_group (A : Type)</span>
-            <span class="fragment" data-fragment-index="1">  extends has_add A, has_zero A, has_neg A : Type :=</span>
+            <span class="fragment" data-fragment-index="1">  extends has_add A, has_zero A, has_neg A</span> : Type :=
             <span class="fragment" data-fragment-index="2">(add_comm     : ∀ a b : A,         a + b = b + a      )
             (add_assoc    : ∀ a b c : A, (a + b) + c = a + (b + c))
             (zero_add     : ∀ a : A,           0 + a = a          )
@@ -585,26 +586,26 @@
               </div>
                 <div class="fragment"  data-fragment-index="4">
                   <p>Theorems <i>consume</i> the API so as to generalize to <i>all</i> abelian groups...</p>
-                  <pre><code class="lean" data-trim>
-                  lemma neg_add {A : Type u} [add_comm_group A] (a b : G) :
+                  <pre style="font-size: 0.9em;"><code class="lean" data-trim>
+                  lemma neg_add {A : Type} [add_comm_group A] (a b : A) :
                     -(a + b) = -a + -b := sorry
                   </code></pre>
                 </div>
                 <div class="fragment" data-fragment-index="5">
                   <p>$\mathbb{H}$ and $\mathbb{R}^{m\times n}$ <i>implement</i> the API to prove they are abelian:</p>
                   <div class="grid" style="grid-template-columns: 1fr 1fr">
-                    <pre><code class="lean" data-trim>
+                    <div><pre style="font-size: 0.6em;"><code class="lean" data-trim>
                     instance : add_comm_group ℍ :=
                     { add_assoc := sorry, add_comm := sorry,
                       zero_add := sorry,  add_zero := sorry,
                       add_left_neg := sorry }
-                    </code></pre>
-                    <pre><code class="lean" data-trim>
+                    </code></pre></div>
+                    <div><pre style="font-size: 0.6em;"><code class="lean" data-trim>
                     instance : add_comm_group (matrix m n ℝ) :=
                     { add_assoc := sorry, add_comm := sorry,
                       zero_add := sorry,  add_zero := sorry,
                       add_left_neg := sorry }
-                    </code></pre>
+                    </code></pre></div>
                   </div>
                 </div>
             </div>
@@ -623,11 +624,9 @@
           <div class="grid" style="grid-template-columns: 1fr 2fr;">
             <div data-fragment-index="0" class="fragment fade-in-then-semi-out">
               $$\operatorname{det} AB = \operatorname{det} A \operatorname{det} B$$
-            </div>
-            <div></div>
-            <div data-fragment-index="0" class="fragment fade-in-then-semi-out">
-              <pre><code class="lean" data-trim>
-              example : det (A⬝B) = det A * det B :=
+              <pre style="font-size: 0.7em"><code class="lean" data-trim>
+              example :
+                det (A⬝B) = det A * det B :=
               by simp
               </code></pre>
             </div>
@@ -636,11 +635,8 @@
             </div>
             <div data-fragment-index="6" class="fragment semi-fade-out">
               <div class="fragment" data-fragment-index="1">$$\operatorname{det} ABA^{-1} = \operatorname{det} B$$</div>
-            </div>
-            <div></div>
-            <div data-fragment-index="6" class="fragment semi-fade-out">
               <div class="fragment" data-fragment-index="1">
-                <pre class="r-stack"><code class="lean fragment" data-trim data-noescape
+                <pre class="r-stack" style="font-size: 0.7em"><code class="lean fragment" data-trim data-noescape
                     data-fragment-index="1">
                   example :
                     det (A⬝B⬝A⁻¹) = det B :=
@@ -671,17 +667,18 @@
             </div>
             <div data-fragment-index="6" class="fragment semi-fade-out" style="text-align: left">
               <p data-fragment-index="1" class="fragment">
-                We need a proof that <code>A</code> is invertible, spelt <code>is_unit A</code></p>
-              <p data-fragment-index="3" class="fragment"><code>simp</code> takes us to a dead end</p>
-              <p data-fragment-index="4" class="fragment"><code>library_search</code> finds that Lean knows this result</p>
+                We need a proof that <code>A</code> is invertible, spelt <code>is_unit A</code>.</p>
+              <p data-fragment-index="3" class="fragment"><code>simp</code> takes us to a dead end.</p>
+              <p data-fragment-index="4" class="fragment"><code>library_search</code> finds the proof.</p>
             </div>
             <div data-fragment-index="6" class="fragment fade-in-then-semi-out">
               $$\operatorname{det} (I_m + PQ) = \operatorname{det} (I_n + QP)$$
             </div><div></div>
             <div data-fragment-index="6" class="fragment fade-in-then-semi-out">
               <pre><code class="lean" data-trim data-noescape>
-              example : det (1 + P⬝Q) = det (1 + Q⬝P) :=
-              by <span class="error" title="(1 + P ⬝ Q).det = (1 + Q ⬝ P).det">simp</span>
+              example :
+                det (1 + P⬝Q) = det (1 + Q⬝P) :=
+              by <span class="error" title="⊢ (1 + P ⬝ Q).det = (1 + Q ⬝ P).det">simp</span>
               </code></pre>
             </div>
             <div data-fragment-index="6" class="fragment fade-in-then-semi-out" style="text-align: left">
@@ -947,16 +944,16 @@
           <div class="grid r-stretch" style="grid-template: min-content auto min-content / 1fr 1fr; height: 100%; margin-top: 0">
             <h3 style="grid-column: 1 / span 2; margin-bottom: 0"><div class="parent-title"><span>What does Mathlib know?</span>Half an Undergraduate Mathematics Degree</div></h3>
             <div class="scroll-container" style="margin-bottom: 0">
-              <iframe style="height: 550vh; width: 100%; max-width: none; max-height: none" data-src="https://leanprover-community.github.io/undergrad.html" scrolling="no" data-preload></iframe>
+              <iframe style="height: 540vh; width: 100%; max-width: none; max-height: none" data-src="https://leanprover-community.github.io/undergrad.html" scrolling="no" data-preload></iframe>
               <div class="fragment" style="position: absolute; top: 30vh" data-fragment-index="0" data-scroll-into-view>
                 <aside class="notes">
                   A good fraction of the linear algebra content is formalized; although we can see that the matrix exponential we needed earlier is still in the TODO list.
                 </aside>
               </div>
-              <div class="fragment" style="position: absolute; top: 197vh" data-fragment-index="1" data-scroll-into-view>
+              <div class="fragment" style="position: absolute; top: 187vh" data-fragment-index="1" data-scroll-into-view>
                 <aside class="notes">There's a reasonable amount about bilinear forms, which are relevant to me for geometric algebra.</aside>
               </div>
-              <div class="fragment" style="position: absolute; top: 260vh" data-fragment-index="2" data-scroll-into-view>
+              <div class="fragment" style="position: absolute; top: 250vh" data-fragment-index="2" data-scroll-into-view>
                 <aside class="notes"> There is significant progress in real analysis too.</aside>
               </div>
               <div class="fragment" data-fragment-index="3" data-scroll-into-view>
@@ -966,8 +963,8 @@
             <div class="scroll-container" style="margin-bottom: 0">
               <iframe style="height: 580vh; width: 100%; max-width: none; max-height: none" data-src="https://leanprover-community.github.io/undergrad_todo.html" scrolling="no" data-preload></iframe>
               <div class="fragment" style="position: absolute; top: 41vh" data-fragment-index="0" data-scroll-into-view></div>
-              <div class="fragment" style="position: absolute; top: 140vh" data-fragment-index="1" data-scroll-into-view></div>
-              <div class="fragment" style="position: absolute; top: 210vh" data-fragment-index="2" data-scroll-into-view></div>
+              <div class="fragment" style="position: absolute; top: 130vh" data-fragment-index="1" data-scroll-into-view></div>
+              <div class="fragment" style="position: absolute; top: 205vh" data-fragment-index="2" data-scroll-into-view></div>
               <div class="fragment" style="position: absolute; top: 365vh" data-fragment-index="3" data-scroll-into-view></div>
             </div>
             <small><a href="https://leanprover-community.github.io/undergrad.html">
