@@ -52,14 +52,14 @@
           <h3><div class="parent-title"><span>Non-commutative algebras</span> Geometric motivation</div></h3>
           <div class="r-stretch" style="display: grid; align-items: center">
             <div class="grid" style="grid-template: auto / 1fr 1fr; text-align: left">
-              <div>
+              <div class="fragment">
                 <p>Geometry is inherently non-commutative:</p>
                 <ul>
                   <li>applying 3D rotations in a different order gives a different result</li>
                   <li>the oriented plane spanning $u$ and $v$ faces the opposite way to the one spanning $v$ and $u$</li>
                 </ul>
               </div>
-              <div>
+              <div class="fragment">
                 <p>&hellip; algebraic representations of geometry are too:</p>
                 <ul>
                   <li>for rotation matrices, composition is multiplication, and $R_1R_2 \ne R_2R_1$ in general<br /></li>
@@ -68,13 +68,15 @@
               </div>
             </div>
           </div>
-          <p style="text-align: left">
-            The matrix algebra $\mathbb{R}^{n \times n}$ is the typical choice for representing geometry, but is by no means the only choice available:
-          </p>
-          <div class="grid" style="grid-template: 1fr / auto auto auto">
-            <p>Quaternions<br />$\mathbb{H}$</p>
-            <p>Exterior algebra<br />$\bigwedge(V)$</p>
-            <p>Geometric algebra<br />$\mathcal{G}(Q)$</p>
+          <div  class="fragment">
+            <p style="text-align: left">
+              The matrix algebra $\mathbb{R}^{n \times n}$ is the typical choice for representing geometry, but is by no means the only choice available:
+            </p>
+            <div class="grid" style="grid-template: 1fr / auto auto auto">
+              <p>Quaternions<br />$\mathbb{H}$</p>
+              <p>Exterior algebra<br />$\bigwedge(V)$</p>
+              <p>Geometric algebra<br />$\mathcal{G}(Q)$</p>
+            </div>
           </div>
         </section>
         <section id="noncommutative-geometric-2" data-auto-animate>
@@ -180,7 +182,7 @@
         <section id="sympy">
           <h2>Sympy</h2>
           <blockquote>
-            SymPy is a Python library for symbolic mathematics. It aims to become a full-featured computer algebra system (CAS) while keeping the code as simple as possible in order to be comprehensible and easily extensible. SymPy is written entirely in Python.
+            <p>SymPy is a Python library for symbolic mathematics. It aims to become a full-featured computer algebra system (CAS) while keeping the code as simple as possible in order to be comprehensible and easily extensible. SymPy is written entirely in Python.</p>
             <p class="reference">
               <cite><a href="https://www.sympy.org/en/index.html">SymPy's website</a></cite>
               <!-- <span>Sympy.org</span> -->
@@ -188,7 +190,7 @@
           </blockquote>
           <p class="fragment" style="text-align: center">Why wasn't this on the previous slide?</p>
           <blockquote class="fragment">
-            Sage[Math] tries to gather together all the major open source mathematics software, and glue it together into a useful system. In fact, Sage[Math] includes SymPy as one of its systems.
+            <p>Sage[Math] tries to gather together all the major open source mathematics software, and glue it together into a useful system. In fact, Sage[Math] includes SymPy as one of its systems.</p>
             <p class="reference">
               <cite><a href="https://stackoverflow.com/q/17847902/102441">What is the difference between SymPy and Sage[Math]?</a></cite>
               <span>Aaron Meurer (Lead SymPy developer)</span>
@@ -1127,7 +1129,7 @@
       </section>
       <section id="lean-projects">
         <h3>What have other people built with Lean?</h3>
-        <dl style="font-size: 80%">
+        <dl style="font-size: 90%">
           <dt style="margin-bottom: -20px" class="fragment" data-fragment-index="0">Integration with Computer algebra software</dt>
           <dd class="fragment" data-fragment-index="0">
             <blockquote>
