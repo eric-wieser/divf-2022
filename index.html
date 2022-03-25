@@ -847,7 +847,7 @@
                 <span>S. Godsill</span>
               </p>
             </blockquote>
-            <blockquote>
+            <blockquote class="fragment">
               <p style="font-size: 80%">The sum of the squared norms of the Fourier coefficients equals the $L^2$ norm of the function.</p>
               <pre><code class="lean" data-trim>
                 lemma tsum_sq_fourier_series_repr
@@ -895,7 +895,7 @@
                 <span>Wikipedia</span>
               </p>
             </blockquote>
-            <blockquote>
+            <blockquote class="fragment">
               <p style="font-size: 80%">The characteristic polynomial of a matrix, applied to the matrix itself, is zero.
                This holds over any commutative ring.</p>
               <pre><code class="lean" data-trim>
@@ -928,19 +928,36 @@
           </div>
         </section>
         <section id="mathlib-knows-math">
+          <aside class="notes">
+            <p>One of the stated goals of mathlib is for it to know everything a maths undergraduate knows.</p>
+            <p>This is a good first step to enabling the sort of maths that researchers want to use it for.</p>
+            <p>The page on the left shows everything from a french mathematics degree that Lean already knows, and the page on the right shows what its yet to be taught. Skimming through this for the parts most useful for engineering, we find</p>
+          </aside>
           <div class="grid r-stretch" style="grid-template: min-content auto min-content / 1fr 1fr; height: 100%; margin-top: 0">
             <h3 style="grid-column: 1 / span 2; margin-bottom: 0"><div class="parent-title"><span>What does Mathlib know?</span>Half an Undergraduate Mathematics Degree</div></h3>
             <div class="scroll-container" style="margin-bottom: 0">
-              <iframe style="height: 520vh; width: 100%; max-width: none; max-height: none" data-src="https://leanprover-community.github.io/undergrad.html" scrolling="no" data-preload></iframe>
-              <div class="fragment" style="position: absolute; top: 170vh" data-fragment-index="0" data-scroll-into-view></div>
-              <div class="fragment" style="position: absolute; top: 230vh" data-fragment-index="1" data-scroll-into-view></div>
-              <div class="fragment" data-fragment-index="2" data-scroll-into-view></div>
+              <iframe style="height: 550vh; width: 100%; max-width: none; max-height: none" data-src="https://leanprover-community.github.io/undergrad.html" scrolling="no" data-preload></iframe>
+              <div class="fragment" style="position: absolute; top: 30vh" data-fragment-index="0" data-scroll-into-view>
+                <aside class="notes">
+                  A good fraction of the linear algebra content is formalized; although we can see that the matrix exponential we needed earlier is still in the TODO list.
+                </aside>
+              </div>
+              <div class="fragment" style="position: absolute; top: 197vh" data-fragment-index="1" data-scroll-into-view>
+                <aside class="notes">There's a reasonable amount about bilinear forms, which are relevant to me for geometric algebra.</aside>
+              </div>
+              <div class="fragment" style="position: absolute; top: 260vh" data-fragment-index="2" data-scroll-into-view>
+                <aside class="notes"> There is significant progress in real analysis too.</aside>
+              </div>
+              <div class="fragment" data-fragment-index="3" data-scroll-into-view>
+                <aside class="notes">Probability theory is still in its infancy though</aside>
+              </div>
             </div>
             <div class="scroll-container" style="margin-bottom: 0">
-              <iframe style="height: 550vh; width: 100%; max-width: none; max-height: none" data-src="https://leanprover-community.github.io/undergrad_todo.html" scrolling="no" data-preload></iframe>
-              <div class="fragment" style="position: absolute; top: 125vh" data-fragment-index="0" data-scroll-into-view></div>
-              <div class="fragment" style="position: absolute; top: 185vh" data-fragment-index="1" data-scroll-into-view></div>
-              <div class="fragment" style="position: absolute; top: 340vh" data-fragment-index="2" data-scroll-into-view></div>
+              <iframe style="height: 580vh; width: 100%; max-width: none; max-height: none" data-src="https://leanprover-community.github.io/undergrad_todo.html" scrolling="no" data-preload></iframe>
+              <div class="fragment" style="position: absolute; top: 41vh" data-fragment-index="0" data-scroll-into-view></div>
+              <div class="fragment" style="position: absolute; top: 140vh" data-fragment-index="1" data-scroll-into-view></div>
+              <div class="fragment" style="position: absolute; top: 210vh" data-fragment-index="2" data-scroll-into-view></div>
+              <div class="fragment" style="position: absolute; top: 365vh" data-fragment-index="3" data-scroll-into-view></div>
             </div>
             <small><a href="https://leanprover-community.github.io/undergrad.html">
               leanprover-community.github.io/undergrad.html
@@ -949,25 +966,6 @@
               leanprover-community.github.io/undergrad_todo.html
             </a></small>
           </div>
-          <aside class="notes">
-            <p>Of particular interest to engineers:</p>
-            <ul>
-              <li>Linear algebra
-                <ul>
-                  <li>Vector subspaces</li>
-                  <li>Matrices</li>
-                  <li>Eigenspaces</li>
-                </ul></li>
-              <li>Multivariate calculus
-                <ul>
-                  <li>Partial derivatives</li>
-                  <li>Fourier series</li>
-                </ul>
-              </li>
-              <li>Polynomials and power series</li>
-              <li>Probability theory</li>
-            </ul>
-          </aside>
         </section>
         <section id="mathlib-contributions">
           <h3><div class="parent-title"><span>What does Mathlib know?</span>The algebra that I taught it</div></h3>
@@ -987,7 +985,7 @@
               </code></pre>
               <pre style="font-size: 60%"><code class="lean" data-trim>
               /-- If the arguments are linearly dependent then the result is `0`. -/
-              theorem alternating_map.map_linear_dependent
+              lemma alternating_map.map_linear_dependent
                 [no_zero_smul_divisors K W] (f : alternating_map K V W ι)
                 (v : ι → V) (h : ¬linear_independent K v) : f v = 0
               </code></pre>
@@ -1012,33 +1010,91 @@
             <dd>
               <p>Graded algebras: $A = \bigoplus_i A_i$ where $A_iA_j \subseteq A_{i+j}$</p>
               <pre style="font-size: 60%"><code class="lean" data-trim>
-                structure set_like.graded_monoid (A : ι → S) :
+                class set_like.graded_monoid (A : ι → S) :
                 (one_mem : 1 ∈ A 0)
                 (mul_mem : ∀ {i j : ι} {gi gj : R}, gi ∈ A i → gj ∈ A j → gi * gj ∈ A (i + j))
               </code></pre>
               <pre style="font-size: 60%"><code class="lean" data-trim>
-              /-- An internally-graded `R`-algebra `A` is one that can be decomposed into a
-              collection of `submodule R A`s indexed by `ι` such that the canonical map
-              `A → ⨁ i, 𝒜 i` is bijective. -/
-              class graded_algebra extends set_like.graded_monoid 𝒜 :=
-              (decompose' : A → ⨁ i, 𝒜 i)
-              (left_inv : function.left_inverse decompose' (direct_sum.submodule_coe 𝒜))
-              (right_inv : function.right_inverse decompose' (direct_sum.submodule_coe 𝒜))
+                /-- An internally-graded `R`-algebra `A` is one that can be decomposed into a
+                collection of `submodule R A`s indexed by `ι` such that the canonical map
+                `A → ⨁ i, 𝒜 i` is bijective. -/
+                class graded_algebra (𝒜 : ι → submodule R A) extends set_like.graded_monoid 𝒜 :=
+                (decompose' : A → ⨁ i, 𝒜 i)
+                (left_inv : function.left_inverse decompose' (direct_sum.submodule_coe 𝒜))
+                (right_inv : function.right_inverse decompose' (direct_sum.submodule_coe 𝒜))
               </code></pre>
               <pre style="font-size: 60%"><code class="lean" data-trim>
-              /-- The clifford algebra is graded by the even and odd parts. -/
-              def clifford_algebra.graded_algebra :
-                graded_algebra (clifford_algebra.even_odd Q)
+                /-- The clifford algebra is graded by the even and odd parts. -/
+                def clifford_algebra.graded_algebra :
+                  graded_algebra (clifford_algebra.even_odd Q)
               </code></pre>
             </dd>
-            <dt>Miscellaneous proofs</dt>
-            <dd>The matrix lemma we proved in this presentation, and hundreds of smaller results in linear algebra, ring theory, and more.</dd>
+            <dt class="fragment" data-fragment-index="0">Miscellaneous proofs</dt>
+            <dd class="fragment" data-fragment-index="0">The matrix lemma we proved in this presentation, and hundreds of smaller results in linear algebra, ring theory, and more.</dd>
           </dl>
         </section>
         <section id="mathlib-contributions-you">
           <h3><div class="parent-title"><span>What does Mathlib know?</span>The algebra this audience wants to teach it?</div></h3>
-          <!-- TODO -->
+          <dl>
+            <dt class="fragment" data-fragment-index="0">How can I learn to use Lean?</dt>
+            <dd class="fragment" data-fragment-index="0">
+              <blockquote>
+                <pre style="float: right; margin-left: var(--r-block-margin)"><code class="lean" data-trim>
+                  inductive mynat
+                  | zero : mynat
+                  | succ (n : mynat) : mynat
+                </code></pre>
+                <div><p style="font-size: 80%">In this [in-browser] game, you get own version of the natural numbers, called <code>mynat</code>, in an interactive theorem prover called Lean. [...] You're going to prove mathematical theorems using the Lean theorem prover.<br /><strong>In other words, you're going to solve levels in a computer game.</strong></p></div>
+                <!-- TODO -->
+                <p class="reference">
+                  <cite><a href="https://www.ma.imperial.ac.uk/~buzzard/xena/natural_number_game/">The Natural Number Game</a></cite>
+                  <span>Kevin Buzzard and Mohammad Pedramfar</span>
+                </p>
+              </blockquote>
+              <p>More learning resources at <a href="https://leanprover-community.github.io/learn.html">leanprover-community.github.io/learn</a>.</p>
+            </dd>
+            <dt class="fragment" data-fragment-index="1">What would be a challenging first project?</dt>
+            <dd class="fragment" data-fragment-index="1">
+              <p>Formalize some first year example papers, with the help of the Lean user community at <a href="https://leanprover.zulipchat.com">leanprover.zulipchat.com</a>.</p>
+              <p>Pick something from the <q>Missing undergraduate mathematics in mathlib</q> list on the earlier slide.</p>
+            </dd>
+          </dl>
         </section>
+      </section>
+      <section id="lean-projects">
+        <h3>What have other people built with Lean?</h3>
+        <dl>
+          <dt>Integration with Computer algebra software</dt>
+          <dd>
+            <blockquote>
+              <p style="font-size: 80%">We show how to make use of the Lean metaprogramming framework to verify certain Mathematica computations, so that the rigor of the proof assistant is not compromised</p>
+              <p class="reference">
+                <cite><a href="https://link.springer.com/article/10.1007/s10817-021-09611-1">A Bi-Directional Extensible Interface Between Lean and Mathematica</a> (2022)</cite>
+                <span>Robert Y. Lewis, Minchao Wu</span>
+              </p>
+            </blockquote>
+          </dd>
+          <dt>Contributions to the edge of mathematical research</dt>
+          <dd>
+            <blockquote>
+              <p style="font-size: 80%"><q>I now think it’s sensible in principle to formalize whatever you want in Lean. There’s no real obstruction.</q> &mdash; Peter Scholze, Fields Medallist</p>
+              <p class="reference">
+                <cite><a href="https://www.quantamagazine.org/lean-computer-program-confirms-peter-scholze-proof-20210728/">Proof Assistant Makes Jump to Big-League Math</a></cite>
+                <span>Quanta Magazine</span>
+              </p>
+            </blockquote>
+          </dd>
+          <dt>Bug-free machine learning systems</dt>
+          <dd>
+            <blockquote>
+              <p style="font-size: 80%">We generate a formal (i.e. machine-checkable) proof that the gradients sampled by the system are unbiased estimates of the true mathematical gradients.</p>
+              <p class="reference">
+                <cite><a href="https://dl.acm.org/doi/10.5555/3305890.3305996">Developing bug-free machine learning systems with formal mathematics (2017)</a></cite>
+                <span> Daniel Selsam, Percy Liang, David L. Dill</span>
+              </p>
+            </blockquote>
+          </dd>
+        </dl>
       </section>
       <section>
         <h3>References</h3>
