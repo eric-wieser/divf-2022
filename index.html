@@ -118,7 +118,7 @@
             <dt class="fragment fade-in-then-semi-out" data-fragment-index="1">$a \ne 0, b \ne 0, ab = 0$; zero divisors</dt>
             <dd class="fragment fade-in-then-semi-out" data-fragment-index="1">
               <p>$\mathbb{R}^{n \times n}$ and $\bigwedge(B)$ and $\mathcal{G}(Q)$ all have this property.</p>
-              <p>This means $ab = ac \centernot\implies b = c$!</p>
+              <p>This means $ab = ac \centernot\implies b = c$ even if $a \ne 0$!</p>
             </dd>
             <dt class="fragment fade-in-then-semi-out" data-fragment-index="2">$a(bc) \ne (ab)c$; non-associativity</dt>
             <dd class="fragment fade-in-then-semi-out" data-fragment-index="2">
@@ -332,7 +332,7 @@
               <pre style="font-size: 60%"><code class="pycon" data-trim data-noescape>
               <span style="opacity: 0.5">&gt;&gt;&gt; def q_diff(Φ, dq):  # similar to ∇Φ
               ...     ℍ = Quaternion
-              ...     I,J,K = ℍ(0,1,0,0),ℍ(0,0,1,0),ℍ(0,0,0,1)
+              ...     I, J, K = ℍ(0,1,0,0), ℍ(0,0,1,0), ℍ(0,0,0,1)
               ...     return (Φ.diff(dq.a) + I*Φ.diff(dq.b)
               ...         + J*Φ.diff(dq.c) + K*Φ.diff(dq.d))</span>
               &gt;&gt;&gt; q_diff(xq*yq, xq)
@@ -423,8 +423,8 @@
                 <h4 style="margin-top: var(--r-block-margin)">Expression tree extension</h4>
                 <div style="text-align: left">
                   <p>It looks like we have to build new <code>MyAlgAdd</code>, <code>MyAlgMul</code>, &hellip; objects.</p>
-                  <p>This scales poorly if we want to work with things like matrices of <code>MyAlg</code>; do we need <code>MatrixMyAlgAdd</code> e.t.c.?</p>
-                  <p>If we get this wrong, things like <code>simplify()</code> fail if they expect <code>MyMul</code> but get an <code>Mul</code>.</p>
+                  <p>This scales poorly if we want to work with things like matrices of <code>MyAlg</code>; do we need <code>MatMyAlgAdd</code> e.t.c.?</p>
+                  <p>If we get this wrong, things like <code>simplify()</code> fail if they expect <code>MyAlgMul</code> but get a <code>Mul</code>.</p>
                 </div>
               </div>
               <div class="fragment" data-fragment-index="1" >
